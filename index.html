@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boutique Codes Cadeaux Zara</title>
+    <title>Boutique Codes Cadeaux</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -20,15 +20,11 @@
             background-color: #f4f4f6;
             color: #111111;
             padding: 20px 15px;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
         }
 
         /* HEADER */
         header {
             max-width: 1200px;
-            width: 100%;
             margin: 0 auto 30px auto;
             background: #ffffff;
             padding: 20px 30px;
@@ -44,47 +40,26 @@
             font-weight: 900;
             letter-spacing: -0.5px;
             text-transform: uppercase;
-            cursor: pointer;
         }
 
         .logo span {
             color: #2563eb;
         }
 
-        .cart-badge-btn {
-            background: #111827;
-            color: #ffffff;
-            padding: 10px 18px;
-            border-radius: 12px;
+        .badge-trust {
+            background: #e0e7ff;
+            color: #3730a3;
+            font-size: 12px;
             font-weight: 700;
-            font-size: 13px;
-            cursor: pointer;
-            border: none;
-            transition: background 0.2s;
-        }
-
-        .cart-badge-btn:hover {
-            background: #2563eb;
-        }
-
-        /* CONTAINER GENERAL ET PAGES */
-        .main-container {
-            max-width: 1200px;
-            width: 100%;
-            margin: 0 auto;
-            flex-grow: 1;
-        }
-
-        .page-view {
-            display: none;
-        }
-
-        .page-view.active {
-            display: block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
         }
 
         /* BANNIERE EXPLICATIVE SIMPLE */
         .how-it-works {
+            max-width: 1200px;
+            margin: 0 auto 30px auto;
             background: #ffffff;
             padding: 20px 25px;
             border-radius: 16px;
@@ -92,7 +67,6 @@
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
             border: 1px solid #e5e7eb;
-            margin-bottom: 30px;
         }
 
         .step-item {
@@ -127,6 +101,8 @@
 
         /* SHOP GRID */
         .shop-container {
+            max-width: 1200px;
+            margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 25px;
@@ -142,7 +118,6 @@
             flex-direction: column;
             justify-content: space-between;
             transition: transform 0.2s ease, box-shadow 0.2s ease;
-            cursor: pointer;
         }
 
         .product-card:hover {
@@ -238,7 +213,7 @@
             text-decoration: line-through;
         }
 
-        /* BOUTON D'ACTION */
+        /* BOUTON PAYPAL */
         .btn-buy {
             display: block;
             width: 100%;
@@ -249,69 +224,12 @@
             border-radius: 12px;
             font-size: 14px;
             font-weight: 700;
-            border: none;
-            cursor: pointer;
-            transition: background 0.2s ease;
             text-decoration: none;
+            transition: background 0.2s ease;
         }
 
         .btn-buy:hover {
             background: #2563eb;
-        }
-
-        .btn-back {
-            background: transparent;
-            border: none;
-            color: #6b7280;
-            font-size: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            margin-bottom: 20px;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .btn-back:hover {
-            color: #111827;
-        }
-
-        /* BOXES POUR PANIER, DETAIL ET CONFIRMATION */
-        .detail-box, .cart-box, .success-box {
-            background: #ffffff;
-            border-radius: 20px;
-            padding: 30px;
-            border: 1px solid #e5e7eb;
-            max-width: 650px;
-            margin: 0 auto;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-        }
-
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-            border-bottom: 1px solid #f3f4f6;
-        }
-
-        .btn-remove {
-            background: #fee2e2;
-            color: #ef4444;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 8px;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        .cart-total-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 25px 0;
-            font-size: 20px;
-            font-weight: 900;
         }
 
         .paypal-notice {
@@ -324,272 +242,207 @@
         .paypal-notice strong {
             color: #d97706;
         }
-
-        input[type="email"] {
-            width: 100%;
-            padding: 14px;
-            border-radius: 12px;
-            border: 1px solid #d1d5db;
-            margin: 15px 0;
-            font-size: 14px;
-        }
-
-        /* FOOTER SUPPORT DISCORD */
-        footer {
-            max-width: 1200px;
-            width: 100%;
-            margin: 40px auto 0 auto;
-            text-align: center;
-            padding: 20px;
-            font-size: 13px;
-            color: #6b7280;
-        }
-
-        footer a {
-            color: #5865F2;
-            font-weight: 700;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
     </style>
 </head>
 <body>
 
     <!-- HEADER -->
     <header>
-        <div class="logo" onclick="showPage('catalog-page')">E-Store <span>Codes</span></div>
-        <button class="cart-badge-btn" onclick="showPage('cart-page')">🛒 Panier (<span id="cart-count">0</span>)</button>
+        <div class="logo">E-Store <span>Codes</span></div>
+        <div class="badge-trust">⚡ Envoi rapide</div>
     </header>
 
-    <div class="main-container">
-
-        <!-- 1. CATALOGUE PRINCIPAL -->
-        <div id="catalog-page" class="page-view active">
-            <div class="how-it-works">
-                <div class="step-item">
-                    <div class="step-number">1</div>
-                    <div class="step-text">
-                        <h4>Choisissez le code</h4>
-                        <p>Sélectionnez la valeur souhaitée</p>
-                    </div>
-                </div>
-                <div class="step-item">
-                    <div class="step-number">2</div>
-                    <div class="step-text">
-                        <h4>Payez sur PayPal</h4>
-                        <p>Sélectionnez "Entre proches"</p>
-                    </div>
-                </div>
-                <div class="step-item">
-                    <div class="step-number">3</div>
-                    <div class="step-text">
-                        <h4>Recevez votre code</h4>
-                        <p>Livraison directe après paiement</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="shop-container" id="products-list"></div>
-        </div>
-
-        <!-- 2. PAGE DE FICHE PRODUIT SIMPLE -->
-        <div id="detail-page" class="page-view">
-            <button class="btn-back" onclick="showPage('catalog-page')">← Retour aux articles</button>
-            <div class="detail-box">
-                <div class="card-image" style="border-radius: 16px; margin-bottom: 20px;">
-                    <span id="detail-tag" class="tag-promo"></span>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Zara_Logo.svg" alt="Zara Logo">
-                </div>
-                <h2 id="detail-title" class="product-title" style="font-size: 22px;"></h2>
-                <p id="detail-subtitle" class="product-subtitle" style="font-size: 14px; margin-bottom: 20px;"></p>
-                
-                <div class="price-section">
-                    <div>
-                        <div class="price-label">Prix à payer</div>
-                        <div id="detail-value" class="price-value-code"></div>
-                    </div>
-                    <div class="price-value-container">
-                        <div id="detail-price" class="price-pay"></div>
-                    </div>
-                </div>
-
-                <button class="btn-buy" onclick="addToCartFromDetail()">Ajouter au panier</button>
+    <!-- ETAPES SIMPLES -->
+    <div class="how-it-works">
+        <div class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-text">
+                <h4>Choisissez le code</h4>
+                <p>Sélectionnez la valeur souhaitée</p>
             </div>
         </div>
+        <div class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-text">
+                <h4>Payez sur PayPal</h4>
+                <p>Sélectionnez "Entre proches"</p>
+            </div>
+        </div>
+        <div class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-text">
+                <h4>Recevez votre code</h4>
+                <p>Livraison directe après paiement</p>
+            </div>
+        </div>
+    </div>
 
-        <!-- 3. PAGE PANIER ET CALCUL DU TOTAL -->
-        <div id="cart-page" class="page-view">
-            <button class="btn-back" onclick="showPage('catalog-page')">← Continuer mes achats</button>
-            <div class="cart-box">
-                <h2 style="font-size: 20px; font-weight: 800; margin-bottom: 20px;">Votre Panier</h2>
-                <div id="cart-items-list"></div>
-                
-                <div class="cart-total-row">
-                    <span>Total cumulé :</span>
-                    <span id="cart-total-price" style="color: #16a34a;">0 €</span>
+    <!-- CATALOGUE PRODUITS -->
+    <div class="shop-container">
+
+        <!-- ARTICLE 1 -->
+        <div class="product-card">
+            <div class="card-image">
+                <span class="tag-promo">-80% REDUCTION</span>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Zara_Logo.svg" alt="Zara Logo">
+            </div>
+            <div class="card-body">
+                <div>
+                    <div class="product-title">Code Carte 50 €</div>
+                    <div class="product-subtitle">Vous recevez un code d'une valeur de 50€</div>
                 </div>
-
-                <button id="paypal-pay-btn" class="btn-buy" onclick="proceedToPayPal()">Payer avec PayPal</button>
-                <div class="paypal-notice">⚠️ Choisir <strong>"Entre proches"</strong> sur PayPal</div>
+                <div>
+                    <div class="price-section">
+                        <div>
+                            <div class="price-label">Prix à payer</div>
+                            <div class="price-value-code">Valeur : 50 €</div>
+                        </div>
+                        <div class="price-value-container">
+                            <div class="price-pay">10 €</div>
+                        </div>
+                    </div>
+                    <a href="https://www.paypal.me/PaMe372106/10EUR" target="_blank" class="btn-buy">Acheter maintenant</a>
+                    <div class="paypal-notice">⚠️ Choisir <strong>"Entre proches"</strong> sur PayPal</div>
+                </div>
             </div>
         </div>
 
-        <!-- 4. ETAPE APRES PAIEMENT (EMAIL) -->
-        <div id="success-page" class="page-view">
-            <div class="success-box">
-                <h2 style="font-size: 20px; font-weight: 800;">Paiement envoyé ? 🎉</h2>
-                <p style="font-size: 13px; color: #6b7280; margin-top: 10px;">
-                    Indiquez votre email pour recevoir directement vos codes cadeaux Zara :
-                </p>
-                <form onsubmit="submitEmail(event)">
-                    <input type="email" id="user-email" placeholder="votre@email.com" required>
-                    <button type="submit" class="btn-buy">Valider et recevoir mon code</button>
-                </form>
-                <div id="confirmation-msg" style="display:none; margin-top: 15px; color: #16a34a; font-weight: 700; text-align: center; font-size: 14px;">
-                    ✅ Merci ! Votre code sera envoyé à cette adresse.
+        <!-- ARTICLE 2 -->
+        <div class="product-card">
+            <div class="card-image">
+                <span class="tag-promo">-85% REDUCTION</span>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Zara_Logo.svg" alt="Zara Logo">
+            </div>
+            <div class="card-body">
+                <div>
+                    <div class="product-title">Code Carte 100 €</div>
+                    <div class="product-subtitle">Vous recevez un code d'une valeur de 100€</div>
+                </div>
+                <div>
+                    <div class="price-section">
+                        <div>
+                            <div class="price-label">Prix à payer</div>
+                            <div class="price-value-code">Valeur : 100 €</div>
+                        </div>
+                        <div class="price-value-container">
+                            <div class="price-pay">15 €</div>
+                        </div>
+                    </div>
+                    <a href="https://www.paypal.me/PaMe372106/15EUR" target="_blank" class="btn-buy">Acheter maintenant</a>
+                    <div class="paypal-notice">⚠️ Choisir <strong>"Entre proches"</strong> sur PayPal</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ARTICLE 3 -->
+        <div class="product-card">
+            <div class="card-image">
+                <span class="tag-promo">POPULAIRE</span>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Zara_Logo.svg" alt="Zara Logo">
+            </div>
+            <div class="card-body">
+                <div>
+                    <div class="product-title">Code Carte 200 €</div>
+                    <div class="product-subtitle">Vous recevez un code d'une valeur de 200€</div>
+                </div>
+                <div>
+                    <div class="price-section">
+                        <div>
+                            <div class="price-label">Prix à payer</div>
+                            <div class="price-value-code">Valeur : 200 €</div>
+                        </div>
+                        <div class="price-value-container">
+                            <div class="price-pay">20 €</div>
+                        </div>
+                    </div>
+                    <a href="https://www.paypal.me/PaMe372106/20EUR" target="_blank" class="btn-buy">Acheter maintenant</a>
+                    <div class="paypal-notice">⚠️ Choisir <strong>"Entre proches"</strong> sur PayPal</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ARTICLE 4 -->
+        <div class="product-card">
+            <div class="card-image">
+                <span class="tag-promo">TOP VENTE</span>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Zara_Logo.svg" alt="Zara Logo">
+            </div>
+            <div class="card-body">
+                <div>
+                    <div class="product-title">Code Carte 500 €</div>
+                    <div class="product-subtitle">Vous recevez un code d'une valeur de 500€</div>
+                </div>
+                <div>
+                    <div class="price-section">
+                        <div>
+                            <div class="price-label">Prix à payer</div>
+                            <div class="price-value-code">Valeur : 500 €</div>
+                        </div>
+                        <div class="price-value-container">
+                            <div class="price-pay">30 €</div>
+                        </div>
+                    </div>
+                    <a href="https://www.paypal.me/PaMe372106/30EUR" target="_blank" class="btn-buy">Acheter maintenant</a>
+                    <div class="paypal-notice">⚠️ Choisir <strong>"Entre proches"</strong> sur PayPal</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ARTICLE 5 -->
+        <div class="product-card">
+            <div class="card-image">
+                <span class="tag-promo">-93% REDUCTION</span>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Zara_Logo.svg" alt="Zara Logo">
+            </div>
+            <div class="card-body">
+                <div>
+                    <div class="product-title">Code Carte 800 €</div>
+                    <div class="product-subtitle">Vous recevez un code d'une valeur de 800€</div>
+                </div>
+                <div>
+                    <div class="price-section">
+                        <div>
+                            <div class="price-label">Prix à payer</div>
+                            <div class="price-value-code">Valeur : 800 €</div>
+                        </div>
+                        <div class="price-value-container">
+                            <div class="price-pay">50 €</div>
+                        </div>
+                    </div>
+                    <a href="https://www.paypal.me/PaMe372106/50EUR" target="_blank" class="btn-buy">Acheter maintenant</a>
+                    <div class="paypal-notice">⚠️ Choisir <strong>"Entre proches"</strong> sur PayPal</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ARTICLE 6 -->
+        <div class="product-card">
+            <div class="card-image">
+                <span class="tag-promo">OFFRE VIP</span>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Zara_Logo.svg" alt="Zara Logo">
+            </div>
+            <div class="card-body">
+                <div>
+                    <div class="product-title">Code Carte 1000 €</div>
+                    <div class="product-subtitle">Vous recevez un code d'une valeur de 1000€</div>
+                </div>
+                <div>
+                    <div class="price-section">
+                        <div>
+                            <div class="price-label">Prix à payer</div>
+                            <div class="price-value-code">Valeur : 1000 €</div>
+                        </div>
+                        <div class="price-value-container">
+                            <div class="price-pay">70 €</div>
+                        </div>
+                    </div>
+                    <a href="https://www.paypal.me/PaMe372106/70EUR" target="_blank" class="btn-buy">Acheter maintenant</a>
+                    <div class="paypal-notice">⚠️ Choisir <strong>"Entre proches"</strong> sur PayPal</div>
                 </div>
             </div>
         </div>
 
     </div>
 
-    <!-- FOOTER SUPPORT DISCORD -->
-    <footer>
-        Un problème avec votre commande ? <a href="https://discord.gg/54NngFNzna" target="_blank">Rejoindre notre Discord</a>
-    </footer>
-
-    <script>
-        // Données complètes identiques à votre modèle original
-        const products = [
-            { id: 1, title: "Code Carte 50 €", value: 50, price: 10, tag: "-80% REDUCTION" },
-            { id: 2, title: "Code Carte 100 €", value: 100, price: 15, tag: "-85% REDUCTION" },
-            { id: 3, title: "Code Carte 200 €", value: 200, price: 20, tag: "POPULAIRE" },
-            { id: 4, title: "Code Carte 500 €", value: 500, price: 30, tag: "TOP VENTE" },
-            { id: 5, title: "Code Carte 800 €", value: 800, price: 50, tag: "-93% REDUCTION" },
-            { id: 6, title: "Code Carte 1000 €", value: 1000, price: 70, tag: "OFFRE VIP" }
-        ];
-
-        let cart = [];
-        let currentProduct = null;
-
-        // Génération du catalogue
-        function renderCatalog() {
-            const container = document.getElementById('products-list');
-            container.innerHTML = products.map(p => `
-                <div class="product-card" onclick="openDetail(${p.id})">
-                    <div class="card-image">
-                        <span class="tag-promo">${p.tag}</span>
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Zara_Logo.svg" alt="Zara Logo">
-                    </div>
-                    <div class="card-body">
-                        <div>
-                            <div class="product-title">${p.title}</div>
-                            <div class="product-subtitle">Vous recevez un code d'une valeur de ${p.value}€</div>
-                        </div>
-                        <div>
-                            <div class="price-section">
-                                <div>
-                                    <div class="price-label">Prix à payer</div>
-                                    <div class="price-value-code">Valeur : ${p.value} €</div>
-                                </div>
-                                <div class="price-value-container">
-                                    <div class="price-pay">${p.price} €</div>
-                                </div>
-                            </div>
-                            <button class="btn-buy">Voir l'article</button>
-                            <div class="paypal-notice">⚠️ Choisir <strong>"Entre proches"</strong> sur PayPal</div>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        // Navigation entre vues
-        function showPage(pageId) {
-            document.querySelectorAll('.page-view').forEach(page => page.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
-            if (pageId === 'cart-page') renderCart();
-        }
-
-        // Fiche Produit
-        function openDetail(productId) {
-            currentProduct = products.find(p => p.id === productId);
-            document.getElementById('detail-tag').innerText = currentProduct.tag;
-            document.getElementById('detail-title').innerText = currentProduct.title;
-            document.getElementById('detail-subtitle').innerText = `Vous recevez un code d'une valeur de ${currentProduct.value}€`;
-            document.getElementById('detail-value').innerText = `Valeur : ${currentProduct.value} €`;
-            document.getElementById('detail-price').innerText = `${currentProduct.price} €`;
-            showPage('detail-page');
-        }
-
-        // Panier
-        function addToCartFromDetail() {
-            if (currentProduct) {
-                cart.push(currentProduct);
-                updateCartCount();
-                showPage('cart-page');
-            }
-        }
-
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCartCount();
-            renderCart();
-        }
-
-        function updateCartCount() {
-            document.getElementById('cart-count').innerText = cart.length;
-        }
-
-        function renderCart() {
-            const container = document.getElementById('cart-items-list');
-            const totalSpan = document.getElementById('cart-total-price');
-            const payBtn = document.getElementById('paypal-pay-btn');
-
-            if (cart.length === 0) {
-                container.innerHTML = "<p style='color: #6b7280; text-align: center; padding: 20px;'>Votre panier est vide.</p>";
-                totalSpan.innerText = "0 €";
-                payBtn.style.display = "none";
-                return;
-            }
-
-            payBtn.style.display = "block";
-            container.innerHTML = cart.map((item, index) => `
-                <div class="cart-item">
-                    <div>
-                        <strong>${item.title}</strong>
-                        <div style="font-size: 12px; color: #6b7280;">Code d'une valeur de ${item.value}€</div>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 15px;">
-                        <span style="font-weight: 800; color: #16a34a;">${item.price} €</span>
-                        <button class="btn-remove" onclick="removeFromCart(${index})">Retirer</button>
-                    </div>
-                </div>
-            `).join('');
-
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            totalSpan.innerText = `${total} €`;
-        }
-
-        // Redirection PayPal + Saisie Email
-        function proceedToPayPal() {
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            if (total > 0) {
-                window.open(`https://www.paypal.me/PaMe372106/${total}EUR`, '_blank');
-                showPage('success-page');
-            }
-        }
-
-        function submitEmail(e) {
-            e.preventDefault();
-            document.getElementById('confirmation-msg').style.display = 'block';
-        }
-
-        // Initialisation du catalogue
-        renderCatalog();
-    </script>
 </body>
 </html>
