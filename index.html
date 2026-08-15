@@ -1,375 +1,137 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Boutique Officielle</title>
-  <!-- SDK PayPal (Remplace 'sb' par ton Client ID PayPal en production) -->
-  <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=EUR"></script>
-  <style>
-    :root {
-      --bg-dark: #0f172a;
-      --card-bg: #1e293b;
-      --accent: #6366f1;
-      --accent-hover: #4f46e5;
-      --text: #f8fafc;
-      --text-muted: #94a3b8;
-    }
+import logging
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import (
+    Application,
+    CommandHandler,
+    CallbackQueryHandler,
+    MessageHandler,
+    filters,
+    ContextTypes,
+    ConversationHandler
+)
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+# Configuration du logging
+logging.basicConfig(level=logging.INFO)
 
-    body {
-      background-color: var(--bg-dark);
-      color: var(--text);
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
+# États pour la ConversationHandler (Recherche par Image)
+WAITING_FOR_PHOTO = 1
 
-    /* Navigation */
-    header {
-      background-color: var(--card-bg);
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #334155;
-    }
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: var(--accent);
-      cursor: pointer;
-    }
-
-    .cart-btn {
-      background-color: var(--accent);
-      color: white;
-      border: none;
-      padding: 0.6rem 1.2rem;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: 0.2s;
-    }
-
-    .cart-btn:hover {
-      background-color: var(--accent-hover);
-    }
-
-    /* Container Principal */
-    .container {
-      max-width: 1000px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-      flex: 1;
-    }
-
-    /* Grille des Produits */
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .product-card {
-      background-color: var(--card-bg);
-      border-radius: 12px;
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      border: 1px solid #334155;
-      transition: transform 0.2s, border-color 0.2s;
-      cursor: pointer;
-    }
-
-    .product-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--accent);
-    }
-
-    .product-title {
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .product-price {
-      font-size: 1.1rem;
-      color: var(--accent);
-      font-weight: bold;
-      margin-top: 1rem;
-    }
-
-    /* Vues (Détails, Panier, Succès) */
-    .view {
-      display: none;
-      background-color: var(--card-bg);
-      padding: 2rem;
-      border-radius: 12px;
-      border: 1px solid #334155;
-    }
-
-    .active {
-      display: block;
-    }
-
-    .btn-back {
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      cursor: pointer;
-      margin-bottom: 1rem;
-    }
-
-    .btn-back:hover {
-      color: var(--text);
-    }
-
-    .btn-primary {
-      background-color: var(--accent);
-      color: white;
-      border: none;
-      padding: 0.8rem 1.5rem;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1rem;
-      font-weight: bold;
-      margin-top: 1rem;
-      width: 100%;
-    }
-
-    .btn-primary:hover {
-      background-color: var(--accent-hover);
-    }
-
-    /* Panier */
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 0;
-      border-bottom: 1px solid #334155;
-    }
-
-    .cart-total {
-      font-size: 1.3rem;
-      font-weight: bold;
-      margin: 1.5rem 0;
-      text-align: right;
-    }
-
-    /* Formulaire Email */
-    input[type="email"] {
-      width: 100%;
-      padding: 0.8rem;
-      border-radius: 8px;
-      border: 1px solid #334155;
-      background-color: #0f172a;
-      color: white;
-      margin: 1rem 0;
-    }
-
-    /* Footer & Support */
-    footer {
-      background-color: var(--card-bg);
-      text-align: center;
-      padding: 1.5rem;
-      border-top: 1px solid #334155;
-      margin-top: auto;
-    }
-
-    .discord-link {
-      color: #5865F2;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .discord-link:hover {
-      text-decoration: underline;
-    }
-  </style>
-</head>
-<body>
-
-  <header>
-    <div class="logo" onclick="showView('catalog-view')">STORE</div>
-    <button class="cart-btn" onclick="showView('cart-view')">🛒 Panier (<span id="cart-count">0</span>)</button>
-  </header>
-
-  <div class="container">
+# 1. Commande /start
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_name = update.effective_user.first_name
     
-    <!-- 1. Catalogue des Articles -->
-    <div id="catalog-view" class="view active">
-      <h2 style="margin-bottom: 1.5rem;">Articles Disponibles</h2>
-      <div class="products-grid" id="products-container"></div>
-    </div>
+    keyboard = [
+        [InlineKeyboardButton("🔥 Promos Zara", callback_data="promos")],
+        [InlineKeyboardButton("📸 Trouver via une photo", callback_data="search_photo")],
+        [
+            InlineKeyboardButton("🔔 Mes Alertes Stock", callback_data="alerts"),
+            InlineKeyboardButton("📉 Suivi des Prix", callback_data="price_tracker")
+        ],
+        [InlineKeyboardButton("👗 Cabine d'essayage IA", callback_data="fitting_room")],
+        [InlineKeyboardButton("💬 Service Client Zara", callback_data="support")]
+    ]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    
+    await update.message.reply_text(
+        f"Bonjour {user_name} ! 🛍️ Bienvenue sur ton assistant personnel **Zara**.\n\n"
+        "Que souhaites-tu faire aujourd'hui ?",
+        reply_markup=reply_markup,
+        parse_mode="Markdown"
+    )
 
-    <!-- 2. Page Détail de l'Article -->
-    <div id="detail-view" class="view">
-      <button class="btn-back" onclick="showView('catalog-view')">← Retour au catalogue</button>
-      <h1 id="detail-title"></h1>
-      <p id="detail-description" style="color: var(--text-muted); margin: 1rem 0;"></p>
-      <div id="detail-price" class="product-price" style="font-size: 1.5rem;"></div>
-      <button class="btn-primary" onclick="addToCartFromDetail()">Ajouter au panier</button>
-    </div>
+# 2. Gestionnaire des boutons du menu
+async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    await query.answer()
+    
+    if query.data == "promos":
+        await query.edit_message_text(
+            "🔥 **Promotions actuelles Zara :**\n\n"
+            "• Manteau en laine : ~89,95€~ **59,95€** (-33%)\n"
+            "• Jean Wide Leg : ~39,95€~ **25,95€** (-35%)\n"
+            "• Robe satinée : ~49,95€~ **29,95€** (-40%)",
+            parse_mode="Markdown"
+        )
 
-    <!-- 3. Page Panier -->
-    <div id="cart-view" class="view">
-      <button class="btn-back" onclick="showView('catalog-view')">← Continuer mes achats</button>
-      <h2>Votre Panier</h2>
-      <div id="cart-items"></div>
-      <div class="cart-total">Total : <span id="cart-total-price">0.00</span> €</div>
-      <div id="paypal-button-container" style="margin-top: 1rem;"></div>
-    </div>
+    elif query.data == "alerts":
+        await query.edit_message_text(
+            "🔔 **Gestion des Alertes de Stock**\n\n"
+            "Vos alertes actives :\n"
+            "• Veste en cuir Biker (Taille M) - *En attente de réapprovisionnement*\n\n"
+            "💡 *Pour ajouter une alerte, envoyez-moi la référence du produit Zara.*"
+        )
 
-    <!-- 4. Page Confirmation après Paiement -->
-    <div id="success-view" class="view">
-      <h2>Paiement réussi ! 🎉</h2>
-      <p style="color: var(--text-muted); margin-top: 0.5rem;">Saisissez votre adresse email pour recevoir immédiatement votre code d'accès.</p>
-      
-      <form onsubmit="sendCode(event)">
-        <input type="email" id="user-email" placeholder="votre@email.com" required>
-        <button type="submit" class="btn-primary">Recevoir mon code</button>
-      </form>
+    elif query.data == "price_tracker":
+        await query.edit_message_text(
+            "📉 **Suivi de Baisse de Prix**\n\n"
+            "Articles suivis :\n"
+            "• Blazer Croisé - Prix actuel : 69,95€ (Objectif : < 50,00€)\n\n"
+            "Vous recevrez une notification dès que le prix baisse !"
+        )
 
-      <div id="confirmation-message" style="display:none; margin-top: 1rem; color: #4ade80;">
-        Un email avec votre code vous a été envoyé avec succès !
-      </div>
-    </div>
+    elif query.data == "fitting_room":
+        await query.edit_message_text(
+            "👗 **Cabine d'essayage virtuelle IA**\n\n"
+            "Cette fonctionnalité vous permet de visualiser un vêtement Zara sur vous.\n"
+            " Envoyez une photo de vous en pied, puis le lien du vêtement."
+        )
 
-  </div>
+    elif query.data == "support":
+        await query.edit_message_text(
+            "💬 **Support Zara**\n\n"
+            "• Retours & Remboursements : 30 jours à compter de l'achat.\n"
+            "• Délais de livraison : 2 à 4 jours ouvrés.\n\n"
+            "Un conseiller peut prendre le relais si besoin."
+        )
 
-  <footer>
-    Un problème avec votre commande ? 
-    <a href="https://discord.gg/54NngFNzna" target="_blank" class="discord-link">Rejoindre notre Discord</a>
-  </footer>
+# 3. Fonctionnalité : Recherche par Photo
+async def start_photo_search(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    await query.answer()
+    await query.edit_message_text(
+        "📸 Envoyez-moi une photo du vêtement que vous cherchez, "
+        "et je trouverai le modèle équivalent chez Zara !"
+    )
+    return WAITING_FOR_PHOTO
 
-  <script>
-    // Base de données des articles
-    const products = [
-      { id: 1, name: "Grade VIP", price: 9.99, description: "Accès au grade VIP sur le serveur avec toutes les commandes exclusives." },
-      { id: 2, name: "Pack 1000 Coins", price: 4.99, description: "1000 pièces virtuelles créditées directement sur votre compte." },
-      { id: 3, name: "Clé de Caisse Légendaire", price: 2.50, description: "Une clé permettant d'ouvrir la caisse légendaire en jeu." }
-    ];
+async def process_photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    photo_file = await update.message.photo[-1].get_file()
+    
+    # Message de confirmation (ici vous intégreriez votre API d'analyse d'image)
+    await update.message.reply_text(
+        "🔍 Analyse de l'image en cours...\n\n"
+        "✨ **Résultat trouvé chez Zara :**\n"
+        "• **Robe Courte Imprimée** (Réf: 3121/044)\n"
+        "• Prix : 39,95€\n"
+        "• Disponibilité : En stock"
+    )
+    return ConversationHandler.END
 
-    let cart = [];
-    let selectedProduct = null;
+async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text("Recherche annulée.")
+    return ConversationHandler.END
 
-    // Affichage des produits
-    function renderProducts() {
-      const container = document.getElementById('products-container');
-      container.innerHTML = products.map(p => `
-        <div class="product-card" onclick="openDetail(${p.id})">
-          <div>
-            <div class="product-title">${p.name}</div>
-            <div style="color: var(--text-muted); font-size: 0.9rem;">${p.description.substring(0, 60)}...</div>
-          </div>
-          <div class="product-price">${p.price.toFixed(2)} €</div>
-        </div>
-      `).join('');
-    }
+# 4. Lancement du bot
+def main():
+    # Remplace 'TON_TOKEN_HERE' par ton véritable token BotFather
+    application = Application.builder().token("TON_TOKEN_HERE").build()
 
-    // Gestion de la navigation entre vues
-    function showView(viewId) {
-      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-      document.getElementById(viewId).classList.add('active');
-      if (viewId === 'cart-view') renderCart();
-    }
-
-    // Ouvrir la page de détail
-    function openDetail(productId) {
-      selectedProduct = products.find(p => p.id === productId);
-      document.getElementById('detail-title').innerText = selectedProduct.name;
-      document.getElementById('detail-description').innerText = selectedProduct.description;
-      document.getElementById('detail-price').innerText = selectedProduct.price.toFixed(2) + " €";
-      showView('detail-view');
-    }
-
-    // Ajouter au panier
-    function addToCartFromDetail() {
-      if (selectedProduct) {
-        cart.push(selectedProduct);
-        updateCartCount();
-        showView('cart-view');
-      }
-    }
-
-    function updateCartCount() {
-      document.getElementById('cart-count').innerText = cart.length;
-    }
-
-    // Afficher le panier
-    function renderCart() {
-      const container = document.getElementById('cart-items');
-      const totalSpan = document.getElementById('cart-total-price');
-
-      if (cart.length === 0) {
-        container.innerHTML = "<p style='color: var(--text-muted);'>Votre panier est vide.</p>";
-        totalSpan.innerText = "0.00";
-        document.getElementById('paypal-button-container').innerHTML = "";
-        return;
-      }
-
-      container.innerHTML = cart.map((item, index) => `
-        <div class="cart-item">
-          <div>
-            <strong>${item.name}</strong>
-            <div style="color: var(--text-muted); font-size: 0.9rem;">${item.price.toFixed(2)} €</div>
-          </div>
-          <button style="background:none; border:none; color:#ef4444; cursor:pointer;" onclick="removeFromCart(${index})">Supprimer</button>
-        </div>
-      `).join('');
-
-      const total = cart.reduce((sum, item) => sum + item.price, 0);
-      totalSpan.innerText = total.toFixed(2);
-
-      initPayPalButton(total);
-    }
-
-    function removeFromCart(index) {
-      cart.splice(index, 1);
-      updateCartCount();
-      renderCart();
-    }
-
-    // Intégration Bouton PayPal
-    function initPayPalButton(total) {
-      const container = document.getElementById('paypal-button-container');
-      container.innerHTML = "";
-
-      paypal.Buttons({
-        createOrder: (data, actions) => {
-          return actions.order.create({
-            purchase_units: [{
-              amount: { value: total.toFixed(2) }
-            }]
-          });
+    # Configuration de la recherche par photo (Conversation)
+    photo_handler = ConversationHandler(
+        entry_points=[CallbackQueryHandler(start_photo_search, pattern="^search_photo$")],
+        states={
+            WAITING_FOR_PHOTO: [MessageHandler(filters.PHOTO, process_photo)]
         },
-        onApprove: (data, actions) => {
-          return actions.order.capture().then(details => {
-            cart = [];
-            updateCartCount();
-            showView('success-view');
-          });
-        }
-      }).render('#paypal-button-container');
-    }
+        fallbacks=[CommandHandler("cancel", cancel)]
+    )
 
-    // Envoi de l'email
-    function sendCode(event) {
-      event.preventDefault();
-      document.getElementById('confirmation-message').style.display = 'block';
-    }
+    # Ajout des gestionnaires
+    application.add_handler(CommandHandler("start", start))
+    application.add_handler(photo_handler)
+    application.add_handler(CallbackQueryHandler(button_handler))
 
-    // Initialisation
-    renderProducts();
-  </script>
-</body>
-</html>
+    # Démarrage
+    application.run_polling()
+
+if __name__ == "__main__":
+    main()
