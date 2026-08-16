@@ -245,32 +245,43 @@
             font-weight: 600;
         }
 
-        .card-valeur {
+        /* NOUVEAU DESIGN DES PRIX */
+        .card-price-main {
             font-family: var(--font-serif);
-            font-size: 2.4rem;
+            font-size: 2.6rem;
             font-weight: 700;
             letter-spacing: -1px;
             text-transform: uppercase;
             line-height: 1;
         }
 
-        .card-price-row {
+        .price-pay-label {
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+            display: block;
+            font-weight: 600;
+        }
+
+        .card-valeur-row {
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
+            align-items: center;
             border-top: 1px dashed var(--border-light);
             padding-top: 15px;
         }
 
-        .price-label {
+        .valeur-label {
             font-size: 9px;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: var(--text-muted);
         }
 
-        .price-amount {
-            font-size: 1.2rem;
+        .valeur-amount {
+            font-size: 1.1rem;
             font-weight: 700;
             letter-spacing: -0.5px;
         }
@@ -545,15 +556,15 @@
                 </div>
                 <div class="card-body">
                     <div>
-                        <span class="card-category">Carte Numérique Zara</span>
-                        <div class="card-valeur">50 €</div>
+                        <span class="price-pay-label">Prix à Payer</span>
+                        <div class="card-price-main">10,00 €</div>
                     </div>
-                    <div class="card-price-row">
-                        <span class="price-label">Prix Tarif Réduit</span>
-                        <span class="price-amount">10,00 €</span>
+                    <div class="card-valeur-row">
+                        <span class="valeur-label">Valeur Carte Zara</span>
+                        <span class="valeur-amount">50 €</span>
                     </div>
                     <div>
-                        <a href="https://www.paypal.me/PaMe372106/10EUR" target="_blank" rel="noopener" class="btn-buy">Commander le Code</a>
+                        <a href="https://www.paypal.me/PaMe372106/10EUR" target="_blank" rel="noopener" class="btn-buy">Commander pour 10,00 €</a>
                         <p class="payment-note">Paiement PayPal : Sélectionner <strong>"Envoi entre proches"</strong></p>
                     </div>
                 </div>
@@ -566,15 +577,15 @@
                 </div>
                 <div class="card-body">
                     <div>
-                        <span class="card-category">Carte Numérique Zara</span>
-                        <div class="card-valeur">100 €</div>
+                        <span class="price-pay-label">Prix à Payer</span>
+                        <div class="card-price-main">15,00 €</div>
                     </div>
-                    <div class="card-price-row">
-                        <span class="price-label">Prix Tarif Réduit</span>
-                        <span class="price-amount">15,00 €</span>
+                    <div class="card-valeur-row">
+                        <span class="valeur-label">Valeur Carte Zara</span>
+                        <span class="valeur-amount">100 €</span>
                     </div>
                     <div>
-                        <a href="https://www.paypal.me/PaMe372106/15EUR" target="_blank" rel="noopener" class="btn-buy">Commander le Code</a>
+                        <a href="https://www.paypal.me/PaMe372106/15EUR" target="_blank" rel="noopener" class="btn-buy">Commander pour 15,00 €</a>
                         <p class="payment-note">Paiement PayPal : Sélectionner <strong>"Envoi entre proches"</strong></p>
                     </div>
                 </div>
@@ -587,15 +598,15 @@
                 </div>
                 <div class="card-body">
                     <div>
-                        <span class="card-category">Carte Numérique Zara</span>
-                        <div class="card-valeur">200 €</div>
+                        <span class="price-pay-label">Prix à Payer</span>
+                        <div class="card-price-main">20,00 €</div>
                     </div>
-                    <div class="card-price-row">
-                        <span class="price-label">Prix Tarif Réduit</span>
-                        <span class="price-amount">20,00 €</span>
+                    <div class="card-valeur-row">
+                        <span class="valeur-label">Valeur Carte Zara</span>
+                        <span class="valeur-amount">200 €</span>
                     </div>
                     <div>
-                        <a href="https://www.paypal.me/PaMe372106/20EUR" target="_blank" rel="noopener" class="btn-buy">Commander le Code</a>
+                        <a href="https://www.paypal.me/PaMe372106/20EUR" target="_blank" rel="noopener" class="btn-buy">Commander pour 20,00 €</a>
                         <p class="payment-note">Paiement PayPal : Sélectionner <strong>"Envoi entre proches"</strong></p>
                     </div>
                 </div>
@@ -608,15 +619,15 @@
                 </div>
                 <div class="card-body">
                     <div>
-                        <span class="card-category">Carte Numérique Zara</span>
-                        <div class="card-valeur">500 €</div>
+                        <span class="price-pay-label">Prix à Payer</span>
+                        <div class="card-price-main">30,00 €</div>
                     </div>
-                    <div class="card-price-row">
-                        <span class="price-label">Prix Tarif Réduit</span>
-                        <span class="price-amount">30,00 €</span>
+                    <div class="card-valeur-row">
+                        <span class="valeur-label">Valeur Carte Zara</span>
+                        <span class="valeur-amount">500 €</span>
                     </div>
                     <div>
-                        <a href="https://www.paypal.me/PaMe372106/30EUR" target="_blank" rel="noopener" class="btn-buy">Commander le Code</a>
+                        <a href="https://www.paypal.me/PaMe372106/30EUR" target="_blank" rel="noopener" class="btn-buy">Commander pour 30,00 €</a>
                         <p class="payment-note">Paiement PayPal : Sélectionner <strong>"Envoi entre proches"</strong></p>
                     </div>
                 </div>
@@ -629,15 +640,15 @@
                 </div>
                 <div class="card-body">
                     <div>
-                        <span class="card-category">Carte Numérique Zara</span>
-                        <div class="card-valeur">800 €</div>
+                        <span class="price-pay-label">Prix à Payer</span>
+                        <div class="card-price-main">50,00 €</div>
                     </div>
-                    <div class="card-price-row">
-                        <span class="price-label">Prix Tarif Réduit</span>
-                        <span class="price-amount">50,00 €</span>
+                    <div class="card-valeur-row">
+                        <span class="valeur-label">Valeur Carte Zara</span>
+                        <span class="valeur-amount">800 €</span>
                     </div>
                     <div>
-                        <a href="https://www.paypal.me/PaMe372106/50EUR" target="_blank" rel="noopener" class="btn-buy">Commander le Code</a>
+                        <a href="https://www.paypal.me/PaMe372106/50EUR" target="_blank" rel="noopener" class="btn-buy">Commander pour 50,00 €</a>
                         <p class="payment-note">Paiement PayPal : Sélectionner <strong>"Envoi entre proches"</strong></p>
                     </div>
                 </div>
@@ -650,15 +661,15 @@
                 </div>
                 <div class="card-body">
                     <div>
-                        <span class="card-category">Carte Numérique Zara</span>
-                        <div class="card-valeur">1000 €</div>
+                        <span class="price-pay-label">Prix à Payer</span>
+                        <div class="card-price-main">70,00 €</div>
                     </div>
-                    <div class="card-price-row">
-                        <span class="price-label">Prix Tarif Réduit</span>
-                        <span class="price-amount">70,00 €</span>
+                    <div class="card-valeur-row">
+                        <span class="valeur-label">Valeur Carte Zara</span>
+                        <span class="valeur-amount">1000 €</span>
                     </div>
                     <div>
-                        <a href="https://www.paypal.me/PaMe372106/70EUR" target="_blank" rel="noopener" class="btn-buy">Commander le Code</a>
+                        <a href="https://www.paypal.me/PaMe372106/70EUR" target="_blank" rel="noopener" class="btn-buy">Commander pour 70,00 €</a>
                         <p class="payment-note">Paiement PayPal : Sélectionner <strong>"Envoi entre proches"</strong></p>
                     </div>
                 </div>
@@ -671,15 +682,15 @@
                 </div>
                 <div class="card-body">
                     <div>
-                        <span class="card-category">Carte Numérique Zara</span>
-                        <div class="card-valeur">1600 €</div>
+                        <span class="price-pay-label">Prix à Payer</span>
+                        <div class="card-price-main">100,00 €</div>
                     </div>
-                    <div class="card-price-row">
-                        <span class="price-label">Prix Tarif Réduit</span>
-                        <span class="price-amount">100,00 €</span>
+                    <div class="card-valeur-row">
+                        <span class="valeur-label">Valeur Carte Zara</span>
+                        <span class="valeur-amount">1600 €</span>
                     </div>
                     <div>
-                        <a href="https://www.paypal.me/PaMe372106/100EUR" target="_blank" rel="noopener" class="btn-buy">Commander le Code</a>
+                        <a href="https://www.paypal.me/PaMe372106/100EUR" target="_blank" rel="noopener" class="btn-buy">Commander pour 100,00 €</a>
                         <p class="payment-note">Paiement PayPal : Sélectionner <strong>"Envoi entre proches"</strong></p>
                     </div>
                 </div>
