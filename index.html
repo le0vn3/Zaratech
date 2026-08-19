@@ -2,7 +2,8 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Viewport configuré pour empêcher le zoom -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <title>TECHZARA — Cartes-Cadeaux Officielles</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,6 +29,8 @@
             padding: 0;
             box-sizing: border-box;
             -webkit-font-smoothing: antialiased;
+            /* Empêche la sélection de texte et les gestes de zoom accidentels */
+            touch-action: manipulation;
         }
 
         body {
@@ -443,7 +446,7 @@
             padding: 14px;
             border: 1px solid var(--border-color);
             font-family: var(--font-sans);
-            font-size: 12px;
+            font-size: 16px; /* 16px empêche le zoom automatique d'iOS lors du clic sur un input */
             outline: none;
             transition: var(--transition);
             background: var(--bg-color);
@@ -742,6 +745,19 @@
 
     <script>
         let selectedPayUrl = '';
+
+        /* Blocage des raccourcis clavier de zoom sur ordinateur (Ctrl + / Ctrl - / Ctrl + Mollette) */
+        document.addEventListener('keydown', function (e) {
+            if ((e.ctrlKey || e.metaKey) && (e.key === '+' || e.key === '-' || e.key === '=')) {
+                e.preventDefault();
+            }
+        });
+
+        document.addEventListener('wheel', function (e) {
+            if (e.ctrlKey) {
+                e.preventDefault();
+            }
+        }, { passive: false });
 
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
