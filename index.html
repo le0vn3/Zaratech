@@ -41,7 +41,7 @@
             margin: 0 auto;
         }
 
-        /* HEADER PARFAITEMENT CENTRÉ */
+        /* HEADER CENTRÉ SANS LE "T" */
         header {
             padding: 25px 0;
             border-bottom: 1px solid var(--border-color);
@@ -63,25 +63,6 @@
             justify-content: center;
             text-align: center;
             cursor: pointer;
-        }
-
-        .brand-title-wrap {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .brand-logo {
-            width: 28px;
-            height: 28px;
-            background: var(--text-main);
-            color: var(--bg-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: var(--font-serif);
-            font-weight: 900;
-            font-size: 16px;
         }
 
         .brand-title {
@@ -146,24 +127,21 @@
             margin-bottom: 30px;
         }
 
-        /* CONTENEUR DU LOGO ZARA SUR L'ACCUEIL */
+        /* IMAGE LOGO ZARA ACCUEIL (IMG_0143.png) */
         .zara-logo-hero-box {
             width: 100%;
             max-width: 380px;
             margin: 0 auto;
-            padding: 40px 20px;
-            border: 1px solid var(--border-color);
-            background: var(--bg-card);
+            padding: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .zara-logo-hero-box svg {
+        .zara-logo-hero-box img {
             width: 100%;
             height: auto;
-            max-height: 90px;
-            fill: var(--text-main);
+            object-fit: contain;
         }
 
         .btn-primary {
@@ -274,7 +252,7 @@
             line-height: 1.6;
         }
 
-        /* AVIS DÉFILANTS FLUIDES (INFINITE SCROLL SMOOTH) */
+        /* AVIS DÉFILANTS RALENTIS (70s) */
         .reviews-section {
             padding: 50px 0;
             border-top: 1px solid var(--border-color);
@@ -297,10 +275,10 @@
             display: flex;
             gap: 20px;
             min-width: 100%;
-            animation: scroll-smooth 35s linear infinite;
+            animation: scroll-slow 70s linear infinite;
         }
 
-        @keyframes scroll-smooth {
+        @keyframes scroll-slow {
             from { transform: translateX(0); }
             to { transform: translateX(-100%); }
         }
@@ -387,20 +365,21 @@
         }
 
         .card-image {
-            height: 220px;
+            height: 240px;
             background: var(--bg-card);
             display: flex;
             align-items: center;
             justify-content: center;
             border-bottom: 1px solid var(--border-color);
-            padding: 20px;
+            padding: 15px;
             position: relative;
         }
 
-        .card-image svg {
-            width: 80%;
-            height: auto;
-            fill: var(--text-main);
+        /* IMAGE CARTE (IMG_0130.png) */
+        .card-image img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
         }
 
         .card-badge {
@@ -528,13 +507,10 @@
 </head>
 <body>
 
-    <!-- HEADER PROPRE ET CENTRÉ (SANS BOUTON NI MESSIER) -->
+    <!-- HEADER PROPRE, CENTRÉ, SANS LE "T" -->
     <header>
         <div class="brand-container" onclick="showPage('home')">
-            <div class="brand-title-wrap">
-                <div class="brand-logo">T</div>
-                <div class="brand-title">TechZara</div>
-            </div>
+            <div class="brand-title">TechZara</div>
             <div class="brand-tag">Revendeur Agréé</div>
         </div>
     </header>
@@ -548,11 +524,9 @@
                 <button class="btn-primary" onclick="showPage('shop')">Accéder à la Boutique</button>
             </div>
             <div>
-                <!-- LOGO ZARA SUR L'ACCUEIL -->
+                <!-- LOGO ZARA SUR L'ACCUEIL (IMG_0143.png) -->
                 <div class="zara-logo-hero-box">
-                    <svg viewBox="0 0 132 55" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M105.7 0L100 8.7h16.2L100 32.5h20.4l5.7-8.7H110l16.2-23.8V0h-20.5zM22.2 0L16.5 8.7h16.2L16.5 32.5h20.4l5.7-8.7H26.4l16.2-23.8V0H22.2zM0 55h44.3v-8.7H11.5L44.3 8.7V0H0v8.7h32.8L0 46.3V55zm83.5-55h-20v8.7h11.5L42.2 55h11.6l12.8-21.3h18l3.2 21.3h11.4L83.5 0zm-14.1 25l6.4-10.7 1.6 10.7h-8.0z"/>
-                    </svg>
+                    <img src="IMG_0143.png" alt="Logo Zara">
                 </div>
             </div>
         </section>
@@ -595,7 +569,7 @@
             </div>
         </section>
 
-        <!-- AVIS CLIENTS DÉFILANTS EN LENT (INFINITE MARQUEE) -->
+        <!-- AVIS CLIENTS DÉFILANTS RALENTIS -->
         <section class="reviews-section">
             <div class="section-title-wrap" style="margin-top:0;">
                 <h2 class="section-title">+600 Avis Clients</h2>
@@ -620,7 +594,7 @@
             <article class="card">
                 <div class="card-image">
                     <span class="card-badge">Code Officiel</span>
-                    <svg viewBox="0 0 132 55"><path d="M105.7 0L100 8.7h16.2L100 32.5h20.4l5.7-8.7H110l16.2-23.8V0h-20.5zM22.2 0L16.5 8.7h16.2L16.5 32.5h20.4l5.7-8.7H26.4l16.2-23.8V0H22.2zM0 55h44.3v-8.7H11.5L44.3 8.7V0H0v8.7h32.8L0 46.3V55zm83.5-55h-20v8.7h11.5L42.2 55h11.6l12.8-21.3h18l3.2 21.3h11.4L83.5 0zm-14.1 25l6.4-10.7 1.6 10.7h-8.0z"/></svg>
+                    <img src="IMG_0130.png" alt="Zara Gift Card">
                 </div>
                 <div class="card-body">
                     <div>
@@ -641,7 +615,7 @@
             <article class="card">
                 <div class="card-image">
                     <span class="card-badge">Code Officiel</span>
-                    <svg viewBox="0 0 132 55"><path d="M105.7 0L100 8.7h16.2L100 32.5h20.4l5.7-8.7H110l16.2-23.8V0h-20.5zM22.2 0L16.5 8.7h16.2L16.5 32.5h20.4l5.7-8.7H26.4l16.2-23.8V0H22.2zM0 55h44.3v-8.7H11.5L44.3 8.7V0H0v8.7h32.8L0 46.3V55zm83.5-55h-20v8.7h11.5L42.2 55h11.6l12.8-21.3h18l3.2 21.3h11.4L83.5 0zm-14.1 25l6.4-10.7 1.6 10.7h-8.0z"/></svg>
+                    <img src="IMG_0130.png" alt="Zara Gift Card">
                 </div>
                 <div class="card-body">
                     <div>
@@ -662,7 +636,7 @@
             <article class="card">
                 <div class="card-image">
                     <span class="card-badge">Meilleure Vente</span>
-                    <svg viewBox="0 0 132 55"><path d="M105.7 0L100 8.7h16.2L100 32.5h20.4l5.7-8.7H110l16.2-23.8V0h-20.5zM22.2 0L16.5 8.7h16.2L16.5 32.5h20.4l5.7-8.7H26.4l16.2-23.8V0H22.2zM0 55h44.3v-8.7H11.5L44.3 8.7V0H0v8.7h32.8L0 46.3V55zm83.5-55h-20v8.7h11.5L42.2 55h11.6l12.8-21.3h18l3.2 21.3h11.4L83.5 0zm-14.1 25l6.4-10.7 1.6 10.7h-8.0z"/></svg>
+                    <img src="IMG_0130.png" alt="Zara Gift Card">
                 </div>
                 <div class="card-body">
                     <div>
@@ -683,7 +657,7 @@
             <article class="card">
                 <div class="card-image">
                     <span class="card-badge">Code Officiel</span>
-                    <svg viewBox="0 0 132 55"><path d="M105.7 0L100 8.7h16.2L100 32.5h20.4l5.7-8.7H110l16.2-23.8V0h-20.5zM22.2 0L16.5 8.7h16.2L16.5 32.5h20.4l5.7-8.7H26.4l16.2-23.8V0H22.2zM0 55h44.3v-8.7H11.5L44.3 8.7V0H0v8.7h32.8L0 46.3V55zm83.5-55h-20v8.7h11.5L42.2 55h11.6l12.8-21.3h18l3.2 21.3h11.4L83.5 0zm-14.1 25l6.4-10.7 1.6 10.7h-8.0z"/></svg>
+                    <img src="IMG_0130.png" alt="Zara Gift Card">
                 </div>
                 <div class="card-body">
                     <div>
@@ -704,7 +678,7 @@
             <article class="card">
                 <div class="card-image">
                     <span class="card-badge">Édition Premium</span>
-                    <svg viewBox="0 0 132 55"><path d="M105.7 0L100 8.7h16.2L100 32.5h20.4l5.7-8.7H110l16.2-23.8V0h-20.5zM22.2 0L16.5 8.7h16.2L16.5 32.5h20.4l5.7-8.7H26.4l16.2-23.8V0H22.2zM0 55h44.3v-8.7H11.5L44.3 8.7V0H0v8.7h32.8L0 46.3V55zm83.5-55h-20v8.7h11.5L42.2 55h11.6l12.8-21.3h18l3.2 21.3h11.4L83.5 0zm-14.1 25l6.4-10.7 1.6 10.7h-8.0z"/></svg>
+                    <img src="IMG_0130.png" alt="Zara Gift Card">
                 </div>
                 <div class="card-body">
                     <div>
@@ -724,7 +698,7 @@
         </section>
     </div>
 
-    <!-- FOOTER AVEC SUPPORT EN BAS DE PAGE -->
+    <!-- FOOTER AVEC LE LIEN SUPPORT DISCRET -->
     <footer>
         <div>© 2026 TECHZARA — Vente de cartes-cadeaux officielles</div>
         <div>Un problème avec votre commande ? <a href="https://discord.gg/54NngFNzna" target="_blank" rel="noopener" class="footer-support-link">Contacter le support</a></div>
@@ -744,7 +718,6 @@
             { name: "Camille V.", comment: "Super plan, tout s'est passé comme prévu. Mail reçu direct et carte validée sur le site.", date: "2026-07-03" }
         ];
 
-        // DÉFILLEMENT CONTINU SANS FIN
         function renderMarquee() {
             const html = reviewsData.map(rev => `
                 <div class="review-card-scroll">
@@ -761,7 +734,6 @@
             document.getElementById('marquee-2').innerHTML = html;
         }
 
-        // BASCULE ENTRE ACCUEIL ET BOUTIQUE
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
             const target = document.getElementById('page-' + pageId);
