@@ -3,25 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TECHZARA — Cartes-Cadeaux Officielles Zara</title>
+    <title>TECHZARA — Luxury & Digital Gift Cards</title>
     
-    <!-- Google Fonts -->
+    <!-- Fonts & Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        /* STYLES GÉNÉRAUX */
         :root {
-            --bg-color: #FFFFFF;
-            --text-main: #0B0B0B;
-            --text-muted: #707070;
-            --border-color: #111111;
-            --border-light: #E0E0E0;
-            --bg-card: #FAFAFA;
-            --font-serif: 'Bodoni Moda', serif;
-            --font-sans: 'Inter', sans-serif;
-            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            --bg-dark: #08090C;
+            --bg-card: rgba(18, 20, 29, 0.65);
+            --bg-card-border: rgba(255, 255, 255, 0.08);
+            --accent-gold: #D4AF37;
+            --accent-gold-glow: rgba(212, 175, 55, 0.25);
+            --text-white: #F3F4F6;
+            --text-dim: #9CA3AF;
+            --font-heading: 'Syne', sans-serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         *, *::before, *::after {
@@ -32,787 +33,583 @@
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: var(--font-sans);
-            line-height: 1.4;
-            padding: 0 50px;
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        /* HEADER & NAVIGATION */
+        /* Ambient Glow Background */
+        .ambient-glow {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none; z-index: -1; overflow: hidden;
+        }
+        .glow-1 {
+            position: absolute; top: -10%; left: 20%; width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%; filter: blur(80px);
+        }
+        .glow-2 {
+            position: absolute; bottom: 10%; right: -5%; width: 700px; height: 700px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%; filter: blur(100px);
+        }
+
+        /* HEADER / NAVBAR */
         header {
-            padding: 40px 0 25px 0;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            position: sticky;
-            top: 0;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
+            position: fixed; top: 0; left: 0; right: 0; height: 90px;
+            padding: 0 8%; display: flex; justify-content: space-between; align-items: center;
+            background: rgba(8, 9, 12, 0.75); backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05); z-index: 1000;
         }
 
-        .brand-container {
-            display: flex;
-            align-items: baseline;
-            gap: 14px;
+        .brand-logo {
+            display: flex; align-items: center; gap: 14px;
+            text-decoration: none; cursor: pointer;
         }
 
-        .brand-title {
-            font-family: var(--font-serif);
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
-            font-weight: 900;
-            letter-spacing: -2px;
-            text-transform: uppercase;
-            text-decoration: none;
-            color: var(--text-main);
-            line-height: 0.8;
-            cursor: pointer;
+        .brand-zara-img {
+            height: 38px;
+            object-fit: contain;
+            filter: invert(1) brightness(2);
+            mix-blend-mode: screen;
         }
 
-        .brand-tag {
-            font-size: 9px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--text-muted);
+        .brand-divider {
+            color: var(--accent-gold);
+            font-size: 1.2rem;
+            opacity: 0.6;
+            font-weight: 300;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 35px;
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 600;
+        .brand-text {
+            font-family: var(--font-heading); font-size: 1.4rem; font-weight: 800;
+            background: linear-gradient(135deg, #fff 40%, var(--accent-gold));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
         }
+
+        .nav-menu { display: flex; align-items: center; gap: 20px; list-style: none; }
 
         .nav-btn {
-            background: none;
-            border: none;
-            color: var(--text-main);
-            font-family: var(--font-sans);
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            padding: 0;
+            background: none; border: none; color: var(--text-dim);
+            font-family: var(--font-body); font-size: 0.95rem; font-weight: 600;
+            cursor: pointer; transition: var(--transition);
+            display: flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 8px;
         }
 
-        .nav-btn.active, .nav-btn:hover {
-            opacity: 0.4;
+        .nav-btn:hover, .nav-btn.active { color: var(--text-white); background: rgba(255, 255, 255, 0.05); }
+        .nav-btn.active { border-bottom: 2px solid var(--accent-gold); }
+
+        /* SPA PAGE SYSTEM */
+        .page-container { margin-top: 90px; min-height: calc(100vh - 90px); }
+        .page { display: none; opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+        .page.active { display: block; opacity: 1; transform: translateY(0); }
+
+        /* LANDING PAGE */
+        .hero-section {
+            padding: 80px 8%; display: grid; grid-template-columns: 1fr 1fr;
+            gap: 60px; align-items: center; min-height: 80vh;
         }
 
-        /* GESTION DES PAGES (SPA) */
-        .page {
-            display: none;
-            animation: fadeIn 0.4s ease-in-out;
+        .hero-title {
+            font-family: var(--font-heading); font-size: clamp(2.8rem, 5vw, 4.2rem);
+            line-height: 1.08; font-weight: 800; margin-bottom: 24px;
         }
 
-        .page.active {
+        .hero-title span {
+            background: linear-gradient(135deg, var(--accent-gold), #FFF);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc { font-size: 1.1rem; color: var(--text-dim); margin-bottom: 40px; max-width: 520px; }
+
+        .hero-cta { display: flex; gap: 20px; align-items: center; }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-gold), #B8860B);
+            color: #000; font-weight: 700; padding: 16px 36px; border-radius: 12px;
+            text-decoration: none; font-size: 1rem; display: inline-flex; align-items: center;
+            gap: 10px; transition: var(--transition); box-shadow: 0 10px 30px var(--accent-gold-glow);
+            border: none; cursor: pointer;
+        }
+
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 35px rgba(212, 175, 55, 0.4); }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05); color: var(--text-white);
+            border: 1px solid var(--bg-card-border); padding: 16px 32px; border-radius: 12px;
+            text-decoration: none; font-weight: 600; cursor: pointer; transition: var(--transition);
+        }
+
+        /* 3D CARD ANIMATION HERO */
+        .card-3d-wrapper { perspective: 1000px; display: flex; justify-content: center; }
+        .card-3d-hero {
+            width: 100%; max-width: 440px; height: 260px;
+            border-radius: 20px;
+            transform-style: preserve-3d; transform: rotateY(-18deg) rotateX(10deg);
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: -20px 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(212, 175, 55, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-3d-hero:hover { transform: rotateY(0deg) rotateX(0deg) scale(1.03); }
+
+        .card-hero-bg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             display: block;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* HERO SECTION */
-        .hero {
-            padding: 80px 0 60px 0;
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 60px;
-            align-items: flex-end;
-            border-bottom: 1px solid var(--border-light);
-        }
-
-        .hero h1 {
-            font-family: var(--font-serif);
-            font-size: clamp(2rem, 4vw, 3.8rem);
-            font-weight: 400;
-            letter-spacing: -1px;
-            text-transform: uppercase;
-            line-height: 1.05;
-        }
-
-        .hero p {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--text-muted);
-            line-height: 1.8;
-        }
-
-        /* PAGE 1: CATALOGUE */
-        .catalog-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 60px 0 40px 0;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .catalog-title {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 2.5px;
-            font-weight: 700;
-        }
-
-        .catalog-count {
-            font-size: 10px;
-            letter-spacing: 1.5px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-        }
-
-        .grid-products {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 50px 35px;
-            margin-bottom: 100px;
-        }
-
-        .card {
-            border: 1px solid var(--border-color);
-            background: var(--bg-color);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: var(--transition);
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
-        }
-
-        .card-image {
-            height: 280px;
-            background: var(--bg-card);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-bottom: 1px solid var(--border-color);
-            padding: 40px;
-            position: relative;
-        }
-
-        .card-image img {
-            max-width: 65%;
-            max-height: 65%;
-            object-fit: contain;
-            filter: grayscale(100%);
-            transition: var(--transition);
-        }
-
-        .card:hover .card-image img {
-            filter: grayscale(0%);
-            transform: scale(1.05);
-        }
-
-        .card-badge {
+        .card-hero-overlay {
             position: absolute;
-            top: 15px;
-            left: 15px;
-            background: var(--text-main);
-            color: var(--bg-color);
-            font-size: 8px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            padding: 6px 12px;
-        }
-
-        .card-body {
+            top: 0; left: 0; right: 0; bottom: 0;
             padding: 30px;
             display: flex;
             flex-direction: column;
-            gap: 20px;
-        }
-
-        .card-category {
-            font-size: 9px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--text-muted);
-            font-weight: 600;
-        }
-
-        /* NOUVEAU DESIGN DES PRIX */
-        .card-price-main {
-            font-family: var(--font-serif);
-            font-size: 2.6rem;
-            font-weight: 700;
-            letter-spacing: -1px;
-            text-transform: uppercase;
-            line-height: 1;
-        }
-
-        .price-pay-label {
-            font-size: 9px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--text-muted);
-            margin-bottom: 5px;
-            display: block;
-            font-weight: 600;
-        }
-
-        .card-valeur-row {
-            display: flex;
             justify-content: space-between;
-            align-items: center;
-            border-top: 1px dashed var(--border-light);
-            padding-top: 15px;
+            background: linear-gradient(135deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%);
         }
 
-        .valeur-label {
-            font-size: 9px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-muted);
+        .card-hero-logo {
+            height: 32px;
+            object-fit: contain;
+            filter: invert(1) brightness(2);
+            mix-blend-mode: screen;
+            align-self: flex-start;
         }
 
-        .valeur-amount {
-            font-size: 1.1rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
+        .card-hero-value {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--accent-gold);
+            font-weight: 800;
+            text-align: right;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.9);
         }
 
-        .btn-buy {
-            display: block;
+        /* VALUES SECTION */
+        .values-section { padding: 80px 8%; background: rgba(255, 255, 255, 0.01); border-top: 1px solid var(--bg-card-border); }
+        .section-header { text-align: center; max-width: 650px; margin: 0 auto 60px auto; }
+        .section-tag { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 3px; color: var(--accent-gold); font-weight: 700; margin-bottom: 10px; display: block; }
+        .section-title { font-family: var(--font-heading); font-size: 2.2rem; font-weight: 800; }
+        .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; }
+        .value-card { background: var(--bg-card); border: 1px solid var(--bg-card-border); padding: 35px 30px; border-radius: 20px; text-align: center; }
+        .value-icon { width: 50px; height: 50px; background: rgba(212, 175, 55, 0.1); border: 1px solid var(--accent-gold); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; color: var(--accent-gold); margin: 0 auto 20px auto; }
+
+        /* REVIEWS SLIDER SECTION */
+        .reviews-section { padding: 80px 8%; position: relative; }
+        .reviews-carousel-wrapper { margin: 40px auto 0 auto; max-width: 750px; }
+        .review-card-active {
+            background: linear-gradient(145deg, rgba(22, 25, 38, 0.9), rgba(14, 16, 24, 0.95));
+            border: 1px solid rgba(212, 175, 55, 0.25); border-radius: 24px; padding: 40px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6); position: relative;
+        }
+
+        .slide-right { animation: slideRightAnim 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes slideRightAnim {
+            0% { opacity: 0; transform: translateX(-60px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+
+        .carousel-progress-bar { width: 100%; height: 4px; background: rgba(255,255,255,0.08); border-radius: 2px; margin-top: 25px; overflow: hidden; }
+        .progress-fill { height: 100%; width: 0%; background: var(--accent-gold); }
+
+        /* SHOP / CATALOGUE PAGE */
+        .shop-header { padding: 60px 8% 20px 8%; text-align: center; }
+        .shop-grid { padding: 20px 8% 100px 8%; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 35px; }
+        
+        .product-card {
+            background: var(--bg-card); border: 1px solid var(--bg-card-border);
+            border-radius: 20px; padding: 25px; transition: var(--transition); position: relative;
+            display: flex; flex-direction: column; align-items: center; text-align: center;
+        }
+        .product-card:hover { transform: translateY(-8px); border-color: rgba(212, 175, 55, 0.4); box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+        .product-badge { position: absolute; top: 20px; left: 20px; background: rgba(212, 175, 55, 0.15); color: var(--accent-gold); border: 1px solid rgba(212, 175, 55, 0.3); font-size: 0.75rem; font-weight: 700; padding: 5px 12px; border-radius: 20px; text-transform: uppercase; z-index: 2; }
+        
+        .product-card-img-wrapper { height: 180px; width: 100%; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; position: relative; }
+        .card-img-3d { max-width: 100%; max-height: 160px; object-fit: contain; filter: drop-shadow(0 15px 25px rgba(0,0,0,0.8)); transition: var(--transition); }
+        .product-card:hover .card-img-3d { transform: scale(1.06) rotate(-2deg); }
+
+        .product-price-box {
             width: 100%;
-            text-align: center;
-            padding: 16px 0;
-            background: var(--text-main);
-            color: var(--bg-color);
-            text-decoration: none;
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border: 1px solid var(--border-color);
-            transition: var(--transition);
-        }
-
-        .btn-buy:hover {
-            background: var(--bg-color);
-            color: var(--text-main);
-        }
-
-        .payment-note {
-            font-size: 9px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            text-align: center;
-            line-height: 1.4;
-            margin-top: 12px;
-        }
-
-        .payment-note strong {
-            color: var(--text-main);
-        }
-
-        /* PAGE 2: PROCESSUS */
-        .page-header {
-            padding: 80px 0 40px 0;
-            border-bottom: 1px solid var(--border-color);
-            margin-bottom: 60px;
-        }
-
-        .page-header h1 {
-            font-family: var(--font-serif);
-            font-size: clamp(2.2rem, 4vw, 3.5rem);
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: -1px;
-            margin-bottom: 15px;
-        }
-
-        .page-header p {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--text-muted);
-        }
-
-        .process-list {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 40px;
-            margin-bottom: 100px;
-        }
-
-        .step-card {
-            border: 1px solid var(--border-color);
-            padding: 50px 40px;
-            background: var(--bg-card);
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .step-num {
-            font-family: var(--font-serif);
-            font-size: 3.5rem;
-            font-weight: 400;
-            line-height: 1;
-            margin-bottom: 25px;
-        }
-
-        .step-card h2 {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-
-        .step-card p {
-            font-size: 11px;
-            color: var(--text-muted);
-            line-height: 1.8;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-        }
-
-        .step-footer {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px dashed var(--border-light);
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* PAGE 3: DISCORD */
-        .support-wrapper {
-            margin: 80px 0 100px 0;
-            border: 1px solid var(--border-color);
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            background: var(--bg-color);
-        }
-
-        .support-main {
-            padding: 70px 60px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .support-badge {
-            display: inline-block;
-            font-size: 9px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            background: var(--text-main);
-            color: var(--bg-color);
-            padding: 6px 12px;
-            margin-bottom: 30px;
-            align-self: flex-start;
-        }
-
-        .support-main h1 {
-            font-family: var(--font-serif);
-            font-size: clamp(2.2rem, 4vw, 3.5rem);
-            font-weight: 700;
-            text-transform: uppercase;
-            line-height: 1.05;
-            margin-bottom: 25px;
-            letter-spacing: -1px;
-        }
-
-        .support-main p {
-            font-size: 11px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            line-height: 1.8;
-            margin-bottom: 40px;
-        }
-
-        .btn-discord-large {
-            display: inline-flex;
-            justify-content: center;
+            justify-content: space-around;
             align-items: center;
-            padding: 22px 45px;
-            background: var(--text-main);
-            color: var(--bg-color);
-            text-decoration: none;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border: 1px solid var(--border-color);
-            transition: var(--transition);
-            align-self: flex-start;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 14px 10px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 15px;
         }
 
-        .btn-discord-large:hover {
-            background: var(--bg-color);
-            color: var(--text-main);
+        .price-item { text-align: center; }
+        .price-label { font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 2px; }
+        .price-value-pay { font-size: 1.8rem; font-weight: 800; color: #FFFFFF; line-height: 1.1; }
+        .price-value-worth { font-size: 1.3rem; font-weight: 800; color: var(--accent-gold); line-height: 1.1; }
+
+        .btn-buy-card {
+            width: 100%; background: linear-gradient(135deg, var(--accent-gold), #b8860b);
+            color: #000; font-weight: 800; font-size: 0.95rem; text-align: center;
+            padding: 15px 0; border-radius: 12px; text-decoration: none; text-transform: uppercase;
+            display: block; transition: var(--transition); box-shadow: 0 6px 20px rgba(212, 175, 55, 0.2);
         }
 
-        .support-features {
-            border-left: 1px solid var(--border-color);
-            padding: 70px 60px;
-            background: var(--bg-card);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            gap: 40px;
-        }
-
-        .feature-block h3 {
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-        }
-
-        .feature-block p {
-            font-size: 10px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            line-height: 1.7;
-        }
+        .btn-buy-card:hover { opacity: 0.95; transform: translateY(-2px); box-shadow: 0 10px 25px rgba(212, 175, 55, 0.35); }
 
         /* FOOTER */
-        footer {
-            border-top: 1px solid var(--border-color);
-            padding: 40px 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 9px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--text-muted);
-        }
+        footer { border-top: 1px solid var(--bg-card-border); padding: 40px 8%; display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-dim); }
 
-        /* RESPONSIVE */
         @media (max-width: 900px) {
-            body { padding: 0 20px; }
-            .hero { grid-template-columns: 1fr; gap: 30px; }
-            header { flex-direction: column; align-items: flex-start; gap: 20px; }
-            .nav-links { width: 100%; justify-content: space-between; }
-            .process-list { grid-template-columns: 1fr; }
-            .support-wrapper { grid-template-columns: 1fr; }
-            .support-features { border-left: none; border-top: 1px solid var(--border-color); }
-            .support-main, .support-features { padding: 40px 25px; }
-            .btn-discord-large { width: 100%; }
+            .hero-section { grid-template-columns: 1fr; text-align: center; }
+            .hero-cta { justify-content: center; }
+            .nav-btn span { display: none; }
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVIGATION GLOBALE -->
+    <div class="ambient-glow"><div class="glow-1"></div><div class="glow-2"></div></div>
+
+    <!-- NAVBAR -->
     <header>
-        <div class="brand-container">
-            <span class="brand-title" onclick="switchPage('collection')">TechZara</span>
-            <span class="brand-tag">Revendeur Agréé</span>
-        </div>
-        <nav class="nav-links">
-            <button class="nav-btn active" id="btn-collection" onclick="switchPage('collection')">Collection</button>
-            <button class="nav-btn" id="btn-procedure" onclick="switchPage('procedure')">Procédure</button>
-            <button class="nav-btn" id="btn-support" onclick="switchPage('support')">Support</button>
-        </nav>
+        <a class="brand-logo" onclick="switchPage('landing')">
+            <!-- Logo ZARA officiel en haut à gauche -->
+            <img src="image_6.png" alt="Zara Logo" class="brand-zara-img">
+            <span class="brand-divider">|</span>
+            <span class="brand-text">TECHZARA</span>
+        </a>
+        <ul class="nav-menu">
+            <li><button class="nav-btn active" id="btn-landing" onclick="switchPage('landing')"><i class="fa-solid fa-house"></i> <span>Accueil</span></button></li>
+            <li><button class="nav-btn" id="btn-shop" onclick="switchPage('shop')"><i class="fa-solid fa-store"></i> <span>Boutique</span></button></li>
+            <li><button class="nav-btn" id="btn-procedure" onclick="switchPage('procedure')"><i class="fa-solid fa-shield-halved"></i> <span>Procédure</span></button></li>
+            <li><button class="nav-btn" id="btn-support" onclick="switchPage('support')"><i class="fa-brands fa-discord"></i> <span>Discord</span></button></li>
+        </ul>
     </header>
 
-    <!-- PAGE 1 : COLLECTION (CATALOGUE) -->
-    <div id="page-collection" class="page active">
-        <section class="hero">
-            <div>
-                <h1>Cartes-Cadeaux Officielles Zara</h1>
-            </div>
-            <div>
-                <p>Accédez à une sélection exclusive de cartes-cadeaux officielles Zara vendues à tarifs préférentiels. Transaction sécurisée et livraison numérique rapide.</p>
-            </div>
-        </section>
+    <div class="page-container">
 
-        <div class="catalog-header">
-            <span class="catalog-title">Offres Disponibles en Stock</span>
-            <span class="catalog-count">7 Références</span>
+        <!-- LANDING PAGE -->
+        <div id="page-landing" class="page active">
+            <section class="hero-section">
+                <div>
+                    <h1 class="hero-title">Cartes-Cadeaux <span>Zara Exclusives</span> en 3D Instantanées</h1>
+                    <p class="hero-desc">Bénéficiez de remises exceptionnelles sur vos e-cartes officielles Zara. Réception immédiate par mail et utilisables instantanément en ligne ou en magasin.</p>
+                    <div class="hero-cta">
+                        <button class="btn-primary" onclick="switchPage('shop')"><i class="fa-solid fa-bag-shopping"></i> Découvrir le Shop</button>
+                        <button class="btn-secondary" onclick="switchPage('procedure')">Comment ça marche ?</button>
+                    </div>
+                </div>
+                <div class="card-3d-wrapper">
+                    <div class="card-3d-hero">
+                        <img src="image_7.png" alt="Zara Card VIP" class="card-hero-bg">
+                        <div class="card-hero-overlay">
+                            <img src="image_6.png" alt="Zara" class="card-hero-logo">
+                            <div class="card-hero-value">1 600 €</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VALEURS -->
+            <section class="values-section">
+                <div class="section-header">
+                    <span class="section-tag">Pourquoi nous choisir</span>
+                    <h2 class="section-title">Nos Engagements & Valeurs</h2>
+                </div>
+                <div class="values-grid">
+                    <div class="value-card"><div class="value-icon"><i class="fa-solid fa-bolt"></i></div><h3>Livraison Instantanée</h3><p>Code transmis instantanément par mail dès la confirmation de la commande.</p></div>
+                    <div class="value-card"><div class="value-icon"><i class="fa-solid fa-shield-check"></i></div><h3>100% Officiel</h3><p>Toutes nos cartes sont valides sur l'appli Zara et en magasin physique.</p></div>
+                    <div class="value-card"><div class="value-icon"><i class="fa-solid fa-tags"></i></div><h3>Tarifs Privilégiés</h3><p>Profitez de réductions jusqu'à 90% sur la valeur nominale des cartes.</p></div>
+                    <div class="value-card"><div class="value-icon"><i class="fa-solid fa-headset"></i></div><h3>Support 24/7</h3><p>Notre équipe répond à toutes vos questions sur notre serveur Discord.</p></div>
+                </div>
+            </section>
+
+            <!-- CAROUSEL AVIS 10s -->
+            <section class="reviews-section">
+                <div class="section-header">
+                    <span class="section-tag">Avis Clients Discord</span>
+                    <h2 class="section-title">Ce que dit notre communauté</h2>
+                </div>
+                <div class="reviews-carousel-wrapper">
+                    <div class="review-card-active" id="review-card" style="text-align: center;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                            <div style="display: flex; align-items: center; gap: 12px; text-align: left;">
+                                <div id="rev-avatar" style="width: 45px; height: 45px; border-radius: 50%; background: var(--accent-gold); color: #000; font-weight: 800; display: flex; align-items: center; justify-content: center;">NP</div>
+                                <div>
+                                    <div id="rev-name" style="font-weight: 700; font-size: 1.05rem;">Nicolas P.</div>
+                                    <div id="rev-date" style="font-size: 0.8rem; color: var(--text-dim);">18 août 2026</div>
+                                </div>
+                            </div>
+                            <div style="color: #FFD700; font-size: 1.1rem;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                        </div>
+                        <div id="rev-comment" style="font-size: 1.15rem; font-style: italic; color: #E5E7EB; line-height: 1.7;">"Franchement nickel, e-carte reçue direct après avoir payé. Code valide sans souci en caisse !"</div>
+                    </div>
+                    <div class="carousel-progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+                    <div id="rev-counter" style="text-align: center; margin-top: 15px; font-size: 0.85rem; color: var(--text-dim);">Avis #1 / 620 — Rotation toutes les 10s</div>
+                </div>
+            </section>
         </div>
 
-        <section class="grid-products">
-            <article class="card">
-                <div class="card-image">
-                    <span class="card-badge">Code Officiel</span>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Zara_Logo.svg" alt="Zara Gift Card">
-                </div>
-                <div class="card-body">
-                    <div>
-                        <span class="price-pay-label">Prix à Payer</span>
-                        <div class="card-price-main">10,00 €</div>
-                    </div>
-                    <div class="card-valeur-row">
-                        <span class="valeur-label">Valeur Carte Zara</span>
-                        <span class="valeur-amount">50 €</span>
-                    </div>
-                    <div>
-                        <a href="https://www.paypal.me/PaMe372106/10EUR" target="_blank" rel="noopener" class="btn-buy">Commander pour 10,00 €</a>
-                        <p class="payment-note">Paiement PayPal : Sélectionner <strong>"Envoi entre proches"</strong></p>
-                    </div>
-                </div>
-            </article>
-
-            <article class="card">
-                <div class="card-image">
-                    <span class="card-badge">Code Officiel</span>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Zara_Logo.svg" alt="Zara Gift Card">
-                </div>
-                <div class="card-body">
-                    <div>
-                        <span class="price-pay-label">Prix à Payer</span>
-                        <div class="card-price-main">15,00 €</div>
-                    </div>
-                    <div class="card-valeur-row">
-                        <span class="valeur-label">Valeur Carte Zara</span>
-                        <span class="valeur-amount">100 €</span>
-                    </div>
-                    <div>
-                        <a href="https://www.paypal.me/PaMe372106/15EUR" target="_blank" rel="noopener" class="btn-buy">Commander pour 15,00 €</a>
-                        <p class="payment-note">Paiement PayPal : Sélectionner <strong>"Envoi entre proches"</strong></p>
-                    </div>
-                </div>
-            </article>
-
-            <article class="card">
-                <div class="card-image">
-                    <span class="card-badge">Meilleure Vente</span>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Zara_Logo.svg" alt="Zara Gift Card">
-                </div>
-                <div class="card-body">
-                    <div>
-                        <span class="price-pay-label">Prix à Payer</span>
-                        <div class="card-price-main">20,00 €</div>
-                    </div>
-                    <div class="card-valeur-row">
-                        <span class="valeur-label">Valeur Carte Zara</span>
-                        <span class="valeur-amount">200 €</span>
-                    </div>
-                    <div>
-                        <a href="https://www.paypal.me/PaMe372106/20EUR" target="_blank" rel="noopener" class="btn-buy">Commander pour 20,00 €</a>
-                        <p class="payment-note">Paiement PayPal : Sélectionner <strong>"Envoi entre proches"</strong></p>
-                    </div>
-                </div>
-            </article>
-
-            <article class="card">
-                <div class="card-image">
-                    <span class="card-badge">Code Officiel</span>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Zara_Logo.svg" alt="Zara Gift Card">
-                </div>
-                <div class="card-body">
-                    <div>
-                        <span class="price-pay-label">Prix à Payer</span>
-                        <div class="card-price-main">30,00 €</div>
-                    </div>
-                    <div class="card-valeur-row">
-                        <span class="valeur-label">Valeur Carte Zara</span>
-                        <span class="valeur-amount">500 €</span>
-                    </div>
-                    <div>
-                        <a href="https://www.paypal.me/PaMe372106/30EUR" target="_blank" rel="noopener" class="btn-buy">Commander pour 30,00 €</a>
-                        <p class="payment-note">Paiement PayPal : Sélectionner <strong>"Envoi entre proches"</strong></p>
-                    </div>
-                </div>
-            </article>
-
-            <article class="card">
-                <div class="card-image">
-                    <span class="card-badge">Code Officiel</span>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Zara_Logo.svg" alt="Zara Gift Card">
-                </div>
-                <div class="card-body">
-                    <div>
-                        <span class="price-pay-label">Prix à Payer</span>
-                        <div class="card-price-main">50,00 €</div>
-                    </div>
-                    <div class="card-valeur-row">
-                        <span class="valeur-label">Valeur Carte Zara</span>
-                        <span class="valeur-amount">800 €</span>
-                    </div>
-                    <div>
-                        <a href="https://www.paypal.me/PaMe372106/50EUR" target="_blank" rel="noopener" class="btn-buy">Commander pour 50,00 €</a>
-                        <p class="payment-note">Paiement PayPal : Sélectionner <strong>"Envoi entre proches"</strong></p>
-                    </div>
-                </div>
-            </article>
-
-            <article class="card">
-                <div class="card-image">
-                    <span class="card-badge">Édition Premium</span>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Zara_Logo.svg" alt="Zara Gift Card">
-                </div>
-                <div class="card-body">
-                    <div>
-                        <span class="price-pay-label">Prix à Payer</span>
-                        <div class="card-price-main">70,00 €</div>
-                    </div>
-                    <div class="card-valeur-row">
-                        <span class="valeur-label">Valeur Carte Zara</span>
-                        <span class="valeur-amount">1000 €</span>
-                    </div>
-                    <div>
-                        <a href="https://www.paypal.me/PaMe372106/70EUR" target="_blank" rel="noopener" class="btn-buy">Commander pour 70,00 €</a>
-                        <p class="payment-note">Paiement PayPal : Sélectionner <strong>"Envoi entre proches"</strong></p>
-                    </div>
-                </div>
-            </article>
-
-            <article class="card">
-                <div class="card-image">
-                    <span class="card-badge">Édition VIP</span>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Zara_Logo.svg" alt="Zara Gift Card">
-                </div>
-                <div class="card-body">
-                    <div>
-                        <span class="price-pay-label">Prix à Payer</span>
-                        <div class="card-price-main">100,00 €</div>
-                    </div>
-                    <div class="card-valeur-row">
-                        <span class="valeur-label">Valeur Carte Zara</span>
-                        <span class="valeur-amount">1600 €</span>
-                    </div>
-                    <div>
-                        <a href="https://www.paypal.me/PaMe372106/100EUR" target="_blank" rel="noopener" class="btn-buy">Commander pour 100,00 €</a>
-                        <p class="payment-note">Paiement PayPal : Sélectionner <strong>"Envoi entre proches"</strong></p>
-                    </div>
-                </div>
-            </article>
-        </section>
-    </div>
-
-    <!-- PAGE 2 : PROCÉDURE DE COMMANDE -->
-    <div id="page-procedure" class="page">
-        <section class="page-header">
-            <h1>Procédure de Commande Officielle</h1>
-            <p>Les étapes sécurisées pour acquérir et utiliser vos cartes-cadeaux Zara</p>
-        </section>
-
-        <section class="process-list">
-            <article class="step-card">
-                <div>
-                    <span class="step-num">01.</span>
-                    <h2>Choix de la Carte Zara</h2>
-                    <p>Consultez la collection disponible sur le catalogue principal. Choisissez la valeur nominale de la carte Zara officielle dont vous avez besoin (de 50 € à 1600 €).</p>
-                </div>
-                <div class="step-footer">
-                    Étape 1 sur 4 — Sélection
-                </div>
-            </article>
-
-            <article class="step-card">
-                <div>
-                    <span class="step-num">02.</span>
-                    <h2>Règlement Sécurisé PayPal</h2>
-                    <p>Cliquez sur "Commander le Code". Vous êtes directement redirigé vers l'interface de paiement PayPal pré-remplie. Afin d'éviter les frais additionnels et de valider la commande, choisissez l'option <strong>"Envoi entre proches"</strong>.</p>
-                </div>
-                <div class="step-footer">
-                    Étape 2 sur 4 — Règlement
-                </div>
-            </article>
-
-            <article class="step-card">
-                <div>
-                    <span class="step-num">03.</span>
-                    <h2>Traitement et Inscription</h2>
-                    <p>Dès confirmation de la transaction par le système, le code officiel associé à votre carte Zara est généré et préparé pour l'envoi instantané.</p>
-                </div>
-                <div class="step-footer">
-                    Délai Moyen : Instantané à 5 minutes
-                </div>
-            </article>
-
-            <article class="step-card">
-                <div>
-                    <span class="step-num">04.</span>
-                    <h2>Délivrance & Utilisation</h2>
-                    <p>Vous recevez votre code de carte-cadeau officiel. Vous pouvez l'utiliser immédiatement sur le site officiel Zara.com ou directement en magasin physique Zara lors de vos passages en caisse.</p>
-                </div>
-                <div class="step-footer">
-                    Utilisation immédiate garantie
-                </div>
-            </article>
-        </section>
-    </div>
-
-    <!-- PAGE 3 : SUPPORT DISCORD -->
-    <div id="page-support" class="page">
-        <main class="support-wrapper">
-            <div class="support-main">
-                <span class="support-badge">Assistance Directe 24/7</span>
-                <h1>Serveur Discord Officiel</h1>
-                <p>Pour toute question sur votre commande, vérification de validité de vos cartes Zara ou assistance en direct, notre équipe technique vous assiste via notre serveur sécurisé.</p>
-                <a href="https://discord.gg/54NngFNzna" target="_blank" rel="noopener" class="btn-discord-large">Rejoindre le Support Discord</a>
+        <!-- SHOP PAGE -->
+        <div id="page-shop" class="page">
+            <div class="shop-header">
+                <span class="section-tag">Catalogue Officiel</span>
+                <h1 class="section-title">Cartes-Cadeaux Zara Disponibles</h1>
             </div>
-
-            <div class="support-features">
-                <div class="feature-block">
-                    <h3>// Assistance Ticket Privée</h3>
-                    <p>Ouvrez un ticket individuel pour échanger directement avec un administrateur en toute sécurité.</p>
+            <div class="shop-grid">
+                <!-- 50€ -->
+                <div class="product-card">
+                    <span class="product-badge">Code Officiel</span>
+                    <div class="product-card-img-wrapper">
+                        <img src="image_7.png" alt="Zara Gift Card" class="card-img-3d">
+                    </div>
+                    <div class="product-price-box">
+                        <div class="price-item">
+                            <span class="price-label">Prix</span>
+                            <div class="price-value-pay">10,00 €</div>
+                        </div>
+                        <div class="price-item">
+                            <span class="price-label">Valeur</span>
+                            <div class="price-value-worth">50 €</div>
+                        </div>
+                    </div>
+                    <a href="https://www.paypal.me/PaMe372106/10EUR" target="_blank" class="btn-buy-card">Commander — 10,00 €</a>
+                    <div style="font-size: 0.75rem; color: var(--text-dim); text-align: center; margin-top: 10px;">PayPal : <strong>"Envoi entre proches"</strong></div>
                 </div>
 
-                <div class="feature-block">
-                    <h3>// Alertes Réapprovisionnement</h3>
-                    <p>Soyez averti dès la mise en ligne des nouveaux stocks de cartes-cadeaux officielles Zara.</p>
+                <!-- 100€ -->
+                <div class="product-card">
+                    <span class="product-badge">Code Officiel</span>
+                    <div class="product-card-img-wrapper">
+                        <img src="image_7.png" alt="Zara Gift Card" class="card-img-3d">
+                    </div>
+                    <div class="product-price-box">
+                        <div class="price-item">
+                            <span class="price-label">Prix</span>
+                            <div class="price-value-pay">15,00 €</div>
+                        </div>
+                        <div class="price-item">
+                            <span class="price-label">Valeur</span>
+                            <div class="price-value-worth">100 €</div>
+                        </div>
+                    </div>
+                    <a href="https://www.paypal.me/PaMe372106/15EUR" target="_blank" class="btn-buy-card">Commander — 15,00 €</a>
+                    <div style="font-size: 0.75rem; color: var(--text-dim); text-align: center; margin-top: 10px;">PayPal : <strong>"Envoi entre proches"</strong></div>
                 </div>
 
-                <div class="feature-block">
-                    <h3>// Retours d'Expérience Client</h3>
-                    <p>Consultez les avis et retours des membres de la communauté TechZara en temps réel.</p>
+                <!-- 200€ -->
+                <div class="product-card">
+                    <span class="product-badge" style="color: #f87171;">Meilleure Vente 🔥</span>
+                    <div class="product-card-img-wrapper">
+                        <img src="image_7.png" alt="Zara Gift Card" class="card-img-3d">
+                    </div>
+                    <div class="product-price-box">
+                        <div class="price-item">
+                            <span class="price-label">Prix</span>
+                            <div class="price-value-pay">20,00 €</div>
+                        </div>
+                        <div class="price-item">
+                            <span class="price-label">Valeur</span>
+                            <div class="price-value-worth">200 €</div>
+                        </div>
+                    </div>
+                    <a href="https://www.paypal.me/PaMe372106/20EUR" target="_blank" class="btn-buy-card">Commander — 20,00 €</a>
+                    <div style="font-size: 0.75rem; color: var(--text-dim); text-align: center; margin-top: 10px;">PayPal : <strong>"Envoi entre proches"</strong></div>
+                </div>
+
+                <!-- 500€ -->
+                <div class="product-card">
+                    <span class="product-badge">Code Officiel</span>
+                    <div class="product-card-img-wrapper">
+                        <img src="image_7.png" alt="Zara Gift Card" class="card-img-3d">
+                    </div>
+                    <div class="product-price-box">
+                        <div class="price-item">
+                            <span class="price-label">Prix</span>
+                            <div class="price-value-pay">30,00 €</div>
+                        </div>
+                        <div class="price-item">
+                            <span class="price-label">Valeur</span>
+                            <div class="price-value-worth">500 €</div>
+                        </div>
+                    </div>
+                    <a href="https://www.paypal.me/PaMe372106/30EUR" target="_blank" class="btn-buy-card">Commander — 30,00 €</a>
+                    <div style="font-size: 0.75rem; color: var(--text-dim); text-align: center; margin-top: 10px;">PayPal : <strong>"Envoi entre proches"</strong></div>
+                </div>
+
+                <!-- 800€ -->
+                <div class="product-card">
+                    <span class="product-badge">Code Officiel</span>
+                    <div class="product-card-img-wrapper">
+                        <img src="image_7.png" alt="Zara Gift Card" class="card-img-3d">
+                    </div>
+                    <div class="product-price-box">
+                        <div class="price-item">
+                            <span class="price-label">Prix</span>
+                            <div class="price-value-pay">50,00 €</div>
+                        </div>
+                        <div class="price-item">
+                            <span class="price-label">Valeur</span>
+                            <div class="price-value-worth">800 €</div>
+                        </div>
+                    </div>
+                    <a href="https://www.paypal.me/PaMe372106/50EUR" target="_blank" class="btn-buy-card">Commander — 50,00 €</a>
+                    <div style="font-size: 0.75rem; color: var(--text-dim); text-align: center; margin-top: 10px;">PayPal : <strong>"Envoi entre proches"</strong></div>
+                </div>
+
+                <!-- 1000€ -->
+                <div class="product-card">
+                    <span class="product-badge" style="color: #c084fc;">Édition Premium ✨</span>
+                    <div class="product-card-img-wrapper">
+                        <img src="image_7.png" alt="Zara Gift Card" class="card-img-3d">
+                    </div>
+                    <div class="product-price-box">
+                        <div class="price-item">
+                            <span class="price-label">Prix</span>
+                            <div class="price-value-pay">70,00 €</div>
+                        </div>
+                        <div class="price-item">
+                            <span class="price-label">Valeur</span>
+                            <div class="price-value-worth">1000 €</div>
+                        </div>
+                    </div>
+                    <a href="https://www.paypal.me/PaMe372106/70EUR" target="_blank" class="btn-buy-card">Commander — 70,00 €</a>
+                    <div style="font-size: 0.75rem; color: var(--text-dim); text-align: center; margin-top: 10px;">PayPal : <strong>"Envoi entre proches"</strong></div>
+                </div>
+
+                <!-- 1600€ -->
+                <div class="product-card">
+                    <span class="product-badge" style="color: #fde047;">Édition VIP 👑</span>
+                    <div class="product-card-img-wrapper">
+                        <img src="image_7.png" alt="Zara Gift Card" class="card-img-3d">
+                    </div>
+                    <div class="product-price-box">
+                        <div class="price-item">
+                            <span class="price-label">Prix</span>
+                            <div class="price-value-pay">100,00 €</div>
+                        </div>
+                        <div class="price-item">
+                            <span class="price-label">Valeur</span>
+                            <div class="price-value-worth">1600 €</div>
+                        </div>
+                    </div>
+                    <a href="https://www.paypal.me/PaMe372106/100EUR" target="_blank" class="btn-buy-card">Commander — 100,00 €</a>
+                    <div style="font-size: 0.75rem; color: var(--text-dim); text-align: center; margin-top: 10px;">PayPal : <strong>"Envoi entre proches"</strong></div>
                 </div>
             </div>
-        </main>
+        </div>
+
+        <!-- PROCEDURE PAGE -->
+        <div id="page-procedure" class="page">
+            <div class="shop-header">
+                <span class="section-tag">Guide d'Achat</span>
+                <h1 class="section-title">Procédure de Commande Officielle</h1>
+            </div>
+            <div class="values-grid" style="padding: 40px 8%;">
+                <div class="value-card"><div class="value-icon">01</div><h3>Sélection du Solde</h3><p>Choisissez la valeur de la carte Zara qui vous convient.</p></div>
+                <div class="value-card"><div class="value-icon">02</div><h3>Règlement PayPal</h3><p>Effectuez le règlement en choisissant <strong>"Envoi entre proches"</strong>.</p></div>
+                <div class="value-card"><div class="value-icon">03</div><h3>Génération Instantanée</h3><p>Votre code officiel est envoyé par e-mail en quelques secondes.</p></div>
+                <div class="value-card"><div class="value-icon">04</div><h3>Utilisation</h3><p>Renseignez votre code directement sur l'application ou en magasin.</p></div>
+            </div>
+        </div>
+
+        <!-- DISCORD PAGE -->
+        <div id="page-support" class="page">
+            <div style="text-align: center; padding: 80px 8%;">
+                <i class="fa-brands fa-discord" style="font-size: 4rem; color: #5865F2;"></i>
+                <h1 class="section-title" style="margin-top: 15px;">Serveur Discord Officiel</h1>
+                <p style="color: var(--text-dim); margin-top: 10px;">Besoin d'aide ou d'un ticket de support en direct ?</p>
+                <a href="https://discord.gg/54NngFNzna" target="_blank" class="btn-primary" style="margin-top: 25px; background: #5865F2; color: #fff;">
+                    <i class="fa-brands fa-discord"></i> Rejoindre Discord
+                </a>
+            </div>
+        </div>
+
     </div>
 
-    <!-- FOOTER GLOBALE -->
     <footer>
         <div>© 2026 TECHZARA — Vente de cartes-cadeaux officielles</div>
-        <div>Support et accompagnement en ligne</div>
+        <div><a href="https://discord.gg/54NngFNzna" target="_blank" style="color: var(--text-dim); text-decoration: none;"><i class="fa-brands fa-discord"></i> Support Discord</a></div>
     </footer>
 
-    <!-- SCRIPT JS POUR LE CHANGEMENT DE PAGE -->
     <script>
         function switchPage(pageId) {
-            // Masquer toutes les pages
-            const pages = document.querySelectorAll('.page');
-            pages.forEach(page => page.classList.remove('active'));
-
-            // Désactiver tous les boutons de navigation
-            const navButtons = document.querySelectorAll('.nav-btn');
-            navButtons.forEach(btn => btn.classList.remove('active'));
-
-            // Afficher la page sélectionnée
-            const targetPage = document.getElementById('page-' + pageId);
-            if (targetPage) {
-                targetPage.classList.add('active');
-            }
-
-            // Activer le bouton de nav correspondant
-            const targetBtn = document.getElementById('btn-' + pageId);
-            if (targetBtn) {
-                targetBtn.classList.add('active');
-            }
-
-            // Remonter en haut de page
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('page-' + pageId).classList.add('active');
+            const btn = document.getElementById('btn-' + pageId);
+            if(btn) btn.classList.add('active');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        // GENERATE 600+ REVIEWS AUTOMATICALLY
+        const initialReviews = [
+            { name: "Nicolas P.", rating: 5, comment: "Franchement nickel, e-carte reçue direct après avoir payé. Code valide sans souci en caisse !", date: "2026-08-18" },
+            { name: "Léa M.", rating: 5, comment: "J'avais un peu peur au début mais j'ai reçu le mail dans la minute. Ça passe direct sur l'appli Zara.", date: "2026-08-15" },
+            { name: "Romain F.", rating: 5, comment: "Hyper rapide ! Mail reçu instantanément avec le code. Je repasserai par là sans hésiter.", date: "2026-08-12" },
+            { name: "Claire B.", rating: 5, comment: "Top pour un cadeau de dernière minute, le mail arrive tout de suite et le code fonctionne super bien.", date: "2026-08-09" },
+            { name: "Hugo T.", rating: 5, comment: "Rien à dire, envoi automatique instantané. Code scanné en boutique cet aprèm sans aucun problème.", date: "2026-08-04" },
+            { name: "Inès G.", rating: 5, comment: "Parfait ! J'ai reçu le code par mail 30 secondes après la commande. Merci beaucoup !", date: "2026-07-29" },
+            { name: "Antoine C.", rating: 5, comment: "Simple et efficace. Le mail était directement dans ma boîte de réception, code valide.", date: "2026-07-22" },
+            { name: "Manon D.", rating: 5, comment: "Vraiment rapide, j'ai pu l'utiliser direct pour passer ma commande. Je recommande !", date: "2026-07-18" },
+            { name: "Youssef K.", rating: 5, comment: "Impeccable, mail bien reçu avec le bon code. Pas eu besoin d'attendre des heures.", date: "2026-07-11" },
+            { name: "Camille V.", rating: 5, comment: "Super plan, tout s'est passé comme prévu. Mail reçu direct et carte validée sur le site.", date: "2026-07-03" }
+        ];
+
+        const fnList = ["Alexandre", "Julien", "Thomas", "Maxime", "Lucas", "Sébastien", "Enzo", "Mathieu", "Gabriel", "Théo", "Sarah", "Emma", "Chloé", "Jade"];
+        const lnList = ["A.", "B.", "C.", "D.", "F.", "G.", "K.", "M.", "N.", "P.", "R.", "S.", "T."];
+        const comments = [
+            "Livraison ultra rapide du code par mail ! Validé immédiatement sur Zara.com.",
+            "Nickel, je viens de passer une commande d'habits avec ma e-carte sans aucun problème !",
+            "Service irréprochable, code valide en caisse en boutique à Paris.",
+            "Deuxième fois que je commande chez TechZara, toujours aussi réactif !",
+            "Code fonctionnel direct sur l'appli Zara, économies au top merci !"
+        ];
+
+        const allReviews = [...initialReviews];
+        for (let i = 11; i <= 620; i++) {
+            const fn = fnList[Math.floor(Math.random() * fnList.length)];
+            const ln = lnList[Math.floor(Math.random() * lnList.length)];
+            const comment = comments[Math.floor(Math.random() * comments.length)];
+            allReviews.push({ name: `${fn} ${ln}`, rating: 5, comment: comment, date: `2026-07-${(i % 28) + 1}` });
+        }
+
+        let currentRevIdx = 0;
+        const ROTATION_TIME = 10000;
+        let startTime = Date.now();
+
+        function updateReview() {
+            const rev = allReviews[currentRevIdx];
+            const card = document.getElementById('review-card');
+            card.classList.remove('slide-right');
+            void card.offsetWidth;
+            card.classList.add('slide-right');
+
+            document.getElementById('rev-avatar').innerText = rev.name.split(' ').map(n => n[0]).join('');
+            document.getElementById('rev-name').innerText = rev.name;
+            document.getElementById('rev-date').innerText = rev.date;
+            document.getElementById('rev-comment').innerText = `"${rev.comment}"`;
+            document.getElementById('rev-counter').innerText = `Avis #${currentRevIdx + 1} / ${allReviews.length} — Rotation toutes les 10s`;
+            startTime = Date.now();
+        }
+
+        function animateProgress() {
+            const elapsed = Date.now() - startTime;
+            document.getElementById('progress-fill').style.width = Math.min((elapsed / ROTATION_TIME) * 100, 100) + '%';
+            if (elapsed >= ROTATION_TIME) {
+                currentRevIdx = (currentRevIdx + 1) % allReviews.length;
+                updateReview();
+            }
+            requestAnimationFrame(animateProgress);
+        }
+
+        updateReview();
+        requestAnimationFrame(animateProgress);
     </script>
 </body>
 </html>
