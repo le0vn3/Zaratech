@@ -415,11 +415,18 @@
 
         .card-valeur-row {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
+            gap: 4px;
             width: 100%;
             border-top: 1px dashed var(--border-light);
             padding-top: 12px;
+        }
+
+        .valeur-row-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
         }
 
         .valeur-label {
@@ -428,9 +435,16 @@
             color: var(--text-muted);
         }
 
-        .valeur-amount {
+        .valeur-amount-base {
+            font-size: 0.85rem;
+            text-decoration: line-through;
+            color: var(--text-muted);
+        }
+
+        .valeur-amount-final {
             font-size: 1rem;
             font-weight: 700;
+            color: #2E7D32;
         }
 
         .btn-buy {
@@ -740,8 +754,10 @@
                         <div class="card-price-main">10,00 €</div>
                     </div>
                     <div class="card-valeur-row">
-                        <span class="valeur-label">Valeur Carte Zara</span>
-                        <span class="valeur-amount">50 €</span>
+                        <div class="valeur-row-item">
+                            <span class="valeur-label">Valeur Carte Zara</span>
+                            <span class="valeur-amount-final">50 €</span>
+                        </div>
                     </div>
                     <button type="button" class="btn-buy" onclick="openCheckout('50 €', '10,00 €', 'https://www.paypal.me/PaMe372106/10EUR')">Commander pour 10,00 €</button>
                 </div>
@@ -758,8 +774,10 @@
                         <div class="card-price-main">15,00 €</div>
                     </div>
                     <div class="card-valeur-row">
-                        <span class="valeur-label">Valeur Carte Zara</span>
-                        <span class="valeur-amount">100 €</span>
+                        <div class="valeur-row-item">
+                            <span class="valeur-label">Valeur Carte Zara</span>
+                            <span class="valeur-amount-final">100 €</span>
+                        </div>
                     </div>
                     <button type="button" class="btn-buy" onclick="openCheckout('100 €', '15,00 €', 'https://www.paypal.me/PaMe372106/15EUR')">Commander pour 15,00 €</button>
                 </div>
@@ -777,8 +795,14 @@
                         <div class="card-price-main">20,00 €</div>
                     </div>
                     <div class="card-valeur-row">
-                        <span class="valeur-label">Valeur Carte Zara</span>
-                        <span class="valeur-amount">200 €</span>
+                        <div class="valeur-row-item">
+                            <span class="valeur-label">Valeur Initiale</span>
+                            <span class="valeur-amount-base">173,91 €</span>
+                        </div>
+                        <div class="valeur-row-item">
+                            <span class="valeur-label">Avec Bonus (+15%)</span>
+                            <span class="valeur-amount-final">200 €</span>
+                        </div>
                     </div>
                     <button type="button" class="btn-buy" onclick="openCheckout('200 €', '20,00 €', 'https://www.paypal.me/PaMe372106/20EUR')">Commander pour 20,00 €</button>
                 </div>
@@ -796,8 +820,14 @@
                         <div class="card-price-main">30,00 €</div>
                     </div>
                     <div class="card-valeur-row">
-                        <span class="valeur-label">Valeur Carte Zara</span>
-                        <span class="valeur-amount">500 €</span>
+                        <div class="valeur-row-item">
+                            <span class="valeur-label">Valeur Initiale</span>
+                            <span class="valeur-amount-base">434,78 €</span>
+                        </div>
+                        <div class="valeur-row-item">
+                            <span class="valeur-label">Avec Bonus (+15%)</span>
+                            <span class="valeur-amount-final">500 €</span>
+                        </div>
                     </div>
                     <button type="button" class="btn-buy" onclick="openCheckout('500 €', '30,00 €', 'https://www.paypal.me/PaMe372106/30EUR')">Commander pour 30,00 €</button>
                 </div>
@@ -815,8 +845,14 @@
                         <div class="card-price-main">70,00 €</div>
                     </div>
                     <div class="card-valeur-row">
-                        <span class="valeur-label">Valeur Carte Zara</span>
-                        <span class="valeur-amount">1000 €</span>
+                        <div class="valeur-row-item">
+                            <span class="valeur-label">Valeur Initiale</span>
+                            <span class="valeur-amount-base">869,57 €</span>
+                        </div>
+                        <div class="valeur-row-item">
+                            <span class="valeur-label">Avec Bonus (+15%)</span>
+                            <span class="valeur-amount-final">1000 €</span>
+                        </div>
                     </div>
                     <button type="button" class="btn-buy" onclick="openCheckout('1000 €', '70,00 €', 'https://www.paypal.me/PaMe372106/70EUR')">Commander pour 70,00 €</button>
                 </div>
@@ -834,8 +870,14 @@
                         <div class="card-price-main">100,00 €</div>
                     </div>
                     <div class="card-valeur-row">
-                        <span class="valeur-label">Valeur Carte Zara</span>
-                        <span class="valeur-amount">2300 €</span>
+                        <div class="valeur-row-item">
+                            <span class="valeur-label">Valeur Initiale</span>
+                            <span class="valeur-amount-base">2000,00 €</span>
+                        </div>
+                        <div class="valeur-row-item">
+                            <span class="valeur-label">Avec Bonus (+15%)</span>
+                            <span class="valeur-amount-final">2300 €</span>
+                        </div>
                     </div>
                     <button type="button" class="btn-buy" onclick="openCheckout('2300 €', '100,00 €', 'https://www.paypal.me/PaMe372106/100EUR')">Commander pour 100,00 €</button>
                 </div>
@@ -853,8 +895,14 @@
                         <div class="card-price-main">200,00 €</div>
                     </div>
                     <div class="card-valeur-row">
-                        <span class="valeur-label">Valeur Carte Zara</span>
-                        <span class="valeur-amount">4600 €</span>
+                        <div class="valeur-row-item">
+                            <span class="valeur-label">Valeur Initiale</span>
+                            <span class="valeur-amount-base">4000,00 €</span>
+                        </div>
+                        <div class="valeur-row-item">
+                            <span class="valeur-label">Avec Bonus (+15%)</span>
+                            <span class="valeur-amount-final">4600 €</span>
+                        </div>
                     </div>
                     <button type="button" class="btn-buy" onclick="openCheckout('4600 €', '200,00 €', 'https://www.paypal.me/PaMe372106/200EUR')">Commander pour 200,00 €</button>
                 </div>
