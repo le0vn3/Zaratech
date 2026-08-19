@@ -43,7 +43,6 @@
             text-align: center;
         }
 
-        /* HEADER */
         header {
             padding: 25px 0;
             display: flex;
@@ -85,7 +84,6 @@
             margin-top: 4px;
         }
 
-        /* PAGES */
         .page {
             display: none;
             opacity: 0;
@@ -99,7 +97,6 @@
             transform: translateY(0);
         }
 
-        /* HERO & ACCUEIL CENTRÉ */
         .home-hero {
             padding: 40px 0 50px 0;
             display: flex;
@@ -169,7 +166,6 @@
             transform: translateY(-2px);
         }
 
-        /* COMPTEURS CENTRÉS */
         .stats-bar {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -199,7 +195,6 @@
             font-weight: 600;
         }
 
-        /* TITRES DE SECTION */
         .section-title-wrap {
             margin: 60px 0 30px 0;
             text-align: center;
@@ -221,7 +216,6 @@
             margin-top: 6px;
         }
 
-        /* ENGAGEMENTS */
         .values-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -252,7 +246,6 @@
             line-height: 1.6;
         }
 
-        /* SECTION AVIS CLIENTS (AUTO-SCROLL CENTRÉ) */
         .reviews-carousel-container {
             overflow: hidden;
             width: 100%;
@@ -272,12 +265,8 @@
         }
 
         @keyframes scrollReviews {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(calc(-50% - 10px));
-            }
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-50% - 10px)); }
         }
 
         .review-card {
@@ -316,7 +305,6 @@
             color: var(--text-muted);
         }
 
-        /* BOUTIQUE */
         .shop-header {
             display: flex;
             justify-content: center;
@@ -416,7 +404,7 @@
         .card-valeur-row {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 6px;
             width: 100%;
             border-top: 1px dashed var(--border-light);
             padding-top: 12px;
@@ -469,14 +457,10 @@
             color: var(--text-main);
         }
 
-        /* MODALES CENTRÉS */
         .modal-overlay {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0, 0, 0, 0.65);
             backdrop-filter: blur(6px);
             z-index: 2000;
@@ -485,9 +469,7 @@
             padding: 20px;
         }
 
-        .modal-overlay.active {
-            display: flex;
-        }
+        .modal-overlay.active { display: flex; }
 
         .modal-card {
             background: var(--bg-color);
@@ -502,10 +484,8 @@
 
         .modal-close {
             position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
-            border: none;
+            top: 15px; right: 15px;
+            background: none; border: none;
             font-size: 1.5rem;
             cursor: pointer;
             color: var(--text-main);
@@ -557,14 +537,10 @@
             background: var(--bg-color);
         }
 
-        .form-group input:focus {
-            border-color: var(--accent-gold);
-        }
+        .form-group input:focus { border-color: var(--accent-gold); }
 
-        /* SPINNER DE CHARGEMENT CENTRÉ */
         .spinner {
-            width: 40px;
-            height: 40px;
+            width: 40px; height: 40px;
             border: 3px solid var(--border-light);
             border-top: 3px solid var(--text-main);
             border-radius: 50%;
@@ -589,7 +565,6 @@
             text-align: center;
         }
 
-        /* FOOTER CENTRÉ */
         footer {
             padding: 40px 0 30px 0;
             display: flex;
@@ -613,9 +588,7 @@
             transition: var(--transition);
         }
 
-        .footer-support-link:hover {
-            color: var(--accent-gold);
-        }
+        .footer-support-link:hover { color: var(--accent-gold); }
 
         @media (max-width: 768px) {
             .stats-bar { grid-template-columns: 1fr; }
@@ -625,7 +598,6 @@
 </head>
 <body>
 
-    <!-- HEADER -->
     <header>
         <div class="brand-container" onclick="showPage('home')">
             <div class="brand-title">TechZara</div>
@@ -633,7 +605,6 @@
         </div>
     </header>
 
-    <!-- PAGE D'ACCUEIL -->
     <div id="page-home" class="page active">
         <section class="home-hero">
             <div class="zara-logo-hero-box">
@@ -644,7 +615,6 @@
             <button class="btn-primary" onclick="showPage('shop')">Accéder à la Boutique</button>
         </section>
 
-        <!-- CHIFFRES CLÉS -->
         <section class="stats-bar">
             <div class="stat-item">
                 <div class="stat-label">Transactions Sécurisées</div>
@@ -658,7 +628,6 @@
             </div>
         </section>
 
-        <!-- ENGAGEMENTS -->
         <section>
             <div class="section-title-wrap">
                 <h2 class="section-title">Nos Engagements</h2>
@@ -680,7 +649,6 @@
             </div>
         </section>
 
-        <!-- AVIS CLIENTS -->
         <section>
             <div class="section-title-wrap">
                 <h2 class="section-title">Avis Clients</h2>
@@ -688,7 +656,6 @@
             </div>
             <div class="reviews-carousel-container">
                 <div class="reviews-track">
-                    <!-- Lot 1 d'avis clients -->
                     <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Cb slt j'ai recu ma carte Zara de 50€ par mail en 2min mm pas »</p></div><span class="review-author">— Yanis (5 ⭐️)</span></article>
                     <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Jpensais c'etait fake mais nn mdrr jai bien recu ma carte de 200€ par mail merci »</p></div><span class="review-author">— Enzo (4.9 ⭐️)</span></article>
                     <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Recu en 5min trkl, carte Zara de 500€ bien recu par mail »</p></div><span class="review-author">— Léo (4.8 ⭐️)</span></article>
@@ -710,7 +677,7 @@
                     <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Nickel, carte de 50€ reçue comme prévu. Rien de particulier à signaler. »</p></div><span class="review-author">— Maxime (4.6 ⭐️)</span></article>
                     <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« omg recu en 2min 😭 la carte de 200€ est bien arrivée par mail »</p></div><span class="review-author">— Lina (5 ⭐️)</span></article>
 
-                    <!-- Duplication pour défilement infini sans coupure -->
+                    <!-- Duplication pour défilement infini -->
                     <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Cb slt j'ai recu ma carte Zara de 50€ par mail en 2min mm pas »</p></div><span class="review-author">— Yanis (5 ⭐️)</span></article>
                     <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Jpensais c'etait fake mais nn mdrr jai bien recu ma carte de 200€ par mail merci »</p></div><span class="review-author">— Enzo (4.9 ⭐️)</span></article>
                     <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Recu en 5min trkl, carte Zara de 500€ bien recu par mail »</p></div><span class="review-author">— Léo (4.8 ⭐️)</span></article>
@@ -736,13 +703,13 @@
         </section>
     </div>
 
-    <!-- PAGE BOUTIQUE -->
     <div id="page-shop" class="page">
         <div class="shop-header">
             <span class="section-subtitle">Offres Disponibles en Stock</span>
         </div>
 
         <section class="grid-products">
+            <!-- 10 € -->
             <article class="card">
                 <div class="card-image">
                     <span class="stock-badge">12 cartes restantes</span>
@@ -763,9 +730,11 @@
                 </div>
             </article>
 
+            <!-- 15 € -->
             <article class="card">
                 <div class="card-image">
                     <span class="stock-badge">8 cartes restantes</span>
+                    <span class="bonus-badge">OFFRE BONUS</span>
                     <img src="IMG_0130.png" alt="Zara Gift Card">
                 </div>
                 <div class="card-body">
@@ -775,7 +744,11 @@
                     </div>
                     <div class="card-valeur-row">
                         <div class="valeur-row-item">
-                            <span class="valeur-label">Valeur Carte Zara</span>
+                            <span class="valeur-label">Valeur de base</span>
+                            <span class="valeur-amount-base">75 €</span>
+                        </div>
+                        <div class="valeur-row-item">
+                            <span class="valeur-label">Valeur reçue</span>
                             <span class="valeur-amount-final">100 €</span>
                         </div>
                     </div>
@@ -783,10 +756,11 @@
                 </div>
             </article>
 
+            <!-- 20 € -->
             <article class="card">
                 <div class="card-image">
                     <span class="stock-badge">5 cartes restantes</span>
-                    <span class="bonus-badge">15 % BONUS</span>
+                    <span class="bonus-badge">OFFRE BONUS</span>
                     <img src="IMG_0130.png" alt="Zara Gift Card">
                 </div>
                 <div class="card-body">
@@ -796,11 +770,11 @@
                     </div>
                     <div class="card-valeur-row">
                         <div class="valeur-row-item">
-                            <span class="valeur-label">Valeur Initiale</span>
-                            <span class="valeur-amount-base">173,91 €</span>
+                            <span class="valeur-label">Valeur de base</span>
+                            <span class="valeur-amount-base">100 €</span>
                         </div>
                         <div class="valeur-row-item">
-                            <span class="valeur-label">Avec Bonus (+15%)</span>
+                            <span class="valeur-label">Valeur reçue</span>
                             <span class="valeur-amount-final">200 €</span>
                         </div>
                     </div>
@@ -808,10 +782,11 @@
                 </div>
             </article>
 
+            <!-- 30 € -->
             <article class="card">
                 <div class="card-image">
                     <span class="stock-badge">4 cartes restantes</span>
-                    <span class="bonus-badge">15 % BONUS</span>
+                    <span class="bonus-badge">OFFRE BONUS</span>
                     <img src="IMG_0130.png" alt="Zara Gift Card">
                 </div>
                 <div class="card-body">
@@ -821,11 +796,11 @@
                     </div>
                     <div class="card-valeur-row">
                         <div class="valeur-row-item">
-                            <span class="valeur-label">Valeur Initiale</span>
-                            <span class="valeur-amount-base">434,78 €</span>
+                            <span class="valeur-label">Valeur de base</span>
+                            <span class="valeur-amount-base">150 €</span>
                         </div>
                         <div class="valeur-row-item">
-                            <span class="valeur-label">Avec Bonus (+15%)</span>
+                            <span class="valeur-label">Valeur reçue</span>
                             <span class="valeur-amount-final">500 €</span>
                         </div>
                     </div>
@@ -833,10 +808,11 @@
                 </div>
             </article>
 
+            <!-- 70 € -->
             <article class="card">
                 <div class="card-image">
                     <span class="stock-badge">3 cartes restantes</span>
-                    <span class="bonus-badge">15 % BONUS</span>
+                    <span class="bonus-badge">OFFRE BONUS</span>
                     <img src="IMG_0130.png" alt="Zara Gift Card">
                 </div>
                 <div class="card-body">
@@ -846,22 +822,23 @@
                     </div>
                     <div class="card-valeur-row">
                         <div class="valeur-row-item">
-                            <span class="valeur-label">Valeur Initiale</span>
-                            <span class="valeur-amount-base">869,57 €</span>
+                            <span class="valeur-label">Valeur de base</span>
+                            <span class="valeur-amount-base">350 €</span>
                         </div>
                         <div class="valeur-row-item">
-                            <span class="valeur-label">Avec Bonus (+15%)</span>
-                            <span class="valeur-amount-final">1000 €</span>
+                            <span class="valeur-label">Valeur reçue</span>
+                            <span class="valeur-amount-final">1 000 €</span>
                         </div>
                     </div>
                     <button type="button" class="btn-buy" onclick="openCheckout('1000 €', '70,00 €', 'https://www.paypal.me/PaMe372106/70EUR')">Commander pour 70,00 €</button>
                 </div>
             </article>
 
+            <!-- 100 € -->
             <article class="card">
                 <div class="card-image">
                     <span class="stock-badge">2 cartes restantes</span>
-                    <span class="bonus-badge">15 % BONUS</span>
+                    <span class="bonus-badge">OFFRE BONUS</span>
                     <img src="IMG_0130.png" alt="Zara Gift Card">
                 </div>
                 <div class="card-body">
@@ -871,22 +848,23 @@
                     </div>
                     <div class="card-valeur-row">
                         <div class="valeur-row-item">
-                            <span class="valeur-label">Valeur Initiale</span>
-                            <span class="valeur-amount-base">2000,00 €</span>
+                            <span class="valeur-label">Valeur de base</span>
+                            <span class="valeur-amount-base">500 €</span>
                         </div>
                         <div class="valeur-row-item">
-                            <span class="valeur-label">Avec Bonus (+15%)</span>
-                            <span class="valeur-amount-final">2300 €</span>
+                            <span class="valeur-label">Valeur reçue</span>
+                            <span class="valeur-amount-final">2 300 €</span>
                         </div>
                     </div>
                     <button type="button" class="btn-buy" onclick="openCheckout('2300 €', '100,00 €', 'https://www.paypal.me/PaMe372106/100EUR')">Commander pour 100,00 €</button>
                 </div>
             </article>
 
+            <!-- 200 € -->
             <article class="card">
                 <div class="card-image">
                     <span class="stock-badge">2 cartes restantes</span>
-                    <span class="bonus-badge">15 % BONUS</span>
+                    <span class="bonus-badge">OFFRE BONUS</span>
                     <img src="IMG_0130.png" alt="Zara Gift Card">
                 </div>
                 <div class="card-body">
@@ -896,12 +874,12 @@
                     </div>
                     <div class="card-valeur-row">
                         <div class="valeur-row-item">
-                            <span class="valeur-label">Valeur Initiale</span>
-                            <span class="valeur-amount-base">4000,00 €</span>
+                            <span class="valeur-label">Valeur de base</span>
+                            <span class="valeur-amount-base">1 000 €</span>
                         </div>
                         <div class="valeur-row-item">
-                            <span class="valeur-label">Avec Bonus (+15%)</span>
-                            <span class="valeur-amount-final">4600 €</span>
+                            <span class="valeur-label">Valeur reçue</span>
+                            <span class="valeur-amount-final">4 600 €</span>
                         </div>
                     </div>
                     <button type="button" class="btn-buy" onclick="openCheckout('4600 €', '200,00 €', 'https://www.paypal.me/PaMe372106/200EUR')">Commander pour 200,00 €</button>
@@ -910,7 +888,6 @@
         </section>
     </div>
 
-    <!-- MODALE 1 : COMMANDE -->
     <div id="checkout-modal" class="modal-overlay">
         <div class="modal-card">
             <button class="modal-close" onclick="closeModal('checkout-modal')">&times;</button>
@@ -931,7 +908,6 @@
         </div>
     </div>
 
-    <!-- MODALE 2 : STATUS ET CONFIRMATION -->
     <div id="status-modal" class="modal-overlay">
         <div class="modal-card">
             <button class="modal-close" onclick="closeModal('status-modal')">&times;</button>
@@ -963,7 +939,6 @@
         </div>
     </div>
 
-    <!-- FOOTER -->
     <footer>
         <div>© 2026 TECHZARA — Vente de cartes-cadeaux officielles</div>
         <div>Un problème avec votre commande ? <a href="https://discord.gg/54NngFNzna" target="_blank" rel="noopener" class="footer-support-link">Contacter le support</a></div>
