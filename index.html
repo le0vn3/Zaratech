@@ -41,7 +41,7 @@
             margin: 0 auto;
         }
 
-        /* HEADER CENTRÉ SANS LE "T" */
+        /* HEADER CENTRÉ ET CLIQUABLE POUR RETOURNER À L'ACCUEIL */
         header {
             padding: 25px 0;
             border-bottom: 1px solid var(--border-color);
@@ -127,7 +127,7 @@
             margin-bottom: 30px;
         }
 
-        /* IMAGE LOGO ZARA ACCUEIL (IMG_0143.png) */
+        /* LOGO ZARA SUR L'ACCUEIL */
         .zara-logo-hero-box {
             width: 100%;
             max-width: 380px;
@@ -252,7 +252,7 @@
             line-height: 1.6;
         }
 
-        /* AVIS DÉFILANTS RALENTIS (70s) */
+        /* AVIS DÉFILANTS RALENTIS */
         .reviews-section {
             padding: 50px 0;
             border-top: 1px solid var(--border-color);
@@ -325,28 +325,12 @@
         /* PAGE BOUTIQUE / CATALOGUE */
         .shop-header {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             margin: 40px 0 30px 0;
             padding-bottom: 15px;
             border-bottom: 1px solid var(--border-color);
-        }
-
-        .btn-back-home {
-            background: transparent;
-            border: 1px solid var(--border-color);
-            padding: 10px 18px;
-            font-size: 9px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .btn-back-home:hover {
-            background: var(--text-main);
-            color: var(--bg-color);
+            text-align: center;
         }
 
         .grid-products {
@@ -375,7 +359,6 @@
             position: relative;
         }
 
-        /* IMAGE CARTE (IMG_0130.png) */
         .card-image img {
             max-width: 90%;
             max-height: 90%;
@@ -459,15 +442,7 @@
             color: var(--text-main);
         }
 
-        .payment-note {
-            font-size: 8px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            text-align: center;
-            margin-top: 8px;
-        }
-
-        /* FOOTER AVEC LE LIEN SUPPORT DISCRET */
+        /* FOOTER AVEC SUPPORT DISCRET */
         footer {
             border-top: 1px solid var(--border-color);
             padding: 30px 0;
@@ -501,13 +476,12 @@
             .stats-bar { grid-template-columns: 1fr; }
             .stat-item { border-right: none; border-bottom: 1px solid var(--border-light); }
             .values-grid { grid-template-columns: 1fr; }
-            .shop-header { flex-direction: column; gap: 15px; align-items: flex-start; }
         }
     </style>
 </head>
 <body>
 
-    <!-- HEADER PROPRE, CENTRÉ, SANS LE "T" -->
+    <!-- HEADER CENTRÉ (CLIQUE SUR TECHZARA POUR REVENIR À L'ACCUEIL) -->
     <header>
         <div class="brand-container" onclick="showPage('home')">
             <div class="brand-title">TechZara</div>
@@ -524,7 +498,6 @@
                 <button class="btn-primary" onclick="showPage('shop')">Accéder à la Boutique</button>
             </div>
             <div>
-                <!-- LOGO ZARA SUR L'ACCUEIL (IMG_0143.png) -->
                 <div class="zara-logo-hero-box">
                     <img src="IMG_0143.png" alt="Logo Zara">
                 </div>
@@ -586,7 +559,6 @@
     <!-- PAGE BOUTIQUE / CATALOGUE -->
     <div id="page-shop" class="page">
         <div class="shop-header">
-            <button class="btn-back-home" onclick="showPage('home')">← Retour à l'accueil</button>
             <span class="section-subtitle">Offres Disponibles en Stock</span>
         </div>
 
@@ -607,7 +579,6 @@
                     </div>
                     <div>
                         <a href="https://www.paypal.me/PaMe372106/10EUR" target="_blank" rel="noopener" class="btn-buy">Commander pour 10,00 €</a>
-                        <p class="payment-note">PayPal : "Envoi entre proches"</p>
                     </div>
                 </div>
             </article>
@@ -628,7 +599,6 @@
                     </div>
                     <div>
                         <a href="https://www.paypal.me/PaMe372106/15EUR" target="_blank" rel="noopener" class="btn-buy">Commander pour 15,00 €</a>
-                        <p class="payment-note">PayPal : "Envoi entre proches"</p>
                     </div>
                 </div>
             </article>
@@ -649,7 +619,6 @@
                     </div>
                     <div>
                         <a href="https://www.paypal.me/PaMe372106/20EUR" target="_blank" rel="noopener" class="btn-buy">Commander pour 20,00 €</a>
-                        <p class="payment-note">PayPal : "Envoi entre proches"</p>
                     </div>
                 </div>
             </article>
@@ -670,7 +639,6 @@
                     </div>
                     <div>
                         <a href="https://www.paypal.me/PaMe372106/30EUR" target="_blank" rel="noopener" class="btn-buy">Commander pour 30,00 €</a>
-                        <p class="payment-note">PayPal : "Envoi entre proches"</p>
                     </div>
                 </div>
             </article>
@@ -691,14 +659,13 @@
                     </div>
                     <div>
                         <a href="https://www.paypal.me/PaMe372106/70EUR" target="_blank" rel="noopener" class="btn-buy">Commander pour 70,00 €</a>
-                        <p class="payment-note">PayPal : "Envoi entre proches"</p>
                     </div>
                 </div>
             </article>
         </section>
     </div>
 
-    <!-- FOOTER AVEC LE LIEN SUPPORT DISCRET -->
+    <!-- FOOTER AVEC SUPPORT EN BAS DE PAGE -->
     <footer>
         <div>© 2026 TECHZARA — Vente de cartes-cadeaux officielles</div>
         <div>Un problème avec votre commande ? <a href="https://discord.gg/54NngFNzna" target="_blank" rel="noopener" class="footer-support-link">Contacter le support</a></div>
