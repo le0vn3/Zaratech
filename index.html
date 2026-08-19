@@ -40,6 +40,7 @@
             overflow-x: hidden;
             max-width: 1200px;
             margin: 0 auto;
+            text-align: center;
         }
 
         /* HEADER */
@@ -98,23 +99,25 @@
             transform: translateY(0);
         }
 
-        /* HERO & ACCUEIL */
+        /* HERO & ACCUEIL CENTRÉ */
         .home-hero {
             padding: 40px 0 50px 0;
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 40px;
+            display: flex;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
+            gap: 30px;
+            max-width: 700px;
+            margin: 0 auto;
         }
 
         .home-hero h1 {
             font-family: var(--font-serif);
-            font-size: clamp(2.2rem, 4.5vw, 4rem);
+            font-size: clamp(2.2rem, 4.5vw, 3.8rem);
             font-weight: 400;
             letter-spacing: -1px;
             text-transform: uppercase;
             line-height: 1.05;
-            margin-bottom: 20px;
         }
 
         .home-hero p {
@@ -123,14 +126,13 @@
             letter-spacing: 1.5px;
             color: var(--text-muted);
             line-height: 1.7;
-            margin-bottom: 30px;
         }
 
         .zara-logo-hero-box {
             width: 100%;
-            max-width: 380px;
+            max-width: 320px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -156,7 +158,9 @@
             transition: var(--transition);
             cursor: pointer;
             width: 100%;
+            max-width: 320px;
             text-align: center;
+            margin: 0 auto;
         }
 
         .btn-primary:hover {
@@ -165,12 +169,13 @@
             transform: translateY(-2px);
         }
 
-        /* COMPTEURS */
+        /* COMPTEURS CENTRÉS */
         .stats-bar {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             background: var(--bg-card);
             margin-top: 20px;
+            border: 1px solid var(--border-light);
         }
 
         .stat-item {
@@ -228,6 +233,7 @@
             border: 1px solid var(--border-color);
             padding: 30px 20px;
             background: var(--bg-color);
+            text-align: center;
         }
 
         .value-card h3 {
@@ -246,7 +252,7 @@
             line-height: 1.6;
         }
 
-        /* SECTION AVIS CLIENTS (AUTO-SCROLL) */
+        /* SECTION AVIS CLIENTS (AUTO-SCROLL CENTRÉ) */
         .reviews-carousel-container {
             overflow: hidden;
             width: 100%;
@@ -283,6 +289,7 @@
             justify-content: space-between;
             width: 300px;
             flex-shrink: 0;
+            text-align: center;
         }
 
         .review-stars {
@@ -331,6 +338,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            text-align: center;
         }
 
         .card-image {
@@ -353,7 +361,8 @@
         .card-badge {
             position: absolute;
             top: 12px;
-            left: 12px;
+            left: 50%;
+            transform: translateX(-50%);
             background: var(--text-main);
             color: var(--bg-color);
             font-size: 8px;
@@ -368,6 +377,7 @@
             display: flex;
             flex-direction: column;
             gap: 15px;
+            align-items: center;
         }
 
         .card-price-main {
@@ -391,6 +401,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            width: 100%;
             border-top: 1px dashed var(--border-light);
             padding-top: 12px;
         }
@@ -428,7 +439,7 @@
             color: var(--text-main);
         }
 
-        /* MODALES ET CHARGEMENT */
+        /* MODALES CENTRÉES */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -456,6 +467,7 @@
             padding: 35px 30px;
             position: relative;
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            text-align: center;
         }
 
         .modal-close {
@@ -493,6 +505,7 @@
             flex-direction: column;
             gap: 6px;
             margin-bottom: 18px;
+            text-align: left;
         }
 
         .form-group label {
@@ -518,10 +531,10 @@
             border-color: var(--accent-gold);
         }
 
-        /* SPINNER DE CHARGEMENT */
+        /* SPINNER DE CHARGEMENT CENTRÉ */
         .spinner {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             border: 3px solid var(--border-light);
             border-top: 3px solid var(--text-main);
             border-radius: 50%;
@@ -543,9 +556,10 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             line-height: 1.5;
+            text-align: center;
         }
 
-        /* FOOTER */
+        /* FOOTER CENTRÉ */
         footer {
             padding: 40px 0 30px 0;
             display: flex;
@@ -574,7 +588,6 @@
         }
 
         @media (max-width: 768px) {
-            .home-hero { grid-template-columns: 1fr; gap: 30px; padding: 30px 0; }
             .stats-bar { grid-template-columns: 1fr; }
             .values-grid { grid-template-columns: 1fr; }
         }
@@ -593,16 +606,12 @@
     <!-- PAGE D'ACCUEIL -->
     <div id="page-home" class="page active">
         <section class="home-hero">
-            <div>
-                <h1>Cartes-Cadeaux Officielles Zara</h1>
-                <p>Délivrance automatique sécurisée par e-mail en moins de 60 secondes.</p>
-                <button class="btn-primary" onclick="showPage('shop')">Accéder à la Boutique</button>
+            <div class="zara-logo-hero-box">
+                <img src="IMG_0143.png" alt="Logo Zara">
             </div>
-            <div>
-                <div class="zara-logo-hero-box">
-                    <img src="IMG_0143.png" alt="Logo Zara">
-                </div>
-            </div>
+            <h1>Cartes-Cadeaux Officielles Zara</h1>
+            <p>Traitement rapide et sécurisé par e-mail sous 2 à 3 minutes.</p>
+            <button class="btn-primary" onclick="showPage('shop')">Accéder à la Boutique</button>
         </section>
 
         <!-- CHIFFRES CLÉS -->
@@ -734,9 +743,7 @@
                         <span class="valeur-label">Valeur Carte Zara</span>
                         <span class="valeur-amount">50 €</span>
                     </div>
-                    <div>
-                        <button type="button" class="btn-buy" onclick="openCheckout('50 €', '10,00 €', 'https://www.paypal.me/PaMe372106/10EUR')">Commander pour 10,00 €</button>
-                    </div>
+                    <button type="button" class="btn-buy" onclick="openCheckout('50 €', '10,00 €', 'https://www.paypal.me/PaMe372106/10EUR')">Commander pour 10,00 €</button>
                 </div>
             </article>
 
@@ -754,9 +761,7 @@
                         <span class="valeur-label">Valeur Carte Zara</span>
                         <span class="valeur-amount">100 €</span>
                     </div>
-                    <div>
-                        <button type="button" class="btn-buy" onclick="openCheckout('100 €', '15,00 €', 'https://www.paypal.me/PaMe372106/15EUR')">Commander pour 15,00 €</button>
-                    </div>
+                    <button type="button" class="btn-buy" onclick="openCheckout('100 €', '15,00 €', 'https://www.paypal.me/PaMe372106/15EUR')">Commander pour 15,00 €</button>
                 </div>
             </article>
 
@@ -774,9 +779,7 @@
                         <span class="valeur-label">Valeur Carte Zara</span>
                         <span class="valeur-amount">200 €</span>
                     </div>
-                    <div>
-                        <button type="button" class="btn-buy" onclick="openCheckout('200 €', '20,00 €', 'https://www.paypal.me/PaMe372106/20EUR')">Commander pour 20,00 €</button>
-                    </div>
+                    <button type="button" class="btn-buy" onclick="openCheckout('200 €', '20,00 €', 'https://www.paypal.me/PaMe372106/20EUR')">Commander pour 20,00 €</button>
                 </div>
             </article>
 
@@ -794,9 +797,7 @@
                         <span class="valeur-label">Valeur Carte Zara</span>
                         <span class="valeur-amount">500 €</span>
                     </div>
-                    <div>
-                        <button type="button" class="btn-buy" onclick="openCheckout('500 €', '30,00 €', 'https://www.paypal.me/PaMe372106/30EUR')">Commander pour 30,00 €</button>
-                    </div>
+                    <button type="button" class="btn-buy" onclick="openCheckout('500 €', '30,00 €', 'https://www.paypal.me/PaMe372106/30EUR')">Commander pour 30,00 €</button>
                 </div>
             </article>
 
@@ -814,9 +815,7 @@
                         <span class="valeur-label">Valeur Carte Zara</span>
                         <span class="valeur-amount">1000 €</span>
                     </div>
-                    <div>
-                        <button type="button" class="btn-buy" onclick="openCheckout('1000 €', '70,00 €', 'https://www.paypal.me/PaMe372106/70EUR')">Commander pour 70,00 €</button>
-                    </div>
+                    <button type="button" class="btn-buy" onclick="openCheckout('1000 €', '70,00 €', 'https://www.paypal.me/PaMe372106/70EUR')">Commander pour 70,00 €</button>
                 </div>
             </article>
 
@@ -834,9 +833,7 @@
                         <span class="valeur-label">Valeur Carte Zara</span>
                         <span class="valeur-amount">2300 €</span>
                     </div>
-                    <div>
-                        <button type="button" class="btn-buy" onclick="openCheckout('2300 €', '100,00 €', 'https://www.paypal.me/PaMe372106/100EUR')">Commander pour 100,00 €</button>
-                    </div>
+                    <button type="button" class="btn-buy" onclick="openCheckout('2300 €', '100,00 €', 'https://www.paypal.me/PaMe372106/100EUR')">Commander pour 100,00 €</button>
                 </div>
             </article>
 
@@ -854,9 +851,7 @@
                         <span class="valeur-label">Valeur Carte Zara</span>
                         <span class="valeur-amount">4600 €</span>
                     </div>
-                    <div>
-                        <button type="button" class="btn-buy" onclick="openCheckout('4600 €', '200,00 €', 'https://www.paypal.me/PaMe372106/200EUR')">Commander pour 200,00 €</button>
-                    </div>
+                    <button type="button" class="btn-buy" onclick="openCheckout('4600 €', '200,00 €', 'https://www.paypal.me/PaMe372106/200EUR')">Commander pour 200,00 €</button>
                 </div>
             </article>
         </section>
@@ -878,42 +873,39 @@
                     <label for="email">Adresse E-mail *</label>
                     <input type="email" id="email" placeholder="exemple@domaine.com" required>
                 </div>
-                <button type="submit" class="btn-primary" style="margin-top: 15px;">Payer via PayPal</button>
+                <button type="submit" class="btn-primary" style="margin-top: 15px; width: 100%; max-width: none;">Payer via PayPal</button>
             </form>
         </div>
     </div>
 
-    <!-- MODALE 2 : PAIEMENT EN COURS ET CONFIRMATION -->
+    <!-- MODALE 2 : STATUS ET CONFIRMATION -->
     <div id="status-modal" class="modal-overlay">
-        <div class="modal-card" style="text-align: center;">
+        <div class="modal-card">
             <button class="modal-close" onclick="closeModal('status-modal')">&times;</button>
             
-            <!-- ÉTAPE 1 : TRAITEMENT DE LA TRANSACTION -->
             <div id="processing-state">
-                <div class="modal-title">Redirection PayPal...</div>
+                <div class="modal-title">Redirection...</div>
                 <div class="spinner"></div>
                 <p style="font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">
-                    Préparation du paiement en cours
+                    Initialisation du paiement sécurisé
                 </p>
             </div>
 
-            <!-- ÉTAPE 2 : CONFIRMATION PAIEMENT ET LIVRAISON -->
             <div id="completed-state" style="display: none;">
-                <div class="modal-title">Merci pour votre commande !</div>
+                <div class="modal-title">Paiement Initialisé !</div>
                 <p style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-main); margin-top: 15px;">
-                    Un opérateur traite l'envoi. Votre code vous sera transmis par e-mail dans un délai de 2 à 3 minutes.
+                    Votre commande est enregistrée. Vous allez recevoir votre code par e-mail dans un délai de 2 à 3 minutes.
                 </p>
                 
-                <!-- BLOC ASSISTANCE REFORMULÉ -->
                 <div class="support-box">
-                    <strong>Besoin d'aide ?</strong><br>
-                    Pour toute question sur la livraison, contactez directement l'équipe d'assistance.
+                    <strong>Une question sur votre livraison ?</strong><br>
+                    Si besoin, notre équipe vous répond directement sur Discord.
                     <div style="margin-top: 10px;">
-                        <a href="https://discord.gg/54NngFNzna" target="_blank" rel="noopener" class="footer-support-link">Rejoindre le support direct</a>
+                        <a href="https://discord.gg/54NngFNzna" target="_blank" rel="noopener" class="footer-support-link">Accéder au support client</a>
                     </div>
                 </div>
 
-                <button type="button" class="btn-primary" style="margin-top: 20px;" onclick="closeModal('status-modal')">Fermer</button>
+                <button type="button" class="btn-primary" style="margin-top: 20px; width: 100%; max-width: none;" onclick="closeModal('status-modal')">Fermer</button>
             </div>
         </div>
     </div>
@@ -927,7 +919,6 @@
     <script>
         let selectedPayUrl = '';
 
-        /* Blocage des raccourcis clavier de zoom */
         document.addEventListener('keydown', function (e) {
             if ((e.ctrlKey || e.metaKey) && (e.key === '+' || e.key === '-' || e.key === '=')) {
                 e.preventDefault();
@@ -965,10 +956,8 @@
             const email = document.getElementById('email').value;
 
             if (firstname && email && selectedPayUrl) {
-                // Ferme la modale d'information
                 closeModal('checkout-modal');
 
-                // Affiche la modale de chargement
                 const statusModal = document.getElementById('status-modal');
                 const processingState = document.getElementById('processing-state');
                 const completedState = document.getElementById('completed-state');
@@ -977,14 +966,12 @@
                 completedState.style.display = 'none';
                 statusModal.classList.add('active');
 
-                // Ouvre PayPal
                 window.open(selectedPayUrl, '_blank');
 
-                // Bascule vers le message de confirmation après 2,5 secondes
                 setTimeout(() => {
                     processingState.style.display = 'none';
                     completedState.style.display = 'block';
-                }, 2500);
+                }, 2000);
             }
         }
     </script>
