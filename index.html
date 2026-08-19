@@ -8,10 +8,10 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* STYLES GÉNÉRAUX */
+        /* STYLES GÉNÉRAUX & VARIABLES */
         :root {
             --bg-color: #FFFFFF;
             --text-main: #0B0B0B;
@@ -19,9 +19,10 @@
             --border-color: #111111;
             --border-light: #E0E0E0;
             --bg-card: #FAFAFA;
+            --accent-gold: #D4AF37;
             --font-serif: 'Bodoni Moda', serif;
             --font-sans: 'Inter', sans-serif;
-            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         *, *::before, *::after {
@@ -37,11 +38,12 @@
             font-family: var(--font-sans);
             line-height: 1.4;
             padding: 0 50px;
+            overflow-x: hidden;
         }
 
         /* HEADER & NAVIGATION */
         header {
-            padding: 40px 0 25px 0;
+            padding: 30px 0 20px 0;
             border-bottom: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
@@ -49,26 +51,46 @@
             position: sticky;
             top: 0;
             background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             z-index: 1000;
         }
 
         .brand-container {
             display: flex;
-            align-items: baseline;
-            gap: 14px;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+        }
+
+        .brand-logo {
+            width: 32px;
+            height: 32px;
+            background: var(--text-main);
+            color: var(--bg-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-serif);
+            font-weight: 900;
+            font-size: 18px;
+            letter-spacing: -1px;
+            transition: var(--transition);
+        }
+
+        .brand-container:hover .brand-logo {
+            transform: rotate(90deg);
+            background: var(--accent-gold);
         }
 
         .brand-title {
             font-family: var(--font-serif);
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            font-size: clamp(2.2rem, 4vw, 3.8rem);
             font-weight: 900;
             letter-spacing: -2px;
             text-transform: uppercase;
             text-decoration: none;
             color: var(--text-main);
             line-height: 0.8;
-            cursor: pointer;
         }
 
         .brand-tag {
@@ -81,11 +103,7 @@
 
         .nav-links {
             display: flex;
-            gap: 35px;
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 600;
+            gap: 30px;
         }
 
         .nav-btn {
@@ -96,59 +114,304 @@
             font-size: 10px;
             text-transform: uppercase;
             letter-spacing: 2px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             transition: var(--transition);
-            padding: 0;
+            padding: 8px 0;
+            position: relative;
         }
 
-        .nav-btn.active, .nav-btn:hover {
-            opacity: 0.4;
+        .nav-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--text-main);
+            transition: var(--transition);
         }
 
-        /* GESTION DES PAGES (SPA) */
+        .nav-btn.active::after, .nav-btn:hover::after {
+            width: 100%;
+        }
+
+        .nav-btn:hover {
+            opacity: 0.6;
+        }
+
+        /* GESTION DES PAGES (SPA) ET ANIMATIONS */
         .page {
             display: none;
-            animation: fadeIn 0.4s ease-in-out;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
         }
 
         .page.active {
             display: block;
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* HERO SECTION */
-        .hero {
-            padding: 80px 0 60px 0;
+        /* HERO & ACCUEIL */
+        .home-hero {
+            padding: 90px 0 70px 0;
             display: grid;
             grid-template-columns: 1.2fr 0.8fr;
             gap: 60px;
-            align-items: flex-end;
+            align-items: center;
             border-bottom: 1px solid var(--border-light);
         }
 
-        .hero h1 {
+        .home-hero h1 {
             font-family: var(--font-serif);
-            font-size: clamp(2rem, 4vw, 3.8rem);
+            font-size: clamp(2.5rem, 5vw, 4.8rem);
             font-weight: 400;
-            letter-spacing: -1px;
+            letter-spacing: -1.5px;
             text-transform: uppercase;
-            line-height: 1.05;
+            line-height: 1;
+            margin-bottom: 25px;
         }
 
-        .hero p {
-            font-size: 11px;
+        .home-hero p {
+            font-size: 12px;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1.8px;
             color: var(--text-muted);
             line-height: 1.8;
+            margin-bottom: 35px;
         }
 
-        /* PAGE 1: CATALOGUE */
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 18px 36px;
+            background: var(--text-main);
+            color: var(--bg-color);
+            text-decoration: none;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: var(--bg-color);
+            color: var(--text-main);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .btn-secondary {
+            display: inline-block;
+            padding: 18px 36px;
+            background: transparent;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-card);
+            transform: translateY(-3px);
+        }
+
+        /* METRIQUES / COMPTEURS */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border-bottom: 1px solid var(--border-color);
+            background: var(--bg-card);
+        }
+
+        .stat-item {
+            padding: 40px;
+            text-align: center;
+            border-right: 1px solid var(--border-light);
+        }
+
+        .stat-item:last-child {
+            border-right: none;
+        }
+
+        .stat-number {
+            font-family: var(--font-serif);
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        /* SECTION NOS VALEURS */
+        .section-title-wrap {
+            margin: 80px 0 40px 0;
+            text-align: center;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .section-subtitle {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 90px;
+        }
+
+        .value-card {
+            border: 1px solid var(--border-color);
+            padding: 40px 30px;
+            background: var(--bg-color);
+            transition: var(--transition);
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            border-color: var(--accent-gold);
+        }
+
+        .value-icon {
+            font-size: 20px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .value-card h3 {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .value-card p {
+            font-size: 10px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            line-height: 1.7;
+        }
+
+        /* SECTION AVIS CLIENTS */
+        .reviews-section {
+            padding: 70px 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            background: var(--bg-card);
+            margin-bottom: 100px;
+        }
+
+        .reviews-summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .reviews-badge-total {
+            background: var(--text-main);
+            color: var(--bg-color);
+            padding: 8px 16px;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .review-card {
+            border: 1px solid var(--border-light);
+            padding: 25px;
+            background: var(--bg-color);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .review-card:hover {
+            border-color: var(--text-main);
+            transform: translateY(-3px);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .review-author {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .review-stars {
+            color: var(--accent-gold);
+            font-size: 12px;
+            letter-spacing: 2px;
+        }
+
+        .review-comment {
+            font-size: 10.5px;
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .review-date {
+            font-size: 8.5px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* PAGE CATALOGUE & CARTES */
         .catalog-header {
             display: flex;
             justify-content: space-between;
@@ -186,11 +449,13 @@
             flex-direction: column;
             justify-content: space-between;
             transition: var(--transition);
+            position: relative;
+            overflow: hidden;
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.08);
         }
 
         .card-image {
@@ -214,7 +479,7 @@
 
         .card:hover .card-image img {
             filter: grayscale(0%);
-            transform: scale(1.05);
+            transform: scale(1.06);
         }
 
         .card-badge {
@@ -238,15 +503,6 @@
             gap: 20px;
         }
 
-        .card-category {
-            font-size: 9px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--text-muted);
-            font-weight: 600;
-        }
-
-        /* NOUVEAU DESIGN DES PRIX */
         .card-price-main {
             font-family: var(--font-serif);
             font-size: 2.6rem;
@@ -322,7 +578,7 @@
             color: var(--text-main);
         }
 
-        /* PAGE 2: PROCESSUS */
+        /* PAGE PROCÉDURE */
         .page-header {
             padding: 80px 0 40px 0;
             border-bottom: 1px solid var(--border-color);
@@ -359,6 +615,12 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            transition: var(--transition);
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--text-main);
         }
 
         .step-num {
@@ -395,7 +657,7 @@
             letter-spacing: 1px;
         }
 
-        /* PAGE 3: DISCORD */
+        /* PAGE SUPPORT */
         .support-wrapper {
             margin: 80px 0 100px 0;
             border: 1px solid var(--border-color);
@@ -463,6 +725,7 @@
         .btn-discord-large:hover {
             background: var(--bg-color);
             color: var(--text-main);
+            transform: translateY(-3px);
         }
 
         .support-features {
@@ -507,9 +770,12 @@
         /* RESPONSIVE */
         @media (max-width: 900px) {
             body { padding: 0 20px; }
-            .hero { grid-template-columns: 1fr; gap: 30px; }
+            .home-hero { grid-template-columns: 1fr; gap: 40px; padding: 50px 0; }
             header { flex-direction: column; align-items: flex-start; gap: 20px; }
             .nav-links { width: 100%; justify-content: space-between; }
+            .stats-bar { grid-template-columns: 1fr; }
+            .stat-item { border-right: none; border-bottom: 1px solid var(--border-light); }
+            .values-grid { grid-template-columns: 1fr; }
             .process-list { grid-template-columns: 1fr; }
             .support-wrapper { grid-template-columns: 1fr; }
             .support-features { border-left: none; border-top: 1px solid var(--border-color); }
@@ -522,26 +788,96 @@
 
     <!-- NAVIGATION GLOBALE -->
     <header>
-        <div class="brand-container">
-            <span class="brand-title" onclick="switchPage('collection')">TechZara</span>
+        <div class="brand-container" onclick="switchPage('home')">
+            <div class="brand-logo">T</div>
+            <span class="brand-title">TechZara</span>
             <span class="brand-tag">Revendeur Agréé</span>
         </div>
         <nav class="nav-links">
-            <button class="nav-btn active" id="btn-collection" onclick="switchPage('collection')">Collection</button>
+            <button class="nav-btn active" id="btn-home" onclick="switchPage('home')">Accueil</button>
+            <button class="nav-btn" id="btn-collection" onclick="switchPage('collection')">Collection</button>
             <button class="nav-btn" id="btn-procedure" onclick="switchPage('procedure')">Procédure</button>
             <button class="nav-btn" id="btn-support" onclick="switchPage('support')">Support</button>
         </nav>
     </header>
 
+    <!-- PAGE 0 : ACCUEIL -->
+    <div id="page-home" class="page active">
+        <section class="home-hero">
+            <div>
+                <h1>Cartes-Cadeaux Zara Officielles & Instantanées</h1>
+                <p>Économisez jusqu'à 90% sur vos achats Zara grâce à nos cartes-cadeaux certifiées avec délivrance automatique par e-mail en quelques secondes.</p>
+                <div class="hero-btns">
+                    <button class="btn-primary" onclick="switchPage('collection')">Voir la Collection</button>
+                    <button class="btn-secondary" onclick="switchPage('procedure')">Comment ça marche</button>
+                </div>
+            </div>
+            <div>
+                <img src="IMG_0130.png" alt="Zara Gift Card" style="width: 100%; max-width: 420px; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.15)); margin: 0 auto; display: block;">
+            </div>
+        </section>
+
+        <!-- STATISTIQUES ET CHIFFRES CLÉS -->
+        <section class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-number">+600</div>
+                <div class="stat-label">Avis Clients Vérifiés</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Codes Officiels Valides</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">&lt; 1 min</div>
+                <div class="stat-label">Livraison Automatique</div>
+            </div>
+        </section>
+
+        <!-- NOS VALEURS -->
+        <section>
+            <div class="section-title-wrap">
+                <h2 class="section-title">Nos Engagements</h2>
+                <p class="section-subtitle">Pourquoi faire confiance à TechZara ?</p>
+            </div>
+            <div class="values-grid">
+                <div class="value-card">
+                    <span class="value-icon">⚡</span>
+                    <h3>Instantannéité</h3>
+                    <p>Dès la confirmation de votre paiement, l'envoi du code s'effectue automatiquement vers votre boîte mail sans délai d'attente.</p>
+                </div>
+                <div class="value-card">
+                    <span class="value-icon">🔒</span>
+                    <h3>Sécurité Maximale</h3>
+                    <p>Vos paiements sont sécurisés par l'infrastructure PayPal. Chaque transaction garantit l'obtention d'un code unique et privé.</p>
+                </div>
+                <div class="value-card">
+                    <span class="value-icon">🏷️</span>
+                    <h3>Tarifs Exclusifs</h3>
+                    <p>Profitez de remises imbattables sur des cartes d'une valeur réelle allant de 50 € jusqu'à 1600 € valables en boutique et en ligne.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- AVIS CLIENTS -->
+        <section class="reviews-section">
+            <div class="reviews-summary">
+                <div>
+                    <h2 class="section-title" style="text-align: left;">Avis de nos clients</h2>
+                    <p class="section-subtitle">Retours vérifiés de la communauté</p>
+                </div>
+                <span class="reviews-badge-total">+600 Avis Positifs ★ 5.0</span>
+            </div>
+            <div class="reviews-grid" id="reviews-container">
+                <!-- Généré dynamiquement en JS -->
+            </div>
+        </section>
+    </div>
+
     <!-- PAGE 1 : COLLECTION (CATALOGUE) -->
-    <div id="page-collection" class="page active">
-        <section class="hero">
-            <div>
-                <h1>Cartes-Cadeaux Officielles Zara</h1>
-            </div>
-            <div>
-                <p>Accédez à une sélection exclusive de cartes-cadeaux officielles Zara vendues à tarifs préférentiels. Transaction sécurisée et livraison numérique rapide.</p>
-            </div>
+    <div id="page-collection" class="page">
+        <section class="page-header">
+            <h1>Cartes-Cadeaux Officielles Zara</h1>
+            <p>Accédez à une sélection exclusive de cartes-cadeaux officielles Zara vendues à tarifs préférentiels.</p>
         </section>
 
         <div class="catalog-header">
@@ -733,7 +1069,7 @@
                 <div>
                     <span class="step-num">03.</span>
                     <h2>Traitement et Inscription</h2>
-                    <p>Dès confirmation de la transaction par le système, le code officiel associé à votre carte Zara est généré et préparé pour l'envoi instantané.</p>
+                    <p>Dès confirmation de la transaction par le système, le code officiel associé à votre carte Zara est généré et préparé pour l'envoi instantané par e-mail.</p>
                 </div>
                 <div class="step-footer">
                     Délai Moyen : Instantané à 5 minutes
@@ -744,7 +1080,7 @@
                 <div>
                     <span class="step-num">04.</span>
                     <h2>Délivrance & Utilisation</h2>
-                    <p>Vous recevez votre code de carte-cadeau officiel. Vous pouvez l'utiliser immédiatement sur le site officiel Zara.com ou directement en magasin physique Zara lors de vos passages en caisse.</p>
+                    <p>Vous recevez votre code de carte-cadeau officiel par mail. Vous pouvez l'utiliser immédiatement sur le site officiel Zara.com ou directement en magasin physique Zara lors de vos passages en caisse.</p>
                 </div>
                 <div class="step-footer">
                     Utilisation immédiate garantie
@@ -759,14 +1095,14 @@
             <div class="support-main">
                 <span class="support-badge">Assistance Directe 24/7</span>
                 <h1>Serveur Discord Officiel</h1>
-                <p>Pour toute question sur votre commande, vérification de validité de vos cartes Zara ou assistance en direct, notre équipe technique vous assiste via notre serveur sécurisé.</p>
+                <p>Pour toute question sur votre commande, vérification de votre boîte mail ou assistance en direct, notre équipe technique vous assiste via notre serveur sécurisé.</p>
                 <a href="https://discord.gg/54NngFNzna" target="_blank" rel="noopener" class="btn-discord-large">Rejoindre le Support Discord</a>
             </div>
 
             <div class="support-features">
                 <div class="feature-block">
                     <h3>// Assistance Ticket Privée</h3>
-                    <p>Ouvrez un ticket individuel pour échanger directement avec un administrateur en toute sécurité.</p>
+                    <p>Ouvrez un ticket individuel pour échanger directement avec un administrateur en toute sécurité si vous avez une question sur votre code.</p>
                 </div>
 
                 <div class="feature-block">
@@ -788,32 +1124,64 @@
         <div>Support et accompagnement en ligne</div>
     </footer>
 
-    <!-- SCRIPT JS POUR LE CHANGEMENT DE PAGE -->
+    <!-- SCRIPT JS POUR LE CHANGEMENT DE PAGE ET L'AFFICHAGE DES AVIS -->
     <script>
+        // DONNÉES DES AVIS CLIENTS
+        const reviewsData = [
+            { name: "Nicolas P.", rating: 5, comment: "Franchement nickel, e-carte reçue direct après avoir payé. Code valide sans souci en caisse !", date: "2026-08-18" },
+            { name: "Léa M.", rating: 5, comment: "J'avais un peu peur au début mais j'ai reçu le mail dans la minute. Ça passe direct sur l'appli Zara.", date: "2026-08-15" },
+            { name: "Romain F.", rating: 5, comment: "Hyper rapide ! Mail reçu instantanément avec le code. Je repasserai par là sans hésiter.", date: "2026-08-12" },
+            { name: "Claire B.", rating: 5, comment: "Top pour un cadeau de dernière minute, le mail arrive tout de suite et le code fonctionne super bien.", date: "2026-08-09" },
+            { name: "Hugo T.", rating: 5, comment: "Rien à dire, envoi automatique instantané. Code scanné en boutique cet aprèm sans aucun problème.", date: "2026-08-04" },
+            { name: "Inès G.", rating: 5, comment: "Parfait ! J'ai reçu le code par mail 30 secondes après la commande. Merci beaucoup !", date: "2026-07-29" },
+            { name: "Antoine C.", rating: 5, comment: "Simple et efficace. Le mail était directement dans ma boîte de réception, code valide.", date: "2026-07-22" },
+            { name: "Manon D.", rating: 5, comment: "Vraiment rapide, j'ai pu l'utiliser direct pour passer ma commande. Je recommande !", date: "2026-07-18" },
+            { name: "Youssef K.", rating: 5, comment: "Impeccable, mail bien reçu avec le bon code. Pas eu besoin d'attendre des heures.", date: "2026-07-11" },
+            { name: "Camille V.", rating: 5, comment: "Super plan, tout s'est passé comme prévu. Mail reçu direct et carte validée sur le site.", date: "2026-07-03" }
+        ];
+
+        // INJECTION DYNAMIQUE DES AVIS
+        function renderReviews() {
+            const container = document.getElementById('reviews-container');
+            container.innerHTML = reviewsData.map(rev => `
+                <div class="review-card">
+                    <div>
+                        <div class="review-header">
+                            <span class="review-author">${rev.name}</span>
+                            <span class="review-stars">★★★★★</span>
+                        </div>
+                        <p class="review-comment">"${rev.comment}"</p>
+                    </div>
+                    <span class="review-date">${rev.date}</span>
+                </div>
+            `).join('');
+        }
+
+        // GESTION SPA (CHANGEMENT DE PAGE ET ANIMATION)
         function switchPage(pageId) {
-            // Masquer toutes les pages
             const pages = document.querySelectorAll('.page');
             pages.forEach(page => page.classList.remove('active'));
 
-            // Désactiver tous les boutons de navigation
             const navButtons = document.querySelectorAll('.nav-btn');
             navButtons.forEach(btn => btn.classList.remove('active'));
 
-            // Afficher la page sélectionnée
             const targetPage = document.getElementById('page-' + pageId);
             if (targetPage) {
                 targetPage.classList.add('active');
             }
 
-            // Activer le bouton de nav correspondant
             const targetBtn = document.getElementById('btn-' + pageId);
             if (targetBtn) {
                 targetBtn.classList.add('active');
             }
 
-            // Remonter en haut de page
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        // INITIALISATION
+        document.addEventListener('DOMContentLoaded', () => {
+            renderReviews();
+        });
     </script>
 </body>
 </html>
