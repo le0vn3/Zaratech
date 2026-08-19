@@ -97,7 +97,7 @@
             transform: translateY(0);
         }
 
-        /* HERO & ACCUEIL SANS BORDURE */
+        /* HERO & ACCUEIL */
         .home-hero {
             padding: 40px 0 50px 0;
             display: grid;
@@ -125,7 +125,6 @@
             margin-bottom: 30px;
         }
 
-        /* LOGO ZARA SUR L'ACCUEIL */
         .zara-logo-hero-box {
             width: 100%;
             max-width: 380px;
@@ -165,7 +164,28 @@
             transform: translateY(-2px);
         }
 
-        /* COMPTEURS SANS BORDURE */
+        .btn-secondary {
+            display: inline-block;
+            padding: 14px 24px;
+            background: transparent;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-card);
+        }
+
+        /* COMPTEURS */
         .stats-bar {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -245,7 +265,7 @@
             line-height: 1.6;
         }
 
-        /* AVIS DÉFILANTS SANS BORDURES SUPERIEURE/INFERIEURE */
+        /* AVIS DÉFILANTS */
         .reviews-section {
             padding: 50px 0;
             background: var(--bg-card);
@@ -313,7 +333,7 @@
             text-transform: uppercase;
         }
 
-        /* PAGE BOUTIQUE SANS BORDURE D'EN-TÊTE */
+        /* BOUTIQUE */
         .shop-header {
             display: flex;
             justify-content: center;
@@ -432,7 +452,7 @@
             color: var(--text-main);
         }
 
-        /* FENÊTRE MODALE DE PAIEMENT */
+        /* MODALES */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -507,7 +527,7 @@
             color: var(--text-main);
         }
 
-        .form-group input {
+        .form-group input, .form-group select, .form-group textarea {
             width: 100%;
             padding: 14px;
             border: 1px solid var(--border-color);
@@ -515,13 +535,25 @@
             font-size: 12px;
             outline: none;
             transition: var(--transition);
+            background: var(--bg-color);
         }
 
-        .form-group input:focus {
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
             border-color: var(--accent-gold);
         }
 
-        /* FOOTER SANS BORDURE SUPERIEURE */
+        .modal-btn-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        /* FOOTER */
         footer {
             padding: 40px 0 30px 0;
             display: flex;
@@ -558,7 +590,7 @@
 </head>
 <body>
 
-    <!-- HEADER CENTRÉ SANS BORDURE -->
+    <!-- HEADER -->
     <header>
         <div class="brand-container" onclick="showPage('home')">
             <div class="brand-title">TechZara</div>
@@ -742,10 +774,10 @@
         </section>
     </div>
 
-    <!-- MODALE FORMULAIRE CLIENT + PAIEMENT -->
+    <!-- MODALE 1 : COMMANDE (PRÉNOM + EMAIL) -->
     <div id="checkout-modal" class="modal-overlay">
         <div class="modal-card">
-            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <button class="modal-close" onclick="closeModal('checkout-modal')">&times;</button>
             <div class="modal-title">Vos Informations</div>
             <div id="modal-product-summary" class="modal-product-summary">Carte Zara</div>
             
@@ -763,7 +795,48 @@
         </div>
     </div>
 
-    <!-- FOOTER SANS BORDURE -->
+    <!-- MODALE 2 : CONFIRMATION + DEMANDE D'AVIS (OUI / NON) -->
+    <div id="review-ask-modal" class="modal-overlay">
+        <div class="modal-card" style="text-align: center;">
+            <div class="modal-title">Merci pour votre achat !</div>
+            <p style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-main); margin-bottom: 20px;">Vous allez recevoir le code d'ici peu par e-mail.</p>
+            <div class="modal-product-summary" style="border:none; margin-bottom:15px; padding-bottom:0;">Voulez-vous laisser un avis sur votre expérience ?</div>
+            
+            <div class="modal-btn-group">
+                <button type="button" class="btn-primary" onclick="openReviewForm()">Oui</button>
+                <button type="button" class="btn-secondary" onclick="closeModal('review-ask-modal')">Non</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODALE 3 : FORMULAIRE D'AVIS (NOTE + DESCRIPTION) -->
+    <div id="review-form-modal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="modal-close" onclick="closeModal('review-form-modal')">&times;</button>
+            <div class="modal-title">Votre Avis</div>
+            <div class="modal-product-summary">Donnez votre retour d'expérience</div>
+            
+            <form id="review-form" onsubmit="submitReview(event)">
+                <div class="form-group">
+                    <label for="review-rating">Note *</label>
+                    <select id="review-rating" required>
+                        <option value="5">★★★★★ (5/5) - Excellent</option>
+                        <option value="4">★★★★☆ (4/5) - Très bien</option>
+                        <option value="3">★★★☆☆ (3/5) - Moyen</option>
+                        <option value="2">★★☆☆☆ (2/5) - Décevant</option>
+                        <option value="1">★☆☆☆☆ (1/5) - Mauvais</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="review-desc">Description / Avis *</label>
+                    <textarea id="review-desc" placeholder="Racontez votre expérience (réception rapide, code valide...)" required></textarea>
+                </div>
+                <button type="submit" class="btn-primary" style="margin-top: 10px;">Publier mon avis</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
     <footer>
         <div>© 2026 TECHZARA — Vente de cartes-cadeaux officielles</div>
         <div>Un problème avec votre commande ? <a href="https://discord.gg/54NngFNzna" target="_blank" rel="noopener" class="footer-support-link">Contacter le support</a></div>
@@ -771,6 +844,7 @@
 
     <script>
         let selectedPayUrl = '';
+        let currentCustomerName = '';
 
         const reviewsData = [
             { name: "Nicolas P.", comment: "Franchement nickel, e-carte reçue direct après avoir payé. Code valide sans souci en caisse !", date: "2026-08-18" },
@@ -790,7 +864,7 @@
                 <div class="review-card-scroll">
                     <div>
                         <span class="review-author">${rev.name}</span>
-                        <div class="review-stars">★★★★★</div>
+                        <div class="review-stars">${'★'.repeat(rev.stars || 5)}${'☆'.repeat(5 - (rev.stars || 5))}</div>
                         <p class="review-comment">"${rev.comment}"</p>
                     </div>
                     <span class="review-date">${rev.date}</span>
@@ -810,15 +884,15 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        /* GESTION DE LA MODALE ET DU PAIEMENT */
+        /* COMMANDE ET MODALES */
         function openCheckout(valeur, prix, paypalUrl) {
             selectedPayUrl = paypalUrl;
             document.getElementById('modal-product-summary').innerText = `Carte Zara de ${valeur} — Prix : ${prix}`;
             document.getElementById('checkout-modal').classList.add('active');
         }
 
-        function closeModal() {
-            document.getElementById('checkout-modal').classList.remove('active');
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
         }
 
         function handleCheckout(e) {
@@ -827,14 +901,57 @@
             const email = document.getElementById('email').value;
 
             if (firstname && email && selectedPayUrl) {
-                // Redirection vers le lien PayPal après la saisie des données
+                currentCustomerName = firstname;
+                
+                sessionStorage.setItem('pending_review', 'true');
+                sessionStorage.setItem('customer_name', firstname);
+
                 window.open(selectedPayUrl, '_blank');
-                closeModal();
+                closeModal('checkout-modal');
             }
         }
 
+        /* GESTION DE L'AVIS CLIENT */
+        function checkPendingReview() {
+            if (sessionStorage.getItem('pending_review') === 'true') {
+                sessionStorage.removeItem('pending_review');
+                currentCustomerName = sessionStorage.getItem('customer_name') || 'Client';
+                setTimeout(() => {
+                    document.getElementById('review-ask-modal').classList.add('active');
+                }, 1000);
+            }
+        }
+
+        function openReviewForm() {
+            closeModal('review-ask-modal');
+            document.getElementById('review-form-modal').classList.add('active');
+        }
+
+        function submitReview(e) {
+            e.preventDefault();
+            const rating = parseInt(document.getElementById('review-rating').value);
+            const desc = document.getElementById('review-desc').value;
+            const today = new Date().toISOString().split('T')[0];
+
+            reviewsData.unshift({
+                name: currentCustomerName + " " + (currentCustomerName.length > 0 ? currentCustomerName[0].toUpperCase() + "." : ""),
+                comment: desc,
+                date: today,
+                stars: rating
+            });
+
+            renderMarquee();
+            closeModal('review-form-modal');
+            alert('Merci ! Votre avis a bien été publié.');
+        }
+
+        window.addEventListener('focus', () => {
+            checkPendingReview();
+        });
+
         document.addEventListener('DOMContentLoaded', () => {
             renderMarquee();
+            checkPendingReview();
         });
     </script>
 </body>
