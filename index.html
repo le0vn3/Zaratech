@@ -164,27 +164,6 @@
             transform: translateY(-2px);
         }
 
-        .btn-secondary {
-            display: inline-block;
-            padding: 14px 24px;
-            background: transparent;
-            color: var(--text-main);
-            text-decoration: none;
-            font-size: 9px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            border: 1px solid var(--border-color);
-            transition: var(--transition);
-            cursor: pointer;
-            width: 100%;
-            text-align: center;
-        }
-
-        .btn-secondary:hover {
-            background: var(--bg-card);
-        }
-
         /* COMPTEURS */
         .stats-bar {
             display: grid;
@@ -263,74 +242,6 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             line-height: 1.6;
-        }
-
-        /* AVIS DÉFILANTS */
-        .reviews-section {
-            padding: 50px 0;
-            background: var(--bg-card);
-            margin-bottom: 80px;
-            overflow: hidden;
-        }
-
-        .marquee-container {
-            display: flex;
-            overflow: hidden;
-            user-select: none;
-            position: relative;
-            width: 100%;
-        }
-
-        .marquee-content {
-            flex-shrink: 0;
-            display: flex;
-            gap: 20px;
-            min-width: 100%;
-            animation: scroll-slow 70s linear infinite;
-        }
-
-        @keyframes scroll-slow {
-            from { transform: translateX(0); }
-            to { transform: translateX(-100%); }
-        }
-
-        .review-card-scroll {
-            width: 320px;
-            flex-shrink: 0;
-            border: 1px solid var(--border-light);
-            background: var(--bg-color);
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .review-author {
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .review-stars {
-            color: var(--accent-gold);
-            font-size: 11px;
-            margin-bottom: 10px;
-        }
-
-        .review-comment {
-            font-size: 10px;
-            color: #333;
-            line-height: 1.5;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 12px;
-        }
-
-        .review-date {
-            font-size: 8px;
-            color: var(--text-muted);
-            text-transform: uppercase;
         }
 
         /* BOUTIQUE */
@@ -527,7 +438,7 @@
             color: var(--text-main);
         }
 
-        .form-group input, .form-group select, .form-group textarea {
+        .form-group input {
             width: 100%;
             padding: 14px;
             border: 1px solid var(--border-color);
@@ -538,19 +449,8 @@
             background: var(--bg-color);
         }
 
-        .form-group textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
-
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+        .form-group input:focus {
             border-color: var(--accent-gold);
-        }
-
-        .modal-btn-group {
-            display: flex;
-            gap: 12px;
-            margin-top: 20px;
         }
 
         /* FOOTER */
@@ -616,8 +516,8 @@
         <!-- CHIFFRES CLÉS -->
         <section class="stats-bar">
             <div class="stat-item">
-                <div class="stat-number">+600</div>
-                <div class="stat-label">Avis Clients Vérifiés</div>
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Transactions Sécurisées</div>
             </div>
             <div class="stat-item">
                 <div class="stat-number">100%</div>
@@ -648,19 +548,6 @@
                     <h3>Tarifs Exclusifs</h3>
                     <p>Remises préférentielles sur des cartes officielles valables en boutique et sur le site Zara.</p>
                 </div>
-            </div>
-        </section>
-
-        <!-- AVIS CLIENTS DÉFILANTS -->
-        <section class="reviews-section">
-            <div class="section-title-wrap" style="margin-top:0;">
-                <h2 class="section-title">+600 Avis Clients</h2>
-                <p class="section-subtitle">Retours d'expérience vérifiés</p>
-            </div>
-            
-            <div class="marquee-container">
-                <div class="marquee-content" id="marquee-1"></div>
-                <div class="marquee-content" id="marquee-2" aria-hidden="true"></div>
             </div>
         </section>
     </div>
@@ -772,7 +659,6 @@
                 </div>
             </article>
 
-            <!-- NOUVEL ARTICLE 100€ -->
             <article class="card">
                 <div class="card-image">
                     <span class="card-badge">Super Offre</span>
@@ -793,7 +679,6 @@
                 </div>
             </article>
 
-            <!-- NOUVEL ARTICLE 200€ -->
             <article class="card">
                 <div class="card-image">
                     <span class="card-badge">Offre VIP</span>
@@ -837,44 +722,15 @@
         </div>
     </div>
 
-    <!-- MODALE 2 : CONFIRMATION + DEMANDE D'AVIS (OUI / NON) -->
-    <div id="review-ask-modal" class="modal-overlay">
+    <!-- MODALE 2 : CONFIRMATION D'ACHAT -->
+    <div id="success-modal" class="modal-overlay">
         <div class="modal-card" style="text-align: center;">
+            <button class="modal-close" onclick="closeModal('success-modal')">&times;</button>
             <div class="modal-title">Merci pour votre achat !</div>
-            <p style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-main); margin-bottom: 20px;">Vous allez recevoir le code d'ici peu par e-mail.</p>
-            <div class="modal-product-summary" style="border:none; margin-bottom:15px; padding-bottom:0;">Voulez-vous laisser un avis sur votre expérience ?</div>
-            
-            <div class="modal-btn-group">
-                <button type="button" class="btn-primary" onclick="openReviewForm()">Oui</button>
-                <button type="button" class="btn-secondary" onclick="closeModal('review-ask-modal')">Non</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODALE 3 : FORMULAIRE D'AVIS (NOTE + DESCRIPTION) -->
-    <div id="review-form-modal" class="modal-overlay">
-        <div class="modal-card">
-            <button class="modal-close" onclick="closeModal('review-form-modal')">&times;</button>
-            <div class="modal-title">Votre Avis</div>
-            <div class="modal-product-summary">Donnez votre retour d'expérience</div>
-            
-            <form id="review-form" onsubmit="submitReview(event)">
-                <div class="form-group">
-                    <label for="review-rating">Note *</label>
-                    <select id="review-rating" required>
-                        <option value="5">★★★★★ (5/5) - Excellent</option>
-                        <option value="4">★★★★☆ (4/5) - Très bien</option>
-                        <option value="3">★★★☆☆ (3/5) - Moyen</option>
-                        <option value="2">★★☆☆☆ (2/5) - Décevant</option>
-                        <option value="1">★☆☆☆☆ (1/5) - Mauvais</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="review-desc">Description / Avis *</label>
-                    <textarea id="review-desc" placeholder="Racontez votre expérience (réception rapide, code valide...)" required></textarea>
-                </div>
-                <button type="submit" class="btn-primary" style="margin-top: 10px;">Publier mon avis</button>
-            </form>
+            <p style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-main); margin-top: 15px; margin-bottom: 25px;">
+                Vous allez recevoir le code d'ici peu par e-mail.
+            </p>
+            <button type="button" class="btn-primary" onclick="closeModal('success-modal')">Fermer</button>
         </div>
     </div>
 
@@ -886,36 +742,6 @@
 
     <script>
         let selectedPayUrl = '';
-        let currentCustomerName = '';
-
-        const reviewsData = [
-            { name: "Nicolas P.", comment: "Franchement nickel, e-carte reçue direct après avoir payé. Code valide sans souci en caisse !", date: "2026-08-18" },
-            { name: "Léa M.", comment: "J'avais un peu peur au début mais j'ai reçu le mail dans la minute. Ça passe direct sur l'appli Zara.", date: "2026-08-15" },
-            { name: "Romain F.", comment: "Hyper rapide ! Mail reçu instantanément avec le code. Je repasserai par là sans hésiter.", date: "2026-08-12" },
-            { name: "Claire B.", comment: "Top pour un cadeau de dernière minute, le mail arrive tout de suite et le code fonctionne super bien.", date: "2026-08-09" },
-            { name: "Hugo T.", comment: "Rien à dire, envoi automatique instantané. Code scanné en boutique cet aprèm sans aucun problème.", date: "2026-08-04" },
-            { name: "Inès G.", comment: "Parfait ! J'ai reçu le code par mail 30 secondes après la commande. Merci beaucoup !", date: "2026-07-29" },
-            { name: "Antoine C.", comment: "Simple et efficace. Le mail était directement dans ma boîte de réception, code valide.", date: "2026-07-22" },
-            { name: "Manon D.", comment: "Vraiment rapide, j'ai pu l'utiliser direct pour passer ma commande. Je recommande !", date: "2026-07-18" },
-            { name: "Youssef K.", comment: "Impeccable, mail bien reçu avec le bon code. Pas eu besoin d'attendre des heures.", date: "2026-07-11" },
-            { name: "Camille V.", comment: "Super plan, tout s'est passé comme prévu. Mail reçu direct et carte validée sur le site.", date: "2026-07-03" }
-        ];
-
-        function renderMarquee() {
-            const html = reviewsData.map(rev => `
-                <div class="review-card-scroll">
-                    <div>
-                        <span class="review-author">${rev.name}</span>
-                        <div class="review-stars">${'★'.repeat(rev.stars || 5)}${'☆'.repeat(5 - (rev.stars || 5))}</div>
-                        <p class="review-comment">"${rev.comment}"</p>
-                    </div>
-                    <span class="review-date">${rev.date}</span>
-                </div>
-            `).join('');
-
-            document.getElementById('marquee-1').innerHTML = html;
-            document.getElementById('marquee-2').innerHTML = html;
-        }
 
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
@@ -926,7 +752,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        /* COMMANDE ET MODALES */
         function openCheckout(valeur, prix, paypalUrl) {
             selectedPayUrl = paypalUrl;
             document.getElementById('modal-product-summary').innerText = `Carte Zara de ${valeur} — Prix : ${prix}`;
@@ -943,45 +768,11 @@
             const email = document.getElementById('email').value;
 
             if (firstname && email && selectedPayUrl) {
-                currentCustomerName = firstname;
-                
-                // Redirection vers PayPal
                 window.open(selectedPayUrl, '_blank');
-                
-                // Fermeture de la modale de paiement
                 closeModal('checkout-modal');
-                
-                // Affichage IMMÉDIAT de la modale de remerciement / avis
-                document.getElementById('review-ask-modal').classList.add('active');
+                document.getElementById('success-modal').classList.add('active');
             }
         }
-
-        function openReviewForm() {
-            closeModal('review-ask-modal');
-            document.getElementById('review-form-modal').classList.add('active');
-        }
-
-        function submitReview(e) {
-            e.preventDefault();
-            const rating = parseInt(document.getElementById('review-rating').value);
-            const desc = document.getElementById('review-desc').value;
-            const today = new Date().toISOString().split('T')[0];
-
-            reviewsData.unshift({
-                name: currentCustomerName + " " + (currentCustomerName.length > 0 ? currentCustomerName[0].toUpperCase() + "." : ""),
-                comment: desc,
-                date: today,
-                stars: rating
-            });
-
-            renderMarquee();
-            closeModal('review-form-modal');
-            alert('Merci ! Votre avis a bien été publié.');
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            renderMarquee();
-        });
     </script>
 </body>
 </html>
