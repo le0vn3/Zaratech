@@ -41,7 +41,7 @@
             margin: 0 auto;
         }
 
-        /* HEADER SANS BORDURE */
+        /* HEADER */
         header {
             padding: 25px 0;
             display: flex;
@@ -97,7 +97,7 @@
             transform: translateY(0);
         }
 
-        /* HERO & ACCUEIL SANS BORDURE */
+        /* HERO & ACCUEIL */
         .home-hero {
             padding: 40px 0 50px 0;
             display: grid;
@@ -125,7 +125,6 @@
             margin-bottom: 30px;
         }
 
-        /* LOGO ZARA SUR L'ACCUEIL */
         .zara-logo-hero-box {
             width: 100%;
             max-width: 380px;
@@ -165,7 +164,7 @@
             transform: translateY(-2px);
         }
 
-        /* COMPTEURS SANS BORDURE */
+        /* STATS */
         .stats-bar {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -245,7 +244,7 @@
             line-height: 1.6;
         }
 
-        /* AVIS DÉFILANTS SANS BORDURES SUPERIEURE/INFERIEURE */
+        /* AVIS DÉFILANTS */
         .reviews-section {
             padding: 50px 0;
             background: var(--bg-card);
@@ -313,7 +312,7 @@
             text-transform: uppercase;
         }
 
-        /* PAGE BOUTIQUE SANS BORDURE D'EN-TÊTE */
+        /* BOUTIQUE */
         .shop-header {
             display: flex;
             justify-content: center;
@@ -424,6 +423,7 @@
             letter-spacing: 1.5px;
             border: 1px solid var(--border-color);
             transition: var(--transition);
+            cursor: pointer;
         }
 
         .btn-buy:hover {
@@ -431,7 +431,85 @@
             color: var(--text-main);
         }
 
-        /* FOOTER SANS BORDURE SUPERIEURE */
+        /* MODAL E-MAIL */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 35px 25px;
+            max-width: 420px;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            color: var(--text-main);
+        }
+
+        .modal-title {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .modal-desc {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .modal-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid var(--border-color);
+            font-family: var(--font-sans);
+            font-size: 12px;
+            outline: none;
+        }
+
+        .modal-input:focus {
+            border-color: var(--accent-gold);
+        }
+
+        /* FOOTER */
         footer {
             padding: 40px 0 30px 0;
             display: flex;
@@ -565,7 +643,7 @@
                         <span class="valeur-amount">50 €</span>
                     </div>
                     <div>
-                        <a href="https://www.paypal.me/PaMe372106/10EUR" target="_blank" rel="noopener" class="btn-buy">Commander pour 10,00 €</a>
+                        <button class="btn-buy" onclick="promptEmail('https://www.paypal.me/PaMe372106/10EUR')">Commander pour 10,00 €</button>
                     </div>
                 </div>
             </article>
@@ -585,7 +663,7 @@
                         <span class="valeur-amount">100 €</span>
                     </div>
                     <div>
-                        <a href="https://www.paypal.me/PaMe372106/15EUR" target="_blank" rel="noopener" class="btn-buy">Commander pour 15,00 €</a>
+                        <button class="btn-buy" onclick="promptEmail('https://www.paypal.me/PaMe372106/15EUR')">Commander pour 15,00 €</button>
                     </div>
                 </div>
             </article>
@@ -605,7 +683,7 @@
                         <span class="valeur-amount">200 €</span>
                     </div>
                     <div>
-                        <a href="https://www.paypal.me/PaMe372106/20EUR" target="_blank" rel="noopener" class="btn-buy">Commander pour 20,00 €</a>
+                        <button class="btn-buy" onclick="promptEmail('https://www.paypal.me/PaMe372106/20EUR')">Commander pour 20,00 €</button>
                     </div>
                 </div>
             </article>
@@ -625,7 +703,7 @@
                         <span class="valeur-amount">500 €</span>
                     </div>
                     <div>
-                        <a href="https://www.paypal.me/PaMe372106/30EUR" target="_blank" rel="noopener" class="btn-buy">Commander pour 30,00 €</a>
+                        <button class="btn-buy" onclick="promptEmail('https://www.paypal.me/PaMe372106/30EUR')">Commander pour 30,00 €</button>
                     </div>
                 </div>
             </article>
@@ -645,11 +723,66 @@
                         <span class="valeur-amount">1000 €</span>
                     </div>
                     <div>
-                        <a href="https://www.paypal.me/PaMe372106/70EUR" target="_blank" rel="noopener" class="btn-buy">Commander pour 70,00 €</a>
+                        <button class="btn-buy" onclick="promptEmail('https://www.paypal.me/PaMe372106/70EUR')">Commander pour 70,00 €</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- NOUVELLE OFFRE 100€ = 1600€ -->
+            <article class="card">
+                <div class="card-image">
+                    <span class="card-badge">Offre Spéciale</span>
+                    <img src="IMG_0130.png" alt="Zara Gift Card">
+                </div>
+                <div class="card-body">
+                    <div>
+                        <span class="price-pay-label">Prix à Payer</span>
+                        <div class="card-price-main">100,00 €</div>
+                    </div>
+                    <div class="card-valeur-row">
+                        <span class="valeur-label">Valeur Carte Zara</span>
+                        <span class="valeur-amount">1600 €</span>
+                    </div>
+                    <div>
+                        <button class="btn-buy" onclick="promptEmail('https://www.paypal.me/PaMe372106/100EUR')">Commander pour 100,00 €</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- NOUVELLE OFFRE 200€ = 400€ -->
+            <article class="card">
+                <div class="card-image">
+                    <span class="card-badge">Offre VIP</span>
+                    <img src="IMG_0130.png" alt="Zara Gift Card">
+                </div>
+                <div class="card-body">
+                    <div>
+                        <span class="price-pay-label">Prix à Payer</span>
+                        <div class="card-price-main">200,00 €</div>
+                    </div>
+                    <div class="card-valeur-row">
+                        <span class="valeur-label">Valeur Carte Zara</span>
+                        <span class="valeur-amount">400 €</span>
+                    </div>
+                    <div>
+                        <button class="btn-buy" onclick="promptEmail('https://www.paypal.me/PaMe372106/200EUR')">Commander pour 200,00 €</button>
                     </div>
                 </div>
             </article>
         </section>
+    </div>
+
+    <!-- MODAL DEMANDE D'E-MAIL -->
+    <div id="email-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            <div class="modal-title">Livraison du Code</div>
+            <p class="modal-desc">Saisissez votre e-mail pour recevoir le code Zara immédiatement après votre paiement.</p>
+            <form class="modal-form" onsubmit="submitCheckout(event)">
+                <input type="email" id="checkout-email" class="modal-input" placeholder="exemple@domaine.com" required>
+                <button type="submit" class="btn-primary">Confirmer et Payer</button>
+            </form>
+        </div>
     </div>
 
     <!-- FOOTER SANS BORDURE -->
@@ -659,6 +792,8 @@
     </footer>
 
     <script>
+        let currentTargetUrl = '';
+
         const reviewsData = [
             { name: "Nicolas P.", comment: "Franchement nickel, e-carte reçue direct après avoir payé. Code valide sans souci en caisse !", date: "2026-08-18" },
             { name: "Léa M.", comment: "J'avais un peu peur au début mais j'ai reçu le mail dans la minute. Ça passe direct sur l'appli Zara.", date: "2026-08-15" },
@@ -695,6 +830,25 @@
                 target.classList.add('active');
             }
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function promptEmail(paypalUrl) {
+            currentTargetUrl = paypalUrl;
+            document.getElementById('email-modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('email-modal').classList.remove('active');
+            document.getElementById('checkout-email').value = '';
+        }
+
+        function submitCheckout(event) {
+            event.preventDefault();
+            const email = document.getElementById('checkout-email').value;
+            if (email) {
+                closeModal();
+                window.open(currentTargetUrl, '_blank');
+            }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
