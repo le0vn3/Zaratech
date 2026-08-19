@@ -29,7 +29,6 @@
             padding: 0;
             box-sizing: border-box;
             -webkit-font-smoothing: antialiased;
-            /* Empêche la sélection de texte et les gestes de zoom accidentels */
             touch-action: manipulation;
         }
 
@@ -196,7 +195,7 @@
             font-weight: 600;
         }
 
-        /* VALEURS */
+        /* TITRES DE SECTION */
         .section-title-wrap {
             margin: 60px 0 30px 0;
             text-align: center;
@@ -218,11 +217,12 @@
             margin-top: 6px;
         }
 
+        /* ENGAGEMENTS */
         .values-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
-            margin-bottom: 70px;
+            margin-bottom: 40px;
         }
 
         .value-card {
@@ -245,6 +245,47 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             line-height: 1.6;
+        }
+
+        /* SECTION AVIS CLIENTS (STATIQUE) */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 70px;
+        }
+
+        .review-card {
+            border: 1px solid var(--border-color);
+            padding: 25px 20px;
+            background: var(--bg-card);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .review-stars {
+            color: var(--accent-gold);
+            font-size: 12px;
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+        }
+
+        .review-text {
+            font-size: 9.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            line-height: 1.6;
+            color: var(--text-main);
+            margin-bottom: 15px;
+        }
+
+        .review-author {
+            font-size: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
         }
 
         /* BOUTIQUE */
@@ -446,7 +487,7 @@
             padding: 14px;
             border: 1px solid var(--border-color);
             font-family: var(--font-sans);
-            font-size: 16px; /* 16px empêche le zoom automatique d'iOS lors du clic sur un input */
+            font-size: 16px;
             outline: none;
             transition: var(--transition);
             background: var(--bg-color);
@@ -488,6 +529,7 @@
             .home-hero { grid-template-columns: 1fr; gap: 30px; padding: 30px 0; }
             .stats-bar { grid-template-columns: 1fr; }
             .values-grid { grid-template-columns: 1fr; }
+            .reviews-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -551,6 +593,37 @@
                     <h3>Tarifs Exclusifs</h3>
                     <p>Remises préférentielles sur des cartes officielles valables en boutique et sur le site Zara.</p>
                 </div>
+            </div>
+        </section>
+
+        <!-- AVIS CLIENTS (AFFICHAGE STATIQUE UNIQUEMENT) -->
+        <section>
+            <div class="section-title-wrap">
+                <h2 class="section-title">Avis Clients</h2>
+                <p class="section-subtitle">Témoignages de nos récents acheteurs</p>
+            </div>
+            <div class="reviews-grid">
+                <article class="review-card">
+                    <div>
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">« Carte reçue par mail en moins de deux minutes. Code parfait et fonctionnel directement en magasin. »</p>
+                    </div>
+                    <span class="review-author">— Thomas D.</span>
+                </article>
+                <article class="review-card">
+                    <div>
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">« Service très rapide, la réduction vaut vraiment le coup. Je repasserai commande sans hésiter. »</p>
+                    </div>
+                    <span class="review-author">— Élodie M.</span>
+                </article>
+                <article class="review-card">
+                    <div>
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-text">« Achat fluide via PayPal. Rien à redire, le support sur Discord répond très vite si besoin. »</p>
+                    </div>
+                    <span class="review-author">— Marc L.</span>
+                </article>
             </div>
         </section>
     </div>
@@ -704,7 +777,7 @@
         </section>
     </div>
 
-    <!-- MODALE 1 : COMMANDE (PRÉNOM + EMAIL) -->
+    <!-- MODALE 1 : COMMANDE -->
     <div id="checkout-modal" class="modal-overlay">
         <div class="modal-card">
             <button class="modal-close" onclick="closeModal('checkout-modal')">&times;</button>
@@ -725,7 +798,7 @@
         </div>
     </div>
 
-    <!-- MODALE 2 : CONFIRMATION D'ACHAT -->
+    <!-- MODALE 2 : CONFIRMATION -->
     <div id="success-modal" class="modal-overlay">
         <div class="modal-card" style="text-align: center;">
             <button class="modal-close" onclick="closeModal('success-modal')">&times;</button>
@@ -746,7 +819,7 @@
     <script>
         let selectedPayUrl = '';
 
-        /* Blocage des raccourcis clavier de zoom sur ordinateur (Ctrl + / Ctrl - / Ctrl + Mollette) */
+        /* Blocage des raccourcis clavier de zoom */
         document.addEventListener('keydown', function (e) {
             if ((e.ctrlKey || e.metaKey) && (e.key === '+' || e.key === '-' || e.key === '=')) {
                 e.preventDefault();
