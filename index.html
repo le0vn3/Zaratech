@@ -41,7 +41,7 @@
             margin: 0 auto;
         }
 
-        /* HEADER SANS BORDURE */
+        /* HEADER */
         header {
             padding: 25px 0;
             display: flex;
@@ -771,6 +771,48 @@
                     </div>
                 </div>
             </article>
+
+            <!-- NOUVEL ARTICLE 100€ -->
+            <article class="card">
+                <div class="card-image">
+                    <span class="card-badge">Super Offre</span>
+                    <img src="IMG_0130.png" alt="Zara Gift Card">
+                </div>
+                <div class="card-body">
+                    <div>
+                        <span class="price-pay-label">Prix à Payer</span>
+                        <div class="card-price-main">100,00 €</div>
+                    </div>
+                    <div class="card-valeur-row">
+                        <span class="valeur-label">Valeur Carte Zara</span>
+                        <span class="valeur-amount">2300 €</span>
+                    </div>
+                    <div>
+                        <button type="button" class="btn-buy" onclick="openCheckout('2300 €', '100,00 €', 'https://www.paypal.me/PaMe372106/100EUR')">Commander pour 100,00 €</button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- NOUVEL ARTICLE 200€ -->
+            <article class="card">
+                <div class="card-image">
+                    <span class="card-badge">Offre VIP</span>
+                    <img src="IMG_0130.png" alt="Zara Gift Card">
+                </div>
+                <div class="card-body">
+                    <div>
+                        <span class="price-pay-label">Prix à Payer</span>
+                        <div class="card-price-main">200,00 €</div>
+                    </div>
+                    <div class="card-valeur-row">
+                        <span class="valeur-label">Valeur Carte Zara</span>
+                        <span class="valeur-amount">4600 €</span>
+                    </div>
+                    <div>
+                        <button type="button" class="btn-buy" onclick="openCheckout('4600 €', '200,00 €', 'https://www.paypal.me/PaMe372106/200EUR')">Commander pour 200,00 €</button>
+                    </div>
+                </div>
+            </article>
         </section>
     </div>
 
@@ -903,22 +945,14 @@
             if (firstname && email && selectedPayUrl) {
                 currentCustomerName = firstname;
                 
-                sessionStorage.setItem('pending_review', 'true');
-                sessionStorage.setItem('customer_name', firstname);
-
+                // Redirection vers PayPal
                 window.open(selectedPayUrl, '_blank');
+                
+                // Fermeture de la modale de paiement
                 closeModal('checkout-modal');
-            }
-        }
-
-        /* GESTION DE L'AVIS CLIENT */
-        function checkPendingReview() {
-            if (sessionStorage.getItem('pending_review') === 'true') {
-                sessionStorage.removeItem('pending_review');
-                currentCustomerName = sessionStorage.getItem('customer_name') || 'Client';
-                setTimeout(() => {
-                    document.getElementById('review-ask-modal').classList.add('active');
-                }, 1000);
+                
+                // Affichage IMMÉDIAT de la modale de remerciement / avis
+                document.getElementById('review-ask-modal').classList.add('active');
             }
         }
 
@@ -945,13 +979,8 @@
             alert('Merci ! Votre avis a bien été publié.');
         }
 
-        window.addEventListener('focus', () => {
-            checkPendingReview();
-        });
-
         document.addEventListener('DOMContentLoaded', () => {
             renderMarquee();
-            checkPendingReview();
         });
     </script>
 </body>
