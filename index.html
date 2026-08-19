@@ -264,7 +264,7 @@
             display: flex;
             gap: 20px;
             width: max-content;
-            animation: scrollReviews 25s linear infinite;
+            animation: scrollReviews 35s linear infinite;
         }
 
         .reviews-carousel-container:hover .reviews-track {
@@ -287,7 +287,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            width: 300px;
+            width: 320px;
             flex-shrink: 0;
             text-align: center;
         }
@@ -358,18 +358,34 @@
             object-fit: contain;
         }
 
-        .card-badge {
+        .stock-badge {
             position: absolute;
             top: 12px;
             left: 50%;
             transform: translateX(-50%);
-            background: var(--text-main);
-            color: var(--bg-color);
+            background: #E53935;
+            color: #FFFFFF;
             font-size: 8px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
             padding: 4px 8px;
+            border-radius: 2px;
+        }
+
+        .bonus-badge {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-gold);
+            color: #FFFFFF;
+            font-size: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 8px;
+            border-radius: 2px;
         }
 
         .card-body {
@@ -617,11 +633,9 @@
         <!-- CHIFFRES CLÉS -->
         <section class="stats-bar">
             <div class="stat-item">
-                <div class="stat-number">100%</div>
                 <div class="stat-label">Transactions Sécurisées</div>
             </div>
             <div class="stat-item">
-                <div class="stat-number">100%</div>
                 <div class="stat-label">Codes Officiels Valides</div>
             </div>
             <div class="stat-item">
@@ -660,63 +674,49 @@
             </div>
             <div class="reviews-carousel-container">
                 <div class="reviews-track">
-                    <article class="review-card">
-                        <div>
-                            <div class="review-stars">★★★★★</div>
-                            <p class="review-text">« Carte reçue par mail en deux minutes. Code parfait et fonctionnel directement en magasin. »</p>
-                        </div>
-                        <span class="review-author">— Thomas D.</span>
-                    </article>
-                    <article class="review-card">
-                        <div>
-                            <div class="review-stars">★★★★★</div>
-                            <p class="review-text">« Service très rapide, la réduction vaut vraiment le coup. Je repasserai commande sans hésiter. »</p>
-                        </div>
-                        <span class="review-author">— Élodie M.</span>
-                    </article>
-                    <article class="review-card">
-                        <div>
-                            <div class="review-stars">★★★★★</div>
-                            <p class="review-text">« Achat fluide via PayPal. Rien à redire, le support sur Discord répond très vite si besoin. »</p>
-                        </div>
-                        <span class="review-author">— Marc L.</span>
-                    </article>
-                    <article class="review-card">
-                        <div>
-                            <div class="review-stars">★★★★★</div>
-                            <p class="review-text">« Commande traitée rapidement. J'ai pu réaliser mes achats sur le site officiel sans problème. »</p>
-                        </div>
-                        <span class="review-author">— Sophie K.</span>
-                    </article>
+                    <!-- Lot 1 d'avis clients -->
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Cb slt j'ai recu ma carte Zara de 50€ par mail en 2min mm pas »</p></div><span class="review-author">— Yanis (5 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Jpensais c'etait fake mais nn mdrr jai bien recu ma carte de 200€ par mail merci »</p></div><span class="review-author">— Enzo (4.9 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Recu en 5min trkl, carte Zara de 500€ bien recu par mail »</p></div><span class="review-author">— Léo (4.8 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Cb rapide jai recu ma carte de 1000€ juste apres la commande »</p></div><span class="review-author">— Sarah (5 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★☆</div><p class="review-text">« jai bien recu ma carte de 2300€ par mail, un peu attendu mais sinon niquel »</p></div><span class="review-author">— Mathis (4.3 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Franchement incroyable 😂 carte de 4600€ recu direct par mail »</p></div><span class="review-author">— Emma (5 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Recu en 3min environ, carte de 50€ bien recue, rien a dire merciii »</p></div><span class="review-author">— Hugo (4.9 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Cb slt jai recu ma carte de 200€ par mail, ca marche nickel »</p></div><span class="review-author">— Inès (4.7 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Très bonne expérience, commande reçue rapidement par e-mail. La carte de 50€ est bien arrivée, merci ! »</p></div><span class="review-author">— Lucas (5 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Wsh j'ai recu les 200€ par mail en mm pas 5min 😭 franchement carré »</p></div><span class="review-author">— Adam (4.9 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Commande bien reçue, tout était conforme et le mail est arrivé assez rapidement. »</p></div><span class="review-author">— Clara (4.8 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Cb rapide mdrr, jai recu la carte de 500€ direct apres »</p></div><span class="review-author">— Tom (5 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Je ne m’attendais pas à recevoir la carte aussi vite. Tout s’est bien passé de mon côté. »</p></div><span class="review-author">— Manon (4.7 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Recu la carte de 1000€ par mail, franchement rien a redire »</p></div><span class="review-author">— Rayan (4.9 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Très satisfaite, réception par e-mail rapide et procédure simple. »</p></div><span class="review-author">— Julie (5 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★☆</div><p class="review-text">« ca a pris un peu de temps mais jai bien recu les 2300€ par mail au final 👍 »</p></div><span class="review-author">— Noah (4.3 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Première commande pour moi, et je suis agréablement surprise. Carte reçue par mail sans problème. »</p></div><span class="review-author">— Chloé (4.8 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Recu les 4600€ par mail, c arrivé assez vite donc c bon merciii »</p></div><span class="review-author">— Yanis (4.9 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Nickel, carte de 50€ reçue comme prévu. Rien de particulier à signaler. »</p></div><span class="review-author">— Maxime (4.6 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« omg recu en 2min 😭 la carte de 200€ est bien arrivée par mail »</p></div><span class="review-author">— Lina (5 ⭐️)</span></article>
 
-                    <article class="review-card">
-                        <div>
-                            <div class="review-stars">★★★★★</div>
-                            <p class="review-text">« Carte reçue par mail en deux minutes. Code parfait et fonctionnel directement en magasin. »</p>
-                        </div>
-                        <span class="review-author">— Thomas D.</span>
-                    </article>
-                    <article class="review-card">
-                        <div>
-                            <div class="review-stars">★★★★★</div>
-                            <p class="review-text">« Service très rapide, la réduction vaut vraiment le coup. Je repasserai commande sans hésiter. »</p>
-                        </div>
-                        <span class="review-author">— Élodie M.</span>
-                    </article>
-                    <article class="review-card">
-                        <div>
-                            <div class="review-stars">★★★★★</div>
-                            <p class="review-text">« Achat fluide via PayPal. Rien à redire, le support sur Discord répond très vite si besoin. »</p>
-                        </div>
-                        <span class="review-author">— Marc L.</span>
-                    </article>
-                    <article class="review-card">
-                        <div>
-                            <div class="review-stars">★★★★★</div>
-                            <p class="review-text">« Commande traitée rapidement. J'ai pu réaliser mes achats sur le site officiel sans problème. »</p>
-                        </div>
-                        <span class="review-author">— Sophie K.</span>
-                    </article>
+                    <!-- Duplication pour défilement infini sans coupure -->
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Cb slt j'ai recu ma carte Zara de 50€ par mail en 2min mm pas »</p></div><span class="review-author">— Yanis (5 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Jpensais c'etait fake mais nn mdrr jai bien recu ma carte de 200€ par mail merci »</p></div><span class="review-author">— Enzo (4.9 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Recu en 5min trkl, carte Zara de 500€ bien recu par mail »</p></div><span class="review-author">— Léo (4.8 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Cb rapide jai recu ma carte de 1000€ juste apres la commande »</p></div><span class="review-author">— Sarah (5 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★☆</div><p class="review-text">« jai bien recu ma carte de 2300€ par mail, un peu attendu mais sinon niquel »</p></div><span class="review-author">— Mathis (4.3 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Franchement incroyable 😂 carte de 4600€ recu direct par mail »</p></div><span class="review-author">— Emma (5 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Recu en 3min environ, carte de 50€ bien recue, rien a dire merciii »</p></div><span class="review-author">— Hugo (4.9 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Cb slt jai recu ma carte de 200€ par mail, ca marche nickel »</p></div><span class="review-author">— Inès (4.7 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Très bonne expérience, commande reçue rapidement par e-mail. La carte de 50€ est bien arrivée, merci ! »</p></div><span class="review-author">— Lucas (5 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Wsh j'ai recu les 200€ par mail en mm pas 5min 😭 franchement carré »</p></div><span class="review-author">— Adam (4.9 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Commande bien reçue, tout était conforme et le mail est arrivé assez rapidement. »</p></div><span class="review-author">— Clara (4.8 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Cb rapide mdrr, jai recu la carte de 500€ direct apres »</p></div><span class="review-author">— Tom (5 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Je ne m’attendais pas à recevoir la carte aussi vite. Tout s’est bien passé de mon côté. »</p></div><span class="review-author">— Manon (4.7 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Recu la carte de 1000€ par mail, franchement rien a redire »</p></div><span class="review-author">— Rayan (4.9 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Très satisfaite, réception par e-mail rapide et procédure simple. »</p></div><span class="review-author">— Julie (5 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★☆</div><p class="review-text">« ca a pris un peu de temps mais jai bien recu les 2300€ par mail au final 👍 »</p></div><span class="review-author">— Noah (4.3 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Première commande pour moi, et je suis agréablement surprise. Carte reçue par mail sans problème. »</p></div><span class="review-author">— Chloé (4.8 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Recu les 4600€ par mail, c arrivé assez vite donc c bon merciii »</p></div><span class="review-author">— Yanis (4.9 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« Nickel, carte de 50€ reçue comme prévu. Rien de particulier à signaler. »</p></div><span class="review-author">— Maxime (4.6 ⭐️)</span></article>
+                    <article class="review-card"><div><div class="review-stars">★★★★★</div><p class="review-text">« omg recu en 2min 😭 la carte de 200€ est bien arrivée par mail »</p></div><span class="review-author">— Lina (5 ⭐️)</span></article>
                 </div>
             </div>
         </section>
@@ -731,7 +731,7 @@
         <section class="grid-products">
             <article class="card">
                 <div class="card-image">
-                    <span class="card-badge">Code Officiel</span>
+                    <span class="stock-badge">12 cartes restantes</span>
                     <img src="IMG_0130.png" alt="Zara Gift Card">
                 </div>
                 <div class="card-body">
@@ -749,7 +749,7 @@
 
             <article class="card">
                 <div class="card-image">
-                    <span class="card-badge">Code Officiel</span>
+                    <span class="stock-badge">8 cartes restantes</span>
                     <img src="IMG_0130.png" alt="Zara Gift Card">
                 </div>
                 <div class="card-body">
@@ -767,7 +767,8 @@
 
             <article class="card">
                 <div class="card-image">
-                    <span class="card-badge">Meilleure Vente</span>
+                    <span class="stock-badge">5 cartes restantes</span>
+                    <span class="bonus-badge">15 % BONUS</span>
                     <img src="IMG_0130.png" alt="Zara Gift Card">
                 </div>
                 <div class="card-body">
@@ -785,7 +786,8 @@
 
             <article class="card">
                 <div class="card-image">
-                    <span class="card-badge">Code Officiel</span>
+                    <span class="stock-badge">4 cartes restantes</span>
+                    <span class="bonus-badge">15 % BONUS</span>
                     <img src="IMG_0130.png" alt="Zara Gift Card">
                 </div>
                 <div class="card-body">
@@ -803,7 +805,8 @@
 
             <article class="card">
                 <div class="card-image">
-                    <span class="card-badge">Édition Premium</span>
+                    <span class="stock-badge">3 cartes restantes</span>
+                    <span class="bonus-badge">15 % BONUS</span>
                     <img src="IMG_0130.png" alt="Zara Gift Card">
                 </div>
                 <div class="card-body">
@@ -821,7 +824,8 @@
 
             <article class="card">
                 <div class="card-image">
-                    <span class="card-badge">Super Offre</span>
+                    <span class="stock-badge">2 cartes restantes</span>
+                    <span class="bonus-badge">15 % BONUS</span>
                     <img src="IMG_0130.png" alt="Zara Gift Card">
                 </div>
                 <div class="card-body">
@@ -839,7 +843,8 @@
 
             <article class="card">
                 <div class="card-image">
-                    <span class="card-badge">Offre VIP</span>
+                    <span class="stock-badge">2 cartes restantes</span>
+                    <span class="bonus-badge">15 % BONUS</span>
                     <img src="IMG_0130.png" alt="Zara Gift Card">
                 </div>
                 <div class="card-body">
