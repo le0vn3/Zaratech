@@ -41,10 +41,9 @@
             margin: 0 auto;
         }
 
-        /* HEADER CENTRÉ ET CLIQUABLE POUR RETOURNER À L'ACCUEIL */
+        /* HEADER SANS BORDURE */
         header {
             padding: 25px 0;
-            border-bottom: 1px solid var(--border-color);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -98,14 +97,13 @@
             transform: translateY(0);
         }
 
-        /* HERO & ACCUEIL */
+        /* HERO & ACCUEIL SANS BORDURE */
         .home-hero {
-            padding: 60px 0 50px 0;
+            padding: 40px 0 50px 0;
             display: grid;
             grid-template-columns: 1.1fr 0.9fr;
             gap: 40px;
             align-items: center;
-            border-bottom: 1px solid var(--border-light);
         }
 
         .home-hero h1 {
@@ -167,22 +165,17 @@
             transform: translateY(-2px);
         }
 
-        /* COMPTEURS */
+        /* COMPTEURS SANS BORDURE */
         .stats-bar {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            border-bottom: 1px solid var(--border-color);
             background: var(--bg-card);
+            margin-top: 20px;
         }
 
         .stat-item {
             padding: 30px 15px;
             text-align: center;
-            border-right: 1px solid var(--border-light);
-        }
-
-        .stat-item:last-child {
-            border-right: none;
         }
 
         .stat-number {
@@ -252,11 +245,9 @@
             line-height: 1.6;
         }
 
-        /* AVIS DÉFILANTS RALENTIS */
+        /* AVIS DÉFILANTS SANS BORDURES SUPERIEURE/INFERIEURE */
         .reviews-section {
             padding: 50px 0;
-            border-top: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
             background: var(--bg-card);
             margin-bottom: 80px;
             overflow: hidden;
@@ -322,14 +313,12 @@
             text-transform: uppercase;
         }
 
-        /* PAGE BOUTIQUE / CATALOGUE */
+        /* PAGE BOUTIQUE SANS BORDURE D'EN-TÊTE */
         .shop-header {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 40px 0 30px 0;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--border-color);
+            margin: 30px 0 30px 0;
             text-align: center;
         }
 
@@ -442,10 +431,9 @@
             color: var(--text-main);
         }
 
-        /* FOOTER AVEC SUPPORT DISCRET */
+        /* FOOTER SANS BORDURE SUPERIEURE */
         footer {
-            border-top: 1px solid var(--border-color);
-            padding: 30px 0;
+            padding: 40px 0 30px 0;
             display: flex;
             flex-direction: column;
             gap: 12px;
@@ -472,16 +460,15 @@
         }
 
         @media (max-width: 768px) {
-            .home-hero { grid-template-columns: 1fr; gap: 30px; padding: 40px 0; }
+            .home-hero { grid-template-columns: 1fr; gap: 30px; padding: 30px 0; }
             .stats-bar { grid-template-columns: 1fr; }
-            .stat-item { border-right: none; border-bottom: 1px solid var(--border-light); }
             .values-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- HEADER CENTRÉ (CLIQUE SUR TECHZARA POUR REVENIR À L'ACCUEIL) -->
+    <!-- HEADER CENTRÉ SANS BORDURE -->
     <header>
         <div class="brand-container" onclick="showPage('home')">
             <div class="brand-title">TechZara</div>
@@ -542,7 +529,7 @@
             </div>
         </section>
 
-        <!-- AVIS CLIENTS DÉFILANTS RALENTIS -->
+        <!-- AVIS CLIENTS DÉFILANTS -->
         <section class="reviews-section">
             <div class="section-title-wrap" style="margin-top:0;">
                 <h2 class="section-title">+600 Avis Clients</h2>
@@ -665,7 +652,7 @@
         </section>
     </div>
 
-    <!-- FOOTER AVEC SUPPORT EN BAS DE PAGE -->
+    <!-- FOOTER SANS BORDURE -->
     <footer>
         <div>© 2026 TECHZARA — Vente de cartes-cadeaux officielles</div>
         <div>Un problème avec votre commande ? <a href="https://discord.gg/54NngFNzna" target="_blank" rel="noopener" class="footer-support-link">Contacter le support</a></div>
