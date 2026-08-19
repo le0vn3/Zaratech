@@ -2,7 +2,6 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <!-- Viewport configuré pour empêcher le zoom -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <title>TECHZARA — Cartes-Cadeaux Officielles</title>
     
@@ -429,7 +428,7 @@
             color: var(--text-main);
         }
 
-        /* MODALES */
+        /* MODALES ET CHARGEMENT */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -519,6 +518,33 @@
             border-color: var(--accent-gold);
         }
 
+        /* SPINNER DE CHARGEMENT */
+        .spinner {
+            width: 36px;
+            height: 36px;
+            border: 3px solid var(--border-light);
+            border-top: 3px solid var(--text-main);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .support-box {
+            margin-top: 20px;
+            padding: 15px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1.5;
+        }
+
         /* FOOTER */
         footer {
             padding: 40px 0 30px 0;
@@ -590,8 +616,8 @@
                 <div class="stat-label">Codes Officiels Valides</div>
             </div>
             <div class="stat-item">
-                <div class="stat-number">&lt; 1 min</div>
-                <div class="stat-label">Livraison Automatique</div>
+                <div class="stat-number">&lt; 3 min</div>
+                <div class="stat-label">Traitement Rapide</div>
             </div>
         </section>
 
@@ -603,8 +629,8 @@
             </div>
             <div class="values-grid">
                 <div class="value-card">
-                    <h3>Instantannéité</h3>
-                    <p>Dès la confirmation de votre paiement, l'envoi du code s'effectue automatiquement par e-mail.</p>
+                    <h3>Traitement Rapide</h3>
+                    <p>Dès la confirmation du paiement, l'envoi du code s'effectue par e-mail sous 2 à 3 minutes.</p>
                 </div>
                 <div class="value-card">
                     <h3>Sécurité Maximale</h3>
@@ -617,7 +643,7 @@
             </div>
         </section>
 
-        <!-- AVIS CLIENTS (DEFILEMENT AUTOMATIQUE / AUTO-SCROLL) -->
+        <!-- AVIS CLIENTS -->
         <section>
             <div class="section-title-wrap">
                 <h2 class="section-title">Avis Clients</h2>
@@ -625,11 +651,10 @@
             </div>
             <div class="reviews-carousel-container">
                 <div class="reviews-track">
-                    <!-- Premier groupe d'avis -->
                     <article class="review-card">
                         <div>
                             <div class="review-stars">★★★★★</div>
-                            <p class="review-text">« Carte reçue par mail en moins de deux minutes. Code parfait et fonctionnel directement en magasin. »</p>
+                            <p class="review-text">« Carte reçue par mail en deux minutes. Code parfait et fonctionnel directement en magasin. »</p>
                         </div>
                         <span class="review-author">— Thomas D.</span>
                     </article>
@@ -650,16 +675,15 @@
                     <article class="review-card">
                         <div>
                             <div class="review-stars">★★★★★</div>
-                            <p class="review-text">« Commande instantanée. J'ai pu réaliser mes achats sur le site officiel sans aucun problème. »</p>
+                            <p class="review-text">« Commande traitée rapidement. J'ai pu réaliser mes achats sur le site officiel sans problème. »</p>
                         </div>
                         <span class="review-author">— Sophie K.</span>
                     </article>
 
-                    <!-- Duplication pour défilement infini fluide -->
                     <article class="review-card">
                         <div>
                             <div class="review-stars">★★★★★</div>
-                            <p class="review-text">« Carte reçue par mail en moins de deux minutes. Code parfait et fonctionnel directement en magasin. »</p>
+                            <p class="review-text">« Carte reçue par mail en deux minutes. Code parfait et fonctionnel directement en magasin. »</p>
                         </div>
                         <span class="review-author">— Thomas D.</span>
                     </article>
@@ -680,7 +704,7 @@
                     <article class="review-card">
                         <div>
                             <div class="review-stars">★★★★★</div>
-                            <p class="review-text">« Commande instantanée. J'ai pu réaliser mes achats sur le site officiel sans aucun problème. »</p>
+                            <p class="review-text">« Commande traitée rapidement. J'ai pu réaliser mes achats sur le site officiel sans problème. »</p>
                         </div>
                         <span class="review-author">— Sophie K.</span>
                     </article>
@@ -689,7 +713,7 @@
         </section>
     </div>
 
-    <!-- PAGE BOUTIQUE / CATALOGUE -->
+    <!-- PAGE BOUTIQUE -->
     <div id="page-shop" class="page">
         <div class="shop-header">
             <span class="section-subtitle">Offres Disponibles en Stock</span>
@@ -859,15 +883,38 @@
         </div>
     </div>
 
-    <!-- MODALE 2 : CONFIRMATION -->
-    <div id="success-modal" class="modal-overlay">
+    <!-- MODALE 2 : PAIEMENT EN COURS ET CONFIRMATION -->
+    <div id="status-modal" class="modal-overlay">
         <div class="modal-card" style="text-align: center;">
-            <button class="modal-close" onclick="closeModal('success-modal')">&times;</button>
-            <div class="modal-title">Merci pour votre achat !</div>
-            <p style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-main); margin-top: 15px; margin-bottom: 25px;">
-                Vous allez recevoir le code d'ici peu par e-mail.
-            </p>
-            <button type="button" class="btn-primary" onclick="closeModal('success-modal')">Fermer</button>
+            <button class="modal-close" onclick="closeModal('status-modal')">&times;</button>
+            
+            <!-- ÉTAPE 1 : TRAITEMENT DE LA TRANSACTION -->
+            <div id="processing-state">
+                <div class="modal-title">Redirection PayPal...</div>
+                <div class="spinner"></div>
+                <p style="font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted);">
+                    Préparation du paiement en cours
+                </p>
+            </div>
+
+            <!-- ÉTAPE 2 : CONFIRMATION PAIEMENT ET LIVRAISON -->
+            <div id="completed-state" style="display: none;">
+                <div class="modal-title">Merci pour votre commande !</div>
+                <p style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-main); margin-top: 15px;">
+                    Un opérateur traite l'envoi. Votre code vous sera transmis par e-mail dans un délai de 2 à 3 minutes.
+                </p>
+                
+                <!-- BLOC ASSISTANCE REFORMULÉ -->
+                <div class="support-box">
+                    <strong>Besoin d'aide ?</strong><br>
+                    Pour toute question sur la livraison, contactez directement l'équipe d'assistance.
+                    <div style="margin-top: 10px;">
+                        <a href="https://discord.gg/54NngFNzna" target="_blank" rel="noopener" class="footer-support-link">Rejoindre le support direct</a>
+                    </div>
+                </div>
+
+                <button type="button" class="btn-primary" style="margin-top: 20px;" onclick="closeModal('status-modal')">Fermer</button>
+            </div>
         </div>
     </div>
 
@@ -918,9 +965,26 @@
             const email = document.getElementById('email').value;
 
             if (firstname && email && selectedPayUrl) {
-                window.open(selectedPayUrl, '_blank');
+                // Ferme la modale d'information
                 closeModal('checkout-modal');
-                document.getElementById('success-modal').classList.add('active');
+
+                // Affiche la modale de chargement
+                const statusModal = document.getElementById('status-modal');
+                const processingState = document.getElementById('processing-state');
+                const completedState = document.getElementById('completed-state');
+
+                processingState.style.display = 'block';
+                completedState.style.display = 'none';
+                statusModal.classList.add('active');
+
+                // Ouvre PayPal
+                window.open(selectedPayUrl, '_blank');
+
+                // Bascule vers le message de confirmation après 2,5 secondes
+                setTimeout(() => {
+                    processingState.style.display = 'none';
+                    completedState.style.display = 'block';
+                }, 2500);
             }
         }
     </script>
