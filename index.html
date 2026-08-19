@@ -257,7 +257,7 @@
             display: flex;
             gap: 20px;
             width: max-content;
-            animation: scrollReviews 35s linear infinite;
+            animation: scrollReviews 80s linear infinite;
         }
 
         .reviews-carousel-container:hover .reviews-track {
@@ -605,9 +605,11 @@
 
         <section class="stats-bar">
             <div class="stat-item">
+                <div class="stat-number">99,8 %</div>
                 <div class="stat-label">Transactions Sécurisées</div>
             </div>
             <div class="stat-item">
+                <div class="stat-number">100 %</div>
                 <div class="stat-label">Codes Officiels Valides</div>
             </div>
             <div class="stat-item">
@@ -700,8 +702,8 @@
             <!-- 10 € -->
             <article class="card">
                 <div class="card-image">
-                    <span class="stock-badge">12 cartes restantes</span>
-                    <img src="./IMG_0204.webp" alt="Carte Cadeau Zara">
+                    <span class="stock-badge"><span class="dynamic-stock" data-product-id="p10">--</span> cartes restantes</span>
+                    <img src="./IMG_0209.png" alt="Carte Cadeau Zara">
                 </div>
                 <div class="card-body">
                     <div>
@@ -721,8 +723,8 @@
             <!-- 15 € -->
             <article class="card">
                 <div class="card-image">
-                    <span class="stock-badge">8 cartes restantes</span>
-                    <img src="./IMG_0204.webp" alt="Carte Cadeau Zara">
+                    <span class="stock-badge"><span class="dynamic-stock" data-product-id="p15">--</span> cartes restantes</span>
+                    <img src="./IMG_0209.png" alt="Carte Cadeau Zara">
                 </div>
                 <div class="card-body">
                     <div>
@@ -746,8 +748,8 @@
             <!-- 20 € -->
             <article class="card">
                 <div class="card-image">
-                    <span class="stock-badge">5 cartes restantes</span>
-                    <img src="./IMG_0204.webp" alt="Carte Cadeau Zara">
+                    <span class="stock-badge"><span class="dynamic-stock" data-product-id="p20">--</span> cartes restantes</span>
+                    <img src="./IMG_0209.png" alt="Carte Cadeau Zara">
                 </div>
                 <div class="card-body">
                     <div>
@@ -771,8 +773,8 @@
             <!-- 30 € -->
             <article class="card">
                 <div class="card-image">
-                    <span class="stock-badge">4 cartes restantes</span>
-                    <img src="./IMG_0204.webp" alt="Carte Cadeau Zara">
+                    <span class="stock-badge"><span class="dynamic-stock" data-product-id="p30">--</span> cartes restantes</span>
+                    <img src="./IMG_0209.png" alt="Carte Cadeau Zara">
                 </div>
                 <div class="card-body">
                     <div>
@@ -796,8 +798,8 @@
             <!-- 70 € -->
             <article class="card">
                 <div class="card-image">
-                    <span class="stock-badge">3 cartes restantes</span>
-                    <img src="./IMG_0204.webp" alt="Carte Cadeau Zara">
+                    <span class="stock-badge"><span class="dynamic-stock" data-product-id="p70">--</span> cartes restantes</span>
+                    <img src="./IMG_0209.png" alt="Carte Cadeau Zara">
                 </div>
                 <div class="card-body">
                     <div>
@@ -821,8 +823,8 @@
             <!-- 100 € -->
             <article class="card">
                 <div class="card-image">
-                    <span class="stock-badge">2 cartes restantes</span>
-                    <img src="./IMG_0204.webp" alt="Carte Cadeau Zara">
+                    <span class="stock-badge"><span class="dynamic-stock" data-product-id="p100">--</span> cartes restantes</span>
+                    <img src="./IMG_0209.png" alt="Carte Cadeau Zara">
                 </div>
                 <div class="card-body">
                     <div>
@@ -846,8 +848,8 @@
             <!-- 200 € -->
             <article class="card">
                 <div class="card-image">
-                    <span class="stock-badge">2 cartes restantes</span>
-                    <img src="./IMG_0204.webp" alt="Carte Cadeau Zara">
+                    <span class="stock-badge"><span class="dynamic-stock" data-product-id="p200">--</span> cartes restantes</span>
+                    <img src="./IMG_0209.png" alt="Carte Cadeau Zara">
                 </div>
                 <div class="card-body">
                     <div>
@@ -984,6 +986,62 @@
                 }, 2000);
             }
         }
+
+        // --- GESTION DU STOCK INDÉPENDANT PAR CARTE ---
+        const productIds = ['p10', 'p15', 'p20', 'p30', 'p70', 'p100', 'p200'];
+
+        function initStockManager() {
+            const todayStr = new Date().toDateString();
+            let savedDate = localStorage.getItem('tz_stock_date');
+            let stocks = {};
+
+            try {
+                stocks = JSON.parse(localStorage.getItem('tz_stocks_map')) || {};
+            } catch (e) {
+                stocks = {};
+            }
+
+            // Réinitialisation / Restock automatique à minuit (entre 150 et 300 pour chaque article)
+            if (savedDate !== todayStr || Object.keys(stocks).length !== productIds.length) {
+                stocks = {};
+                productIds.forEach(id => {
+                    stocks[id] = Math.floor(Math.random() * (300 - 150 + 1)) + 150;
+                });
+                localStorage.setItem('tz_stock_date', todayStr);
+                localStorage.setItem('tz_stocks_map', JSON.stringify(stocks));
+            }
+
+            updateStockDisplay(stocks);
+
+            // Baisse progressive et indépendante des stocks au fil du temps
+            setInterval(() => {
+                let updated = false;
+                productIds.forEach(id => {
+                    // Chaque article baisse à son propre rythme (60 % de chance à chaque cycle)
+                    if (stocks[id] > 2 && Math.random() < 0.6) {
+                        stocks[id] -= Math.floor(Math.random() * 2) + 1; // Baisse de 1 à 2 unités
+                        if (stocks[id] < 2) stocks[id] = 2;
+                        updated = true;
+                    }
+                });
+
+                if (updated) {
+                    localStorage.setItem('tz_stocks_map', JSON.stringify(stocks));
+                    updateStockDisplay(stocks);
+                }
+            }, 30000); // Vérification toutes les 30 secondes
+        }
+
+        function updateStockDisplay(stocks) {
+            document.querySelectorAll('.dynamic-stock').forEach(el => {
+                const pid = el.getAttribute('data-product-id');
+                if (pid && stocks[pid] !== undefined) {
+                    el.textContent = stocks[pid];
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', initStockManager);
     </script>
 </body>
 </html>
